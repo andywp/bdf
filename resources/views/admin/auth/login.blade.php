@@ -6,7 +6,7 @@
         <div class="col-xl-12">
             <div class="auth-form">
                 <div class="text-center mb-3">
-                    <a href="{{ url('/') }}"><img src="{{asset('assets/images/konsela.png') }}" alt="Konsela Indonesia"></a>
+                    <a href="{{ url('/') }}"><img src="https://rasalogi.com/wp-content/uploads/2021/12/logo.png" alt="Rasalogi App"></a>
                 </div>
                 <h4 class="text-center mb-4">Sign in your account</h4>
                 <form method="POST" action="{{ route('admin.login') }}" autocomplete="off">

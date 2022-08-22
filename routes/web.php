@@ -46,11 +46,11 @@ Route::get('/create-mentor', function () {
 
     } */
 
-   /*  \App\Models\Admin::create([
+    /* \App\Models\Admin::create([
     
-            'name'  => 'Andi Wijang P',
-            'email' => 'andy.wijang@gmail.com',
-            'password' => Hash::make('andi//123')
+            'name'  => 'raslogi',
+            'email' => 'rasalogweb@gmail.com',
+            'password' => Hash::make('100%admin')
     
     ]); */
 
