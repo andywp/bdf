@@ -16,10 +16,9 @@ class AdminController extends Controller
            'email'=>'required',
            'password'=>'required'
         ]);
-
         $creds = $request->only('email','password');
-       // dd($creds,Auth::guard('admin')->attempt($creds));
-        if(Auth::guard('admin')->attempt($creds) ){
+        $remember=isset($request->remember)?true:false;
+        if(Auth::guard('admin')->attempt($creds, $remember) ){
             return redirect()->route('admin.home');
         }else{
             return redirect()->route('admin.login')->with('fail','Incorrect credentials');

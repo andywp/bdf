@@ -1,0 +1,152 @@
+/*side bar*/
+.dlabnav .header-info2 span {
+    font-size: 14px;
+    font-weight: 600;
+}
+.content-body{
+    margin-left: 17.563rem;
+}
+.nav-header ,.dlabnav{
+    width: 18.5rem;
+}
+.upload-file {
+    border: 1px solid #ddd;
+    height: 140px;
+    margin: 0 auto;
+    text-align: center;
+    position: relative;
+    padding: 4px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgb(0 0 0 / 6%);
+    border-radius: 4px;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+}
+.upload-file .preview {
+    background: #fafafa;
+    display: block;
+    height: 100%;
+}
+.upload-file .preview div {
+    height: 100%;
+    text-align: center;
+}
+.upload-file img {
+    height: 100%;
+    border: none;
+}
+.upload-file-input {
+    position: absolute;
+    top: -30px;
+    right: 4px;
+    z-index: 100;
+    -webkit-transition: all 0.1s ease-in;
+    -moz-transition: all 0.1s ease-in;
+    -o-transition: all 0.1s ease-in;
+    -ms-transition: all 0.1s ease-in;
+    transition: all 0.1s ease-in;
+}
+
+.upload-file-input .button {
+    background: #4682B4;
+    margin: 0;
+    overflow: hidden;
+    padding: 0;
+    position: relative;
+    box-shadow: 0 0 0 transparent;
+    border-radius: 0;
+    -moz-border-radius: 0;
+    -webkit-border-radius: 0;
+}
+
+.upload-file:hover  span.bg-transparent{background: rgba(255, 255, 255, 0.5);}
+.upload-file-input a,
+.upload-file-input .button{
+	border: 1px solid rgba(0,0,0,0.15);
+	float: right;
+	height: 30px;
+	line-height: 30px;
+	width: 30px;
+	color: #fff;
+	margin-left: 2px;
+}
+.upload-file-input a.delFile{background: #B22222;}
+.upload-file-input a.restoreFile{background: #6B8E23;}
+.upload-file-input .button{
+	background: #4682B4;
+	margin: 0;
+	overflow: hidden;
+	padding: 0;
+	position: relative;
+	
+	box-shadow: 0 0 0 transparent;
+	
+	border-radius: 0;
+	-moz-border-radius: 0;
+	-webkit-border-radius: 0;
+}
+.upload-file-input a.delFile:hover{background: #a31f1f;}
+.upload-file-input a.restoreFile:hover{background: #638320;}
+.upload-file-input .button:hover{background: #4077a4;}
+.upload-file-input button{
+	border: 1px solid transparent;
+	height: 20px;
+	line-height: 20px;
+	width: 100%;
+	color: #fff;
+	background: none;
+	padding: 0;
+	margin: 0;
+	display: block;
+}
+.upload-file-input input[type=file]{ cursor: pointer; }
+.upload-file-input [class^="icon-"], [class*=" icon-"]{margin:0!important;}
+.upload-file-input button {
+    border: 1px solid transparent;
+    height: 30px;
+    line-height: 30px;
+    width: 100%;
+    color: #fff;
+    background: none;
+    padding: 0;
+    margin: 0;
+    display: block;
+    width: 30px;
+    position: relative;
+}
+.upload-file:hover .upload-file-input {
+    top: 4px;
+    -webkit-transition: all 0.2s ease-in;
+    -moz-transition: all 0.2s ease-in;
+    -o-transition: all 0.2s ease-in;
+    -ms-transition: all 0.2s ease-in;
+    transition: all 0.2s ease-in;
+}
+.upload-input {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    opacity: 0;
+    cursor: pointer;
+}
+
+/*form */
+.form-control {
+    border: 0.0625rem solid #ddddddd9;
+    border-radius: 0.5rem;
+}
+
+.admin-img-post img {
+    height: 80px;
+    width: 80px;
+    object-fit: contain;
+}
+
+table.dataTable thead th{
+    font-size: 14px;
+}
+table.dataTable tbody th, table.dataTable tbody td {
+    font-size: 12px;
+}

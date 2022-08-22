@@ -2,12 +2,15 @@
 
 namespace App\Models;
 
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 
 class Mentor extends Authenticatable
 {
-    use HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -16,10 +19,12 @@ class Mentor extends Authenticatable
      */
     protected $fillable = [
         'name',
-        'username ',
+        'username',
         'email',
         'password',
-        'phone'
+        'phone',
+        'alamat',
+        'date_of_brith'
     ];
 
     /**
