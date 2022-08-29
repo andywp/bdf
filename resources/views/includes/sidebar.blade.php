@@ -19,19 +19,12 @@
                 </div>
             </a>
             <div class="dropdown-menu dropdown-menu-end">
-                <a href="./app-profile.html" class="dropdown-item ai-icon ">
+                <a href="{{ route('admin.profile.index') }}" class="dropdown-item ai-icon ">
                     <svg xmlns="http://www.w3.org/2000/svg" class="text-primary" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                         <circle cx="12" cy="7" r="4"></circle>
                     </svg>
                     <span class="ms-2">Profile </span>
-                </a>
-                <a href="./email-inbox.html" class="dropdown-item ai-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="text-success" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-                        <polyline points="22,6 12,13 2,6"></polyline>
-                    </svg>
-                    <span class="ms-2">Inbox </span>
                 </a>
                 <a href="{{ route('admin.logout') }}" class="dropdown-item ai-icon" onclick="event.preventDefault();document.getElementById('logout-form').submit();" >
                     <svg xmlns="http://www.w3.org/2000/svg" class="text-danger" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -70,7 +63,38 @@
                 </a>
                 <ul aria-expanded="false">
                     <li><a href="{{ route('admin.gallery.index') }}">Images</a></li>
-                    <li><a href="#">Video</a></li>
+                    <li><a href="{{ route('admin.video.index') }}">Video</a></li>
+                </ul>
+            </li>
+            <li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
+                    <i class="flaticon-381-download"></i>
+                    <span class="nav-text">Manage Download</span>
+                </a>
+                <ul aria-expanded="false">
+                    <li><a href="{{ route('admin.publication.index') }}">Publication</a></li>
+                    <li><a href="{{ route('admin.advisory.index') }}">Media Advisory</a></li>
+                </ul>
+            </li>
+            <li><a href="{{ route('admin.slider.index') }}" class="" aria-expanded="false">
+                    <i class="flaticon-381-next-1"></i>
+                    <span class="nav-text">Slider</span>
+                </a>
+            </li>
+            <li><a href="{{ route('admin.link.index') }}" class="" aria-expanded="false">
+                    <i class="flaticon-381-share-2"></i>
+                    <span class="nav-text">External Link</span>
+                </a>
+            </li>
+            <li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
+                    <i class="flaticon-381-notepad"></i>
+                    <span class="nav-text">Registration</span>
+                </a>
+                <ul aria-expanded="false">
+                    <li><a href="#">Physical</a></li>
+                    <li><a href="#">Virtual</a></li>
+                    <li><a href="#">Media</a></li>
+                    <li><a href="#">Guest</a></li>
+                    <li><a href="#">Committee</a></li>
                 </ul>
             </li>
             <!--
@@ -218,7 +242,7 @@
         -->
         <div class="copyright">
             <p><strong>Bdf</strong> © {{ date('Y') }} All Rights Reserved</p>
-            <p class="fs-12">Made with <span class="heart"></span> by RasalogiWeb</p>
+            <p class="fs-12">Made with <span class="heart"></span> by <a href="https://rasalogi.com/" target="_blank">RasalogiWeb</a></p>
         </div>
     </div>
 </div>

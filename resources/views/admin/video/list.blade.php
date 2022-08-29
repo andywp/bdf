@@ -1,8 +1,15 @@
 @extends('layouts.admin-panel')
-@section('title','Album '. $dataAlbum->album)
+@section('title','Album '. $dataAlbum->title)
 @section('styles')
 <link href="{{asset('assets/vendor/datatables/css/jquery.dataTables.min.css')}}" rel="stylesheet">
 <link href="{{asset('vendor/laravel-filemanager/css/dropzone.min.css')}}" rel="stylesheet">
+<link href="https://vjs.zencdn.net/7.20.2/video-js.css" rel="stylesheet" />
+<style>
+    .video-js {
+        width: 200px;
+    }
+
+</style>
 @endsection
 
 @section('content')
@@ -11,9 +18,9 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex align-items-center w-100">
-                        <h4 class="card-title" >Album {{ $dataAlbum->album }}</h4>
+                        <h4 class="card-title" >Album {{ $dataAlbum->title }}</h4>
                         <div class="ms-auto">
-                            <button type="button" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#createAlbum">
+                            <button type="button" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#createVideo">
                                 <i class="fas fa-plus"></i> Add New
                             </button>
                         </div>
@@ -37,10 +44,9 @@
                             <table id="galleryfoto" class="table table-striped table-bordered display w-100">
                                 <thead>
                                     <tr>
-                                        <th>Photo</th>
-                                        <th>caption</th>
+                                        <th>Video</th>
+                                        <th>Title</th>
                                         <th>Create Date</th>
-                                    
                                         <th>#</th>
                                     </tr>
                                 </thead>
@@ -51,7 +57,7 @@
                             </table>
                             @csrf
                             <button type="submit" class="btn btn-md  btn-outline-primary">save changes</button>
-                            <a href="{{ route('admin.gallery.index')}}" class="btn btn-md btn-outline-danger">Back</a>
+                            <a href="{{ route('admin.video.index')}}" class="btn btn-md btn-outline-danger">Back</a>
                         </form>
                     </div>
                 </div>
@@ -59,32 +65,49 @@
                 
         </div>
     </div>
+    <!-- Modal -->
+    <div class="modal fade" id="createVideo" tabindex="-1"  data-bs-backdrop="static" aria-labelledby="createAlbumLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <form id="uploadFile" method="POST" action="{{ route('admin.video.storevideo') }}" enctype="multipart/form-data">
+                <div class="modal-content " >
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="createAlbumLabel">Add Video</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body ">
+                        
+                            <div class="form-group mb-3">
+                                <label>Title</label>
+                                <input type="text" name="title" class="form-control" placeholder="Enter Title">
+                                <span class="text-danger" id="EditalbumError"></span>
+                            </div> 
+                            <div class="form-group mb-3">
+                                <label>Video</label>
+                                <div class="form-file">
+                                    <input name="video" type="file" class="form-file-input form-control">
+                                    <span class="text-danger" id="inputVideoError"></span>
+                                </div>
+                            </div>
+                            <div class="form-group mb-4">
+                                <div class="progress">
+                                    <div class="progress-bar progress-bar-striped progress-bar-animated bg-danger" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%"></div>
+                                </div>
+                            </div>
+                          
 
-<!-- Modal -->
-<div class="modal fade" id="createAlbum" tabindex="-1"  data-bs-backdrop="static" aria-labelledby="createAlbumLabel" aria-hidden="true">
-    <div class="modal-dialog modal-fullscreen">
-        
-            <div class="modal-content " style="height: 90vh;" >
-                <div class="modal-header">
-                    <h5 class="modal-title" id="createAlbumLabel">Add Photo</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        
+                    </div>
+                    <div class="modal-footer">
+                        <input type="hidden" name="category_id" value="{{ $dataAlbum->id }}">
+                        <button type="button" class="btn btn-xs  btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <input type="submit"  value="Upload" class="btn btn-xs btn-primary">
+                       
+                    
+                    </div>
                 </div>
-                <div class="modal-body ">
-                <form id="dropzone" action="{{ route('admin.gallery.storephoto') }}" class="dropzone" method="POST" novalidate>
-
-                        <input type="hidden" name="album_id" value="{{ $dataAlbum->id }}" >
-                        @csrf
-                </form>
-                </div>
-                <div class="modal-footer">
-                   
-                    <button type="button" class="btn btn-xs btn-primary done-upload">Done</button>
-                   
-                </div>
-            </div>
-       
+            </form>
+        </div>
     </div>
-</div>
 @endsection
 
 
@@ -93,22 +116,26 @@
 
 
 @section('scripts')
-<script type="text/javascript" src="{{ asset('vendor/laravel-filemanager/js/dropzone.min.js') }}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.3.0/jquery.form.min.js"></script>
+<script src="https://vjs.zencdn.net/7.20.2/video.min.js"></script>
+<!-- <script type="text/javascript" src="{{ asset('vendor/laravel-filemanager/js/dropzone.min.js') }}"></script> -->
 <script>
         
-        Dropzone.options.dropzone =
+/*         Dropzone.options.dropzone =
          {
-            maxFilesize: 120,
+            maxFilesize: 5,
             renameFile: function(file) {
                 var name=file.name.replace(/\s/g, '');
                 var dt = new Date();
                 var time = dt.getTime();
-               return 'bdf-'+time+name;
+               return 'video-'+time+name;
             },
-            acceptedFiles: ".jpeg,.jpg,.png,.gif,.pdf",
+            acceptedFiles: ".mp4,.mov,.avi,.mpeg4,.flv,.3gpp",
+            autoProcessQueue: true,
+            parallelUploads: 20,
             addRemoveLinks: true,
-            timeout: 50000,
-            maxFilesize: 3,
+            //timeout: 50000,
+            maxFilesize: 300,
             removedfile: function(file) 
             {
                 var name = file.upload.filename;
@@ -129,7 +156,13 @@
                     return (fileRef = file.previewElement) != null ? 
                     fileRef.parentNode.removeChild(file.previewElement) : void 0;
             },
-       
+            accept: function(file, done) {
+                var ext = (file.name).split('.')[1]; // get extension from file name
+                if (ext == 'mp4' || ext == 'mov') {
+                done("Dont like those extension"); // error message for user
+                }
+                else { done(); } // accept file
+            },
             success: function(file, response) 
             {
                 console.log(response);
@@ -138,17 +171,52 @@
             {
                return false;
             }
-};
+}; */
+ function validate(formData, jqForm, options) {
+    
+  /*   var form = jqForm[0];
+    if (!form.file.value) {
+        alert('File not found');
+        return false;
+    } */
+} 
 </script>
 <script type="text/javascript" >
 $(document).ready(function(){
+   
+
     $.ajaxSetup({
         headers: {
           'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
     
+    $('#uploadFile').ajaxForm({
+        beforeSubmit: validate,
+        beforeSend: function () {
+            var percentage = '0';
+        },
+        uploadProgress: function (event, position, total, percentComplete) {
+            var percentage = percentComplete;
+            $('.progress .progress-bar').css("width", percentage+'%', function() {
+                return $(this).attr("aria-valuenow", percentage) + "%";
+            })
+        },
+        complete: function (xhr) {
+            //console.log(xhr,'File has uploaded');
+            $('#createVideo').modal('toggle');
+            $('#galleryfoto').dataTable().fnDestroy();
+            loadData();
 
+            notif('Video has uploaded');
+        },
+        error: function(response){
+            
+            $('#EditalbumError').text(response.responseJSON.errors.title);
+            //inputVideoError
+            $('#inputVideoError').text(response.responseJSON.errors.video);
+        }
+    });
 
 
     $("#album").submit(function( event ) {
@@ -226,7 +294,7 @@ $(document).ready(function(){
                     }
                 },
                 ajax: {
-                    url:"{{route('admin.gallery.dataphoto',$dataAlbum->id)}}",
+                    url:"{{route('admin.video.datavideo',$dataAlbum->id)}}",
                     type: "POST" ,
                     dataType: 'json'        
                 },
@@ -234,9 +302,9 @@ $(document).ready(function(){
                     {
                         orderable: false, 
                         searchable: false,
-                        width: "90px",
+                        width: "200px",
                         className: "text-center",
-                        data: 'images',                                    
+                        data: 'file',                                    
                     },
                     {
                         data: 'title',
@@ -257,10 +325,13 @@ $(document).ready(function(){
                 fnDrawCallback : function() {
                     $('.togglepublish').bootstrapToggle();
                     $('[data-bs-toggle="tooltip"]').tooltip();
+                   // $('.box-video').lightGallery(); 
+                   videojs(document.querySelector('.video-js'));
                 },
                 createdRow: function (row, data, dataIndex) {
-                    console.log(data,'data');
+                    //console.log(data,'data');
                     $(row).addClass('gall'+data.id);
+                    
                 }
             });
         }

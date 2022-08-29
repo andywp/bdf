@@ -1,8 +1,9 @@
 @extends('layouts.admin-panel')
-@section('title','Album '. $dataAlbum->album)
+@section('title','Publication '. $dataAlbum->title)
 @section('styles')
 <link href="{{asset('assets/vendor/datatables/css/jquery.dataTables.min.css')}}" rel="stylesheet">
 <link href="{{asset('vendor/laravel-filemanager/css/dropzone.min.css')}}" rel="stylesheet">
+
 @endsection
 
 @section('content')
@@ -11,9 +12,9 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex align-items-center w-100">
-                        <h4 class="card-title" >Album {{ $dataAlbum->album }}</h4>
+                        <h4 class="card-title" >Publication {{ $dataAlbum->title }}</h4>
                         <div class="ms-auto">
-                            <button type="button" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#createAlbum">
+                            <button type="button" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#createVideo">
                                 <i class="fas fa-plus"></i> Add New
                             </button>
                         </div>
@@ -33,14 +34,13 @@
                     </div>
                     @endif
                     <div class="table-responsive">
-                        <form id="updatephoto" action="{{ route('admin.gallery.updatephoto') }}" class="form" method="POST" novalidate>
+                        <form id="updatephoto" action="{{ route('admin.publication.updateFile') }}" class="form" method="POST" novalidate>
                             <table id="galleryfoto" class="table table-striped table-bordered display w-100">
                                 <thead>
                                     <tr>
-                                        <th>Photo</th>
-                                        <th>caption</th>
+                                        <th>File</th>
+                                        <th>Title</th>
                                         <th>Create Date</th>
-                                    
                                         <th>#</th>
                                     </tr>
                                 </thead>
@@ -51,7 +51,7 @@
                             </table>
                             @csrf
                             <button type="submit" class="btn btn-md  btn-outline-primary">save changes</button>
-                            <a href="{{ route('admin.gallery.index')}}" class="btn btn-md btn-outline-danger">Back</a>
+                            <a href="{{ route('admin.publication.index')}}" class="btn btn-md btn-outline-danger">Back</a>
                         </form>
                     </div>
                 </div>
@@ -59,32 +59,36 @@
                 
         </div>
     </div>
-
-<!-- Modal -->
-<div class="modal fade" id="createAlbum" tabindex="-1"  data-bs-backdrop="static" aria-labelledby="createAlbumLabel" aria-hidden="true">
-    <div class="modal-dialog modal-fullscreen">
-        
-            <div class="modal-content " style="height: 90vh;" >
-                <div class="modal-header">
-                    <h5 class="modal-title" id="createAlbumLabel">Add Photo</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body ">
-                <form id="dropzone" action="{{ route('admin.gallery.storephoto') }}" class="dropzone" method="POST" novalidate>
-
-                        <input type="hidden" name="album_id" value="{{ $dataAlbum->id }}" >
+    <!-- Modal -->
+    <div class="modal fade" id="createVideo" tabindex="-1"  data-bs-backdrop="static" aria-labelledby="createAlbumLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+           
+                <div class="modal-content " style="height: 80vh;" >
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="createAlbumLabel">Add File</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body ">
+                    <p>Hanya diijinkan file .pdf</p>
+                    <div class="error-msg"></div>
+                    <form id="dropzone" action="{{ route('admin.publication.storeFile') }}" class="dropzone" method="POST" novalidate>
+                        <input type="hidden" name="category_id" value="{{ $dataAlbum->id }}" >
                         @csrf
-                </form>
+                         
+                    </form>
+                          
+
+                        
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-xs btn-primary done-upload">Done</button>
+                       
+                    
+                    </div>
                 </div>
-                <div class="modal-footer">
-                   
-                    <button type="button" class="btn btn-xs btn-primary done-upload">Done</button>
-                   
-                </div>
-            </div>
-       
+           
+        </div>
     </div>
-</div>
 @endsection
 
 
@@ -93,62 +97,24 @@
 
 
 @section('scripts')
-<script type="text/javascript" src="{{ asset('vendor/laravel-filemanager/js/dropzone.min.js') }}"></script>
-<script>
-        
-        Dropzone.options.dropzone =
-         {
-            maxFilesize: 120,
-            renameFile: function(file) {
-                var name=file.name.replace(/\s/g, '');
-                var dt = new Date();
-                var time = dt.getTime();
-               return 'bdf-'+time+name;
-            },
-            acceptedFiles: ".jpeg,.jpg,.png,.gif,.pdf",
-            addRemoveLinks: true,
-            timeout: 50000,
-            maxFilesize: 3,
-            removedfile: function(file) 
-            {
-                var name = file.upload.filename;
-                $.ajax({
-                    headers: {
-                                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-                            },
-                    type: 'POST',
-                    url: '{{ route("admin.gallery.deletephoto") }}',
-                    data: {filename: name},
-                    success: function (data){
-                        console.log("File has been successfully removed!!");
-                    },
-                    error: function(e) {
-                        console.log(e);
-                    }});
-                    var fileRef;
-                    return (fileRef = file.previewElement) != null ? 
-                    fileRef.parentNode.removeChild(file.previewElement) : void 0;
-            },
-       
-            success: function(file, response) 
-            {
-                console.log(response);
-            },
-            error: function(file, response)
-            {
-               return false;
-            }
-};
-</script>
+
+<script type="text/javascript" src="{{ asset('vendor/laravel-filemanager/js/dropzone.min.js') }}"></script> 
+
 <script type="text/javascript" >
 $(document).ready(function(){
+   
     $.ajaxSetup({
         headers: {
           'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
     
-
+    $('.done-upload').click(function() {
+        $('.error-msg').empty();
+        $('#createVideo').modal('toggle');
+        $('#albumtable').dataTable().fnDestroy();
+        loadData();
+    });
 
 
     $("#album").submit(function( event ) {
@@ -226,7 +192,7 @@ $(document).ready(function(){
                     }
                 },
                 ajax: {
-                    url:"{{route('admin.gallery.dataphoto',$dataAlbum->id)}}",
+                    url:"{{route('admin.publication.dataTableFile',$dataAlbum->id)}}",
                     type: "POST" ,
                     dataType: 'json'        
                 },
@@ -234,9 +200,9 @@ $(document).ready(function(){
                     {
                         orderable: false, 
                         searchable: false,
-                        width: "90px",
+                        width: "100px",
                         className: "text-center",
-                        data: 'images',                                    
+                        data: 'file',                                    
                     },
                     {
                         data: 'title',
@@ -257,10 +223,13 @@ $(document).ready(function(){
                 fnDrawCallback : function() {
                     $('.togglepublish').bootstrapToggle();
                     $('[data-bs-toggle="tooltip"]').tooltip();
+                   // $('.box-video').lightGallery(); 
+                   //videojs(document.querySelector('.video-js'));
                 },
                 createdRow: function (row, data, dataIndex) {
-                    console.log(data,'data');
+                    //console.log(data,'data');
                     $(row).addClass('gall'+data.id);
+                    
                 }
             });
         }
@@ -292,15 +261,23 @@ $(document).ready(function(){
     $('.done-upload').click(function() {
         $('#createAlbum').modal('toggle');
         $('#galleryfoto').dataTable().fnDestroy();
+        $('.dz-preview').remove();
         loadData();
     });
 
+
+    $('#albumtable').on('click', '.edit', function (){
+        $('#editAlbum').modal('show');
+        $('#inputAlbum').val($(this).data('album'));
+        $('#albumId').val($(this).data('id'));
+    
+    });
 
     $("#updatephoto").submit(function( event ) {
         event.preventDefault();
         $.ajax({
             type: 'POST',
-            url: "{{ route('admin.gallery.updatephoto') }}",
+            url: "{{ route('admin.publication.updateFile') }}",
             data: $("#updatephoto").serialize(),
             dataType: 'json',
             success: function(data){
@@ -315,12 +292,7 @@ $(document).ready(function(){
         });
     });
 
-    $('#albumtable').on('click', '.edit', function (){
-        $('#editAlbum').modal('show');
-        $('#inputAlbum').val($(this).data('album'));
-        $('#albumId').val($(this).data('id'));
-    
-    });
+
 
     $('#galleryfoto').on('click', '.delete', function (){
             // e.preventDefault();
@@ -367,5 +339,69 @@ $(document).ready(function(){
 });
 
 </script>
+<script>
+                 Dropzone.options.dropzone =
+                    {
+                        maxFilesize: 120,
+                        renameFile: function(file) {
+                            var name=file.name.replace(/\s/g, '');
+                            var dt = new Date();
+                            var time = dt.getTime();
+                        return 'bdf-'+time+name;
+                        },
+                        acceptedFiles: ".pdf",
+                        addRemoveLinks: true,
+                        timeout: 50000,
+                        maxFilesize: 3,
+                        removedfile: function(file) 
+                        {
+                            var name = file.upload.filename;
+                            $.ajax({
+                                headers: {
+                                            'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                                        },
+                                type: 'POST',
+                                url: '{{ route("admin.gallery.deletephoto") }}',
+                                data: {filename: name},
+                                success: function (data){
+                                    console.log("File has been successfully removed!!");
+                                },
+                                error: function(e) {
+                                    console.log(e);
+                                }});
+                                var fileRef;
+                                return (fileRef = file.previewElement) != null ? 
+                                fileRef.parentNode.removeChild(file.previewElement) : void 0;
+                        },
+                
+                        success: function(file, response) 
+                        {
+                            /* $('#albumtable').dataTable().fnDestroy();
+                            loadData(); */
+                        },
+                        error: function(file, response)
+                        {
+                            //return false;
+                            //console.log(file,'asmkaksaksj');
+                            //console.log(response,'response');
 
+                            let msgalrt=`<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                            <strong>`+file.name+`</strong> `+response+`
+                                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                                        </div>`;
+                            $('.error-msg').append(msgalrt);
+
+                        }
+            };
+     
+       
+ function validate(formData, jqForm, options) {
+    
+  /*   var form = jqForm[0];
+    if (!form.file.value) {
+        alert('File not found');
+        return false;
+    } */
+} 
+</script>
 @endsection

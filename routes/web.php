@@ -134,6 +134,7 @@ Route::group(['prefix' => 'laravel-filemanager', 'middleware' =>['web', 'auth:ad
                 Route::delete('/{id}/delete', [App\Http\Controllers\Admin\AboutController::class,'destroy'])->name('destroy');
                 Route::post('/publish', [App\Http\Controllers\Admin\AboutController::class,'publish'])->name('publish');
             });
+            /* gallery */
             Route::prefix('gallery')->name('gallery.')->group(function(){
                 Route::get('/', [App\Http\Controllers\Admin\GalleryController::class,'index'])->name('index');
                 Route::post('data',[App\Http\Controllers\Admin\GalleryController::class,'dataTable'])->name('data');
@@ -152,6 +153,80 @@ Route::group(['prefix' => 'laravel-filemanager', 'middleware' =>['web', 'auth:ad
                 Route::post('/delete-photo', [App\Http\Controllers\Admin\GalleryController::class,'deletePhoto'])->name('deletephoto');
                 Route::delete('/{id}/destroy-photo', [App\Http\Controllers\Admin\GalleryController::class,'photodestroy'])->name('photodestroy');
                 Route::post('/update-photo', [App\Http\Controllers\Admin\GalleryController::class,'updatePhoto'])->name('updatephoto');
+            });
+
+            /*Video */
+            Route::prefix('video')->name('video.')->group(function(){
+                Route::get('/', [App\Http\Controllers\Admin\VideoController::class,'index'])->name('index');
+                Route::post('data',[App\Http\Controllers\Admin\VideoController::class,'dataTable'])->name('data');
+                Route::get('/create', [App\Http\Controllers\Admin\VideoController::class,'create'])->name('create');
+                Route::post('/create', [App\Http\Controllers\Admin\VideoController::class,'store'])->name('store');
+                Route::post('/update', [App\Http\Controllers\Admin\VideoController::class,'update'])->name('update');
+                Route::delete('/{id}/delete', [App\Http\Controllers\Admin\VideoController::class,'destroy'])->name('destroy');
+                Route::get('/{id}/list', [App\Http\Controllers\Admin\VideoController::class,'listVideo'])->name('list');
+                Route::post('/publish', [App\Http\Controllers\Admin\VideoController::class,'publish'])->name('publish');
+                Route::post('/store-video', [App\Http\Controllers\Admin\VideoController::class,'storevideo'])->name('storevideo');
+                Route::post('data-video/{id}',[App\Http\Controllers\Admin\VideoController::class,'dataTableVideo'])->name('datavideo');
+
+            });
+
+            /*Publication */
+            Route::prefix('publication')->name('publication.')->group(function(){
+                Route::get('/', [App\Http\Controllers\Admin\PublicationController::class,'index'])->name('index');
+                Route::post('data',[App\Http\Controllers\Admin\PublicationController::class,'dataTable'])->name('data');
+                Route::post('/create', [App\Http\Controllers\Admin\PublicationController::class,'store'])->name('store');
+                Route::post('/update', [App\Http\Controllers\Admin\PublicationController::class,'update'])->name('update');
+                Route::delete('/{id}/delete', [App\Http\Controllers\Admin\PublicationController::class,'destroy'])->name('destroy');
+
+                Route::get('/{id}/list', [App\Http\Controllers\Admin\PublicationController::class,'listPublication'])->name('list');
+                Route::post('/store-file', [App\Http\Controllers\Admin\PublicationController::class,'storeFile'])->name('storeFile');
+                Route::post('data-file/{id}',[App\Http\Controllers\Admin\PublicationController::class,'dataTableFile'])->name('dataTableFile');
+                Route::delete('/{id}/delete-file', [App\Http\Controllers\Admin\PublicationController::class,'destroyFile'])->name('destroyFile');
+                Route::post('/update-file', [App\Http\Controllers\Admin\PublicationController::class,'updateFile'])->name('updateFile');
+                //Route::post('/publish', [App\Http\Controllers\Admin\GalleryController::class,'publish'])->name('publish');
+
+            });
+
+             /*Media Advisory */
+             Route::prefix('media-advisory')->name('advisory.')->group(function(){
+                Route::get('/', [App\Http\Controllers\Admin\MediaAdvisoryController::class,'index'])->name('index');
+                Route::post('data',[App\Http\Controllers\Admin\MediaAdvisoryController::class,'dataTable'])->name('data');
+                Route::post('/create', [App\Http\Controllers\Admin\MediaAdvisoryController::class,'store'])->name('store');
+                Route::post('/update', [App\Http\Controllers\Admin\MediaAdvisoryController::class,'update'])->name('update');
+                Route::delete('/{id}/delete', [App\Http\Controllers\Admin\MediaAdvisoryController::class,'destroy'])->name('destroy');
+
+                Route::get('/{id}/list', [App\Http\Controllers\Admin\MediaAdvisoryController::class,'listPublication'])->name('list');
+                Route::post('/store-file', [App\Http\Controllers\Admin\MediaAdvisoryController::class,'storeFile'])->name('storeFile');
+                Route::post('data-file/{id}',[App\Http\Controllers\Admin\MediaAdvisoryController::class,'dataTableFile'])->name('dataTableFile');
+                Route::delete('/{id}/delete-file', [App\Http\Controllers\Admin\MediaAdvisoryController::class,'destroyFile'])->name('destroyFile');
+                Route::post('/update-file', [App\Http\Controllers\Admin\MediaAdvisoryController::class,'updateFile'])->name('updateFile');
+                /**cek */
+                Route::post('/publish', [App\Http\Controllers\Admin\GalleryController::class,'publish'])->name('publish');
+
+            });
+
+            Route::prefix('slider')->name('slider.')->group(function(){
+                Route::get('/', [App\Http\Controllers\Admin\SliderController::class,'index'])->name('index');
+                Route::post('/create', [App\Http\Controllers\Admin\SliderController::class,'store'])->name('store');
+                Route::post('data',[App\Http\Controllers\Admin\SliderController::class,'dataTable'])->name('data');
+                Route::post('update',[App\Http\Controllers\Admin\SliderController::class,'update'])->name('update');
+                Route::delete('/{id}/delete', [App\Http\Controllers\Admin\SliderController::class,'destroy'])->name('destroy');
+                Route::post('publish',[App\Http\Controllers\Admin\SliderController::class,'publish'])->name('publish');
+            });
+
+            Route::prefix('external-link')->name('link.')->group(function(){
+                Route::get('/', [App\Http\Controllers\Admin\ExternalLinkController::class,'index'])->name('index');
+                Route::post('/create', [App\Http\Controllers\Admin\ExternalLinkController::class,'store'])->name('store');
+                Route::post('data',[App\Http\Controllers\Admin\ExternalLinkController::class,'dataTable'])->name('data');
+                Route::post('update',[App\Http\Controllers\Admin\ExternalLinkController::class,'update'])->name('update');
+                Route::delete('/{id}/delete', [App\Http\Controllers\Admin\ExternalLinkController::class,'destroy'])->name('destroy');
+                Route::post('publish',[App\Http\Controllers\Admin\ExternalLinkController::class,'publish'])->name('publish');
+            });
+            Route::prefix('profile')->name('profile.')->group(function(){
+                Route::get('/', [App\Http\Controllers\Admin\AdminUserController::class,'index'])->name('index');
+                Route::put('/{id}/update',  [App\Http\Controllers\Admin\AdminUserController::class,'update'])->name('update');
+                Route::put('/{id}/update-password',  [App\Http\Controllers\Admin\AdminUserController::class,'updatepassword'])->name('password');
+                //Route::delete('/{id}/delete', [App\Http\Controllers\Admin\AdminUserController::class,'destroy'])->name('destroy');
             });
 
         });

@@ -81,7 +81,7 @@ class GalleryController extends Controller
         $data=$post::find($id);
         $data->publish =$publish;
         $data->save();
-        $pesan='Successfully Album article';
+        $pesan='Successfully publish Album ';
         if($publish == 0){
             $pesan='Successfully unpublish Album';
         }

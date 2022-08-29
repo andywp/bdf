@@ -105,7 +105,22 @@ class HelperImages{
 
     }
 
+    public static function delete($oldfile, $path){
+        //$path='gallery';
+        $oldImages=public_path('/images/'.$path.'/'.$oldfile);
+        if(File::exists($oldImages)){
+            File::delete($oldImages);
+        }
+        
+        $getThumbConfig=config('thumb');
+        foreach($getThumbConfig as $tName => $pixel){
+            $oldImages=public_path('/images/'.$path.'/thumb/'.$tName.'/'.$oldfile);
+            if(File::exists($oldImages)){
+                File::delete($oldImages);
+            }
+        }
 
+    }
     public static function deleteGallery($oldfile){
         $path='gallery';
         $oldImages=public_path('/images/'.$path.'/'.$oldfile);

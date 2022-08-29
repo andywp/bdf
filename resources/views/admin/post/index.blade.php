@@ -130,7 +130,7 @@ $(document).ready(function(){
             // e.preventDefault();
         Swal.fire({
                 title: "Warning..!",
-                text: "Do you want to delete mentor "+$(this).data('name')+" ?",
+                text: "Do you want to delete Artikel "+$(this).data('name')+" ?",
                 icon: "warning",
                 showCancelButton:true,
                 confirmButtonText: 'Ok',

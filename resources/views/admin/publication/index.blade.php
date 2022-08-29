@@ -1,5 +1,5 @@
 @extends('layouts.admin-panel')
-@section('title','Album Gallery')
+@section('title','Publication')
 @section('styles')
 <link href="{{asset('assets/vendor/datatables/css/jquery.dataTables.min.css')}}" rel="stylesheet">
 @endsection
@@ -10,7 +10,7 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex align-items-center w-100">
-                        <h4 class="card-title" >Album Gallery</h4>
+                        <h4 class="card-title" >Publication</h4>
                         <div class="ms-auto">
                             <button type="button" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#createAlbum">
                                 <i class="fas fa-plus"></i> Add New
@@ -35,8 +35,8 @@
                         <table id="albumtable" class="table table-striped table-bordered display w-100">
                             <thead>
                                 <tr>
-                                    <th>Album</th>
-                                    <th>Photo</th>
+                                    <th>Category</th>
+                                    <th>Manage File</th>
                                     <th>Create Date</th>
                                     <th>publish</th>
                                     <th>#</th>
@@ -58,7 +58,7 @@
     <!-- Modal -->
 <div class="modal fade" id="createAlbum" tabindex="-1" aria-labelledby="createAlbumLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
-        <form id="album" action="{{ route('admin.gallery.store') }}" class="needs-validation" method="POST" novalidate>
+        <form id="album" action="{{ route('admin.publication.store') }}" class="needs-validation" method="POST" novalidate>
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="createAlbumLabel">Create Album</h5>
@@ -66,9 +66,9 @@
                 </div>
                 <div class="modal-body">
                     <div class="mb-3">
-                        <label for="validationTooltip01" class="form-label">Album</label>
+                        <label for="validationTooltip01" class="form-label">Title</label>
                         
-                        <input type="text" name="album" class="form-control form-control-sm @error('album') is-invalid @enderror" id="validationTooltip01" value="{{ old('album') }}">
+                        <input type="text" name="title" class="form-control form-control-sm @error('album') is-invalid @enderror" id="validationTooltip01" value="{{ old('album') }}">
                         <span class="text-danger" id="albumError"></span>
                         @error('album')
                             <div class="invalid-feedback">{{ $message }}</div>
@@ -99,7 +99,7 @@
                     <div class="mb-3">
                         <label for="validationTooltip01" class="form-label">Album</label>
                         
-                        <input type="text" name="album" id="inputAlbum" class="form-control form-control-sm" id="validationTooltip01" value="">
+                        <input type="text" name="title" id="inputAlbum" class="form-control form-control-sm" id="validationTooltip01" value="">
                         <span class="text-danger" id="EditalbumError"></span>
                         @error('album')
                             <div class="invalid-feedback">{{ $message }}</div>
@@ -135,7 +135,7 @@ $(document).ready(function(){
         event.preventDefault();
         $.ajax({
             type: 'POST',
-            url: "{{ route('admin.gallery.store') }}",
+            url: "{{ route('admin.publication.store') }}",
             data: $("#album").serialize(),
             dataType: 'json',
             success: function(data){
@@ -161,7 +161,7 @@ $(document).ready(function(){
         event.preventDefault();
         $.ajax({
             type: 'POST',
-            url: "{{ route('admin.gallery.update') }}",
+            url: "{{ route('admin.publication.update') }}",
             data: $("#editalbum").serialize(),
             dataType: 'json',
             success: function(data){
@@ -206,18 +206,18 @@ $(document).ready(function(){
                     }
                 },
                 ajax: {
-                    url:"{{route('admin.gallery.data')}}",
+                    url:"{{route('admin.publication.data')}}",
                     type: "POST" ,
                     dataType: 'json'        
                 },
                 columns: [
                     {
-                        data: 'album',                                    
+                        data: 'title',                                    
                     },
                     {
                         width: "90px",
                         className: "text-center",
-                        data: 'photo',
+                        data: 'file',
                     },
                     {
                         width: "90px",
