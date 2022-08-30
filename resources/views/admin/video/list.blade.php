@@ -1,5 +1,5 @@
 @extends('layouts.admin-panel')
-@section('title','Album '. $dataAlbum->title)
+@section('title','Album Video')
 @section('styles')
 <link href="{{asset('assets/vendor/datatables/css/jquery.dataTables.min.css')}}" rel="stylesheet">
 <link href="{{asset('vendor/laravel-filemanager/css/dropzone.min.css')}}" rel="stylesheet">
@@ -18,7 +18,7 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex align-items-center w-100">
-                        <h4 class="card-title" >Album {{ $dataAlbum->title }}</h4>
+                        <h4 class="card-title" >Video</h4>
                         <div class="ms-auto">
                             <button type="button" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#createVideo">
                                 <i class="fas fa-plus"></i> Add New
@@ -98,7 +98,7 @@
                         
                     </div>
                     <div class="modal-footer">
-                        <input type="hidden" name="category_id" value="{{ $dataAlbum->id }}">
+                        <input type="hidden" name="category_id" value="0">
                         <button type="button" class="btn btn-xs  btn-secondary" data-bs-dismiss="modal">Close</button>
                         <input type="submit"  value="Upload" class="btn btn-xs btn-primary">
                        
@@ -207,7 +207,11 @@ $(document).ready(function(){
             $('#createVideo').modal('toggle');
             $('#galleryfoto').dataTable().fnDestroy();
             loadData();
-
+            $(":input","#uploadFile")
+                .not(":button, :submit, :reset, :hidden")
+                .val("")
+                .removeAttr("checked")
+                .removeAttr("selected");
             notif('Video has uploaded');
         },
         error: function(response){
@@ -294,7 +298,7 @@ $(document).ready(function(){
                     }
                 },
                 ajax: {
-                    url:"{{route('admin.video.datavideo',$dataAlbum->id)}}",
+                    url:"{{route('admin.video.datavideo',0)}}",
                     type: "POST" ,
                     dataType: 'json'        
                 },
@@ -326,7 +330,10 @@ $(document).ready(function(){
                     $('.togglepublish').bootstrapToggle();
                     $('[data-bs-toggle="tooltip"]').tooltip();
                    // $('.box-video').lightGallery(); 
-                   videojs(document.querySelector('.video-js'));
+                   if($(".video-js").length ){
+                        videojs(document.querySelector('.video-js'));
+                   }
+                   
                 },
                 createdRow: function (row, data, dataIndex) {
                     //console.log(data,'data');
@@ -351,6 +358,7 @@ $(document).ready(function(){
             dataType: 'json',
             success: function(data){
             if(!data.error){
+                
                 notif(data.pesan);
             }else{
                 notif('Error omething wrong','warning');

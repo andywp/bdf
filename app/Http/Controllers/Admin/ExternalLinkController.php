@@ -17,7 +17,7 @@ class ExternalLinkController extends Controller
     public function store(Request $request,ExternalLink $ExternalLink){
         //dd($request->all());
         $request->validate([
-            'url'=> 'required|url',
+            'url'=> 'nullable|url',
             'title'=> 'required',
             'post_image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
@@ -39,7 +39,7 @@ class ExternalLinkController extends Controller
                         ->addColumn('action', function($row){  
                             //$enc_id = \Crypt::encrypt($row->id);
                             $btn = '
-                                    <form id="fd'.$row->id.'" action="'.route("admin.slider.destroy",$row->id).'" method="POST">
+                                    <form id="fd'.$row->id.'" action="'.route("admin.link.destroy",$row->id).'" method="POST">
                                         <input type="hidden" name="_token" value="' . csrf_token() . '" />
                                         <input type="hidden" name="_method" value="DELETE">
                                         <div class="d-flex">

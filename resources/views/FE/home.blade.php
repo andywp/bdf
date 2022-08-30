@@ -1,5 +1,18 @@
 @extends('layouts.bdf')
 @section('title','Bali Democracy Forum')
+@section('styles')
+  <style>
+    .external_links .slick-slide img{
+        max-width: 70px;
+    }
+    .card-gallery img {
+        object-fit: cover;
+        height: 200px;
+    }
+  </style>
+@endsection
+
+
 @section('content')
 
     <!-- BANNER -->
@@ -76,6 +89,32 @@
                 </div>
                 @endif
             @endforeach
+        </div>
+      </div>
+    </section>
+
+    <!-- External Link -->
+    <section class="section_regular bg-grey" id="media">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <h2 class="title-section text-center">External Link</h2>
+          </div>
+        </div>
+      
+
+        <div class="row">
+          <div class="col-12">
+            <div class="external_links">
+              @foreach($link as $r)
+                @if(file_exists(public_path('images/link/thumb/mini/'.$r->images))) 
+                <div>
+                  <a href="{{ !empty($r->order_link)?$r->order_link:'#' }}"><img src="{{ asset('images/link/thumb/medium/'.$r->images) }}" alt="{{ $r->title }}" class="img_externallinks"></a>
+                </div>
+                @endif
+              @endforeach
+            </div>
+          </div>
         </div>
       </div>
     </section>

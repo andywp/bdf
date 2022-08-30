@@ -76,7 +76,7 @@ class VideoController extends Controller
         }
     }
 
-    public function listVideo($id, Category $Category){
+    public function listVideo($id='', Category $Category){
         $id=(int) $id;
         $dataAlbum=$Category::find($id);
        
@@ -150,9 +150,10 @@ class VideoController extends Controller
     }
 
 
-    public function dataTableVideo($id,Request $request){
+    public function dataTableVideo($id='',Request $request){
         if ($request->ajax()) {
-            $datas = \App\Models\Video::select('id','title','file','cover','created_at')->where('category_id',$id);
+            //$datas = \App\Models\Video::select('id','title','file','cover','created_at')->where('category_id',$id);
+            $datas = \App\Models\Video::select('id','title','file','cover','created_at');
             return DataTables::of($datas)
                         ->addColumn('action', function($row){  
                             //$enc_id = \Crypt::encrypt($row->id);

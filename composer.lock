@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5190657b53ffc2b9ec113b24e4fbd74a",
+    "content-hash": "f38a3e82a3b8c0ed82a0c0eba3a371c1",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -784,6 +784,65 @@
                 }
             ],
             "time": "2020-12-29T14:50:06+00:00"
+        },
+        {
+            "name": "eusonlito/laravel-meta",
+            "version": "v3.2.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/eusonlito/laravel-Meta.git",
+                "reference": "104c7f6273f953b6b82bd1c0f0aa2d5afb739721"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/eusonlito/laravel-Meta/zipball/104c7f6273f953b6b82bd1c0f0aa2d5afb739721",
+                "reference": "104c7f6273f953b6b82bd1c0f0aa2d5afb739721",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^9.3"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Eusonlito\\LaravelMeta\\MetaServiceProvider"
+                    ],
+                    "aliases": {
+                        "Meta": "Eusonlito\\LaravelMeta\\Facade"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Eusonlito\\LaravelMeta\\": "src/Eusonlito/LaravelMeta/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Lito",
+                    "email": "lito@eordes.com"
+                }
+            ],
+            "description": "A package to manage Header Meta Tags",
+            "keywords": [
+                "head",
+                "laravel",
+                "meta",
+                "tags"
+            ],
+            "support": {
+                "issues": "https://github.com/eusonlito/laravel-Meta/issues",
+                "source": "https://github.com/eusonlito/laravel-Meta/tree/v3.2.3"
+            },
+            "time": "2022-05-13T08:13:41+00:00"
         },
         {
             "name": "evenement/evenement",

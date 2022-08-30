@@ -26,7 +26,7 @@
                                 <div class="mb-3">
                                     <label for="validationTooltip01" class="form-label">Title</label>
                                     <input type="text" name="post_title" class="form-control form-control-sm @error('post_title') is-invalid @enderror" id="validationTooltip01" value="{{ $data->post_title }}">
-                                    @error('post_title')
+                                    @error('post_title')  
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                     

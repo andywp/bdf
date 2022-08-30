@@ -26,10 +26,12 @@ class ViewServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        View::composer('includes/external-link', function ($view) {
-            // following code will create $posts variable which we can use
-            // in our post.list view you can also create more variables if needed
-            $view->with('data','');
+        View::composer('includes/top-nav', function ($view) {
+            $bdf=\App\Models\Post::where('publish',1)->where('post_type','post')->select('post_title','slug_url')->orderBy('id','desc')->first();
+        
+            $about=\App\Models\Post::where('publish',1)->where('post_type','about')->select('post_title','slug_url')->orderBy('id','asc')->get();
+            $view->with('bdf',$bdf);
+            $view->with('about',$about);
         });
     }
 }

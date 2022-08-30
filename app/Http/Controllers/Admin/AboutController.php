@@ -105,7 +105,7 @@ class AboutController extends Controller
                         }) 
                         ->rawColumns(['action','publish'])   //merender content column dalam bentuk html
                         ->escapeColumns()  //mencegah XSS Attack
-                        ->orderColumn('name',function ($query, $order) {
+                        ->orderColumn('post_title',function ($query, $order) {
                             $query->orderBy('id', $order);
                         })
                         ->toJson();
@@ -141,7 +141,7 @@ class AboutController extends Controller
     public function edit($id,Post $post){
         $data=$post::find($id);
         //dd($data);
-        return view('admin.history.edit', compact('data'));
+        return view('admin.about.edit', compact('data'));
     }
 
     public function update(Request $request, $id, Post $post){

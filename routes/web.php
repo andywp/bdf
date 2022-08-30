@@ -23,40 +23,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-/* Route::get('/send', function () {
-    event(new OrderStatusUpdated('Hello Echo'));
-   echo 'ekekeke';
-}); */
-
-Route::get('/create-mentor', function () {
-   /*  for ($x = 0; $x <= 20; $x++) {
-    Mentor::create(
-        [
-            'name' => 'mentor 1',
-            'username'  => 'mentor'.$x,
-            'email' => 'mentor'.$x.'@mail.com',
-            'alamat'    => 'Boyolali'.$x,
-            'date_of_brith' => date('Y-m-d'),
-            'phone'     => '082226274844',
-            'email_verified_at' => now(),
-            'password' => Hash::make('mentor'.$x), // password
-            'remember_token' => Str::random(10),
-        ]
-        );
-
-    } */
-
-    /* \App\Models\Admin::create([
-    
-            'name'  => 'raslogi',
-            'email' => 'rasalogweb@gmail.com',
-            'password' => Hash::make('100%admin')
-    
-    ]); */
-
-
-});
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('landing');
+Route::get('/history', [App\Http\Controllers\BdfController::class, 'history'])->name('history');
+Route::get('/gallery', [App\Http\Controllers\BdfController::class, 'gallery'])->name('gallery');
+Route::get('/{slug_url}', [App\Http\Controllers\BdfController::class, 'index'])->name('detail');
 
 Auth::routes();
 Route::group(['prefix' => 'laravel-filemanager', 'middleware' =>['web', 'auth:admin']], function () {
@@ -164,7 +134,8 @@ Route::group(['prefix' => 'laravel-filemanager', 'middleware' =>['web', 'auth:ad
                 Route::post('/create', [App\Http\Controllers\Admin\VideoController::class,'store'])->name('store');
                 Route::post('/update', [App\Http\Controllers\Admin\VideoController::class,'update'])->name('update');
                 Route::delete('/{id}/delete', [App\Http\Controllers\Admin\VideoController::class,'destroy'])->name('destroy');
-                Route::get('/{id}/list', [App\Http\Controllers\Admin\VideoController::class,'listVideo'])->name('list');
+                //Route::get('/{id}/list', [App\Http\Controllers\Admin\VideoController::class,'listVideo'])->name('list');
+                Route::get('/list', [App\Http\Controllers\Admin\VideoController::class,'listVideo'])->name('list');
                 Route::post('/publish', [App\Http\Controllers\Admin\VideoController::class,'publish'])->name('publish');
                 Route::post('/store-video', [App\Http\Controllers\Admin\VideoController::class,'storevideo'])->name('storevideo');
                 Route::post('data-video/{id}',[App\Http\Controllers\Admin\VideoController::class,'dataTableVideo'])->name('datavideo');

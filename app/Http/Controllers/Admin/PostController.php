@@ -118,7 +118,7 @@ class PostController extends Controller
                         }) 
                         ->rawColumns(['action','publish'])   //merender content column dalam bentuk html
                         ->escapeColumns()  //mencegah XSS Attack
-                        ->orderColumn('name',function ($query, $order) {
+                        ->orderColumn('post_title',function ($query, $order) {
                             $query->orderBy('id', $order);
                         })
                         ->toJson();

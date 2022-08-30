@@ -6,33 +6,18 @@
         <h2 class="title-section text-center">External Link</h2>
       </div>
     </div>
+   
+
     <div class="row">
       <div class="col-12">
         <div class="external_links">
-          <div>
-            <a href="#"><img src="./assets/images/logo-footer.png" class="img_externallinks"></a>
-          </div>
-          <div>
-            <a href="#"><img src="./assets/images/logo-footer.png" class="img_externallinks"></a>
-          </div>
-          <div>
-            <a href="#"><img src="./assets/images/logo-footer.png" class="img_externallinks"></a>
-          </div>
-          <div>
-            <a href="#"><img src="./assets/images/logo-footer.png" class="img_externallinks"></a>
-          </div>
-          <div>
-            <a href="#"><img src="./assets/images/logo-footer.png" class="img_externallinks"></a>
-          </div>
-          <div>
-            <a href="#"><img src="./assets/images/logo-footer.png" class="img_externallinks"></a>
-          </div>
-          <div>
-            <a href="#"><img src="./assets/images/logo-footer.png" class="img_externallinks"></a>
-          </div>
-          <div>
-            <a href="#"><img src="./assets/images/logo-footer.png" class="img_externallinks"></a>
-          </div>
+          @foreach($slider as $r)
+            @if(file_exists(public_path('images/link/thumb/small/'.$r->images))) 
+            <div>
+              <a href="{{ !empty($->order_link)?$r->order_link:'#' }}"><img src="{{ asset('images/link/thumb/medium/'.$r->images) }}" alt="{{ $r->title }}" class="img_externallinks"></a>
+            </div>
+            @endif
+          @foreach
         </div>
       </div>
     </div>

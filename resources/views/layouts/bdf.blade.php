@@ -4,15 +4,12 @@
 <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-   <!--  <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:image:src" content="./assets/images/index-meta.png" />
-    <meta property="og:image" content="./assets/images/index-meta.png" />
-    <meta name="twitter:title" content="Bapenda" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
-    <link rel="shortcut icon" href="./assets/images/favicon.png" type="image/x-icon" />
-    <meta name="description" content="Bapenda Jawa Timur" /> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+    <link rel="shortcut icon" href="{{  asset('bdf/assets/images/logo-bdf.png') }}" type="image/x-icon">
 
-    <title>@yield('title')</title>
+    
+    @metas
+    <meta name="generator" content="Rasalogiweb">
     <link rel="stylesheet" href="{{asset('bdf/assets/3rdparty/mobirise-icons2/mobirise2.css')}}" />
     <link rel="stylesheet" href="{{asset('bdf/assets/3rdparty/bootstrap/css/bootstrap.min.css')}}" />
     <link rel="stylesheet" href="{{asset('bdf/assets/3rdparty/bootstrap/css/bootstrap-grid.min.css')}}" />
@@ -34,6 +31,7 @@
 
     <!-- page css -->
     <link rel="stylesheet" href="{{asset('bdf/assets/css/style.css')}}" />
+    <link rel="stylesheet" href="{{asset('bdf/assets/css/style-2.css')}}" type="text/css">
     <link rel="stylesheet" href="{{asset('bdf/assets/css/index.css')}}" type="text/css" />
     @yield('styles')
 </head>
@@ -73,41 +71,7 @@
                     </div>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav nav-dropdown nav-right" data-app-modern-menu="true">
-                        <li class="nav-item"><a class="nav-link link text-black text-primary display-4" href="./index.html">HOME</a></li>
-                        <li class="nav-item active"><a class="nav-link link text-white text-primary display-4" href="./bdf-15.html">BDF 15</a></li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link link text-black text-primary display-4 dropdown-toggle" href="#" id="dropdownProfile" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                ABOUT
-                            </a>
-                            <ul class="dropdown-menu bg-white" aria-labelledby="dropdownProfile">
-                                <li><a class="dropdown-item" href="./what-is-bdf.html">What is The BDF</a></li>
-                                <li><a class="dropdown-item" href="./why-bdf.html">Why BDF</a></li>
-                                <li><a class="dropdown-item" href="./objectives.html">Objectives</a></li>
-                                <li><a class="dropdown-item" href="./participants.html">Participants</a></li>
-                                <li><a class="dropdown-item" href="./observer.html">Observer</a></li>
-                                <li><a class="dropdown-item" href="./international-organization.html">International Organization</a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-item"><a class="nav-link link text-black text-primary display-4" href="./history.html">HISTORY</a></li>
-                        <li class="nav-item"><a class="nav-link link text-black text-primary display-4" href="./gallery.html">GALLERY</a></li>
-                        <li class="nav-item"><a class="nav-link link text-black text-primary display-4" href="./ipd.html">IPD</a></li>
-                        <li class="nav-item"><a class="nav-link link text-black text-primary display-4" href="./publication.html">PUBLICATION</a></li>
-                        <li class="nav-item"><a class="nav-link link text-black text-primary display-4" href="./media-advisory.html">MEDIA</a></li>
-                        <li class="nav-item"><a class="nav-link link text-black text-primary display-4" href="./contact.html">CONTACT</a></li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link link text-black text-primary display-4 dropdown-toggle" href="#" id="dropdownLayanan" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                REGISTRATION
-                            </a>
-                            <ul class="dropdown-menu bg-white" aria-labelledby="dropdownLayanan">
-                                <li><a class="dropdown-item" href="./physical-attendance.html">Physical Attendance</a></li>
-                                <li><a class="dropdown-item" href="./virtual-attendance.html">Virtual Attendance</a></li>
-                                <li><a class="dropdown-item" href="./media.html">Media</a></li>
-                                <li><a class="dropdown-item" href="./guest.html">Guest</a></li>
-                                <li><a class="dropdown-item" href="./commitee.html">Commitee</a></li>
-                            </ul>
-                        </li>
-                    </ul>
+                    @include('includes/top-nav')
                     <!-- <div class="icons-menu">
                     <a class="iconfont-wrapper" href="#" target="_blank">
                         <span class="p-2 mbr-iconfont mobi-mbri-search mobi-mbri"></span>
@@ -123,7 +87,7 @@
 
     @yield('content')
 
-    @include('includes.external-link')
+   
     <!-- FOOTER -->
     <footer class="section-footer" id="footer">
         <div class="container">

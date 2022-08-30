@@ -321,11 +321,11 @@ $(document).ready(function(){
     
     });
 
-    $('#albumtable').on('click', '.delete', function (){
+    $('#updateSlider').on('click', '.delete', function (){
             // e.preventDefault();
         Swal.fire({
                 title: "Warning..!",
-                text: "Do you want to delete Slider "+$(this).data('name')+" ?",
+                text: "Do you want to delete External link "+$(this).data('name')+" ?",
                 icon: "warning",
                 showCancelButton:true,
                 confirmButtonText: 'Ok',

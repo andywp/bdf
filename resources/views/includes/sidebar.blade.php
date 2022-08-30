@@ -63,7 +63,7 @@
                 </a>
                 <ul aria-expanded="false">
                     <li><a href="{{ route('admin.gallery.index') }}">Images</a></li>
-                    <li><a href="{{ route('admin.video.index') }}">Video</a></li>
+                    <li><a href="{{ route('admin.video.list') }}">Video</a></li>
                 </ul>
             </li>
             <li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
