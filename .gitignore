@@ -1,7 +1,5 @@
 /node_modules
 /public/hot
-/public/video
-/public/images
 /public/vis
 /storage/*.key
 /vendor

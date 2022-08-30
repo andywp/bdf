@@ -70,6 +70,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body ">
+                <div class="error-msg"></div>
                 <form id="dropzone" action="{{ route('admin.gallery.storephoto') }}" class="dropzone" method="POST" novalidate>
 
                         <input type="hidden" name="album_id" value="{{ $dataAlbum->id }}" >
@@ -136,7 +137,11 @@
             },
             error: function(file, response)
             {
-               return false;
+                let msgalrt=`<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                            <strong>`+file.name+`</strong> `+response+`
+                                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                                        </div>`;
+                            $('.error-msg').append(msgalrt);
             }
 };
 </script>

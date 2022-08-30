@@ -1,0 +1,50 @@
+.login-form {
+    background: rgba(237, 237, 237, .35);
+    border-radius: 25px;
+    max-width: 780px;
+    display: block;
+    margin: auto;
+    padding: 60px;
+}
+.login-form form {
+    width: 100%;
+    max-width: 580px;
+    display: block;
+    margin: auto;
+}
+.label-flex {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.form-control {
+    border: none;
+    background: transparent;
+    padding: 10px 0;
+    font-size: 14px;
+    border-bottom: 1px solid #B20602;
+    border-radius: 0;
+}
+.title-form {
+    font-size: 22px;
+    margin-bottom: 24px;
+    font-weight: bold;
+}
+
+.wrap-contactform {
+    padding: 24px;
+    background: #EDEDED;
+    border-radius: 25px;
+}
+.contact-information {
+    height: 100%;
+    background: #2A4B75;
+    border-radius: 25px;
+    padding: 40px 30px;
+}
+
+@media only screen and (max-width: 767px) {
+    .login-form {
+        padding: 30px;
+    }
+}

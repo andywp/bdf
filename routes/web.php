@@ -23,10 +23,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/send', function () {
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+/* Route::get('/send', function () {
     event(new OrderStatusUpdated('Hello Echo'));
    echo 'ekekeke';
-});
+}); */
 
 Route::get('/create-mentor', function () {
    /*  for ($x = 0; $x <= 20; $x++) {
