@@ -26,7 +26,7 @@ Route::get('/', function () {
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('landing');
 Route::get('/history', [App\Http\Controllers\BdfController::class, 'history'])->name('history');
 Route::get('/gallery', [App\Http\Controllers\BdfController::class, 'gallery'])->name('gallery');
-Route::get('/{slug_url}', [App\Http\Controllers\BdfController::class, 'index'])->name('detail');
+Route::get('{slug_url}', [App\Http\Controllers\BdfController::class, 'index'])->name('detail');
 
 Auth::routes();
 Route::group(['prefix' => 'laravel-filemanager', 'middleware' =>['web', 'auth:admin']], function () {
@@ -208,4 +208,6 @@ Route::group(['prefix' => 'laravel-filemanager', 'middleware' =>['web', 'auth:ad
     });
 //});
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
