@@ -27,7 +27,7 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('la
 Route::get('/history', [App\Http\Controllers\BdfController::class, 'history'])->name('history');
 Route::get('/gallery', [App\Http\Controllers\BdfController::class, 'gallery'])->name('gallery');
 Route::get('{slug_url}', [App\Http\Controllers\BdfController::class, 'index'])->name('detail');
-
+//
 Auth::routes();
 Route::group(['prefix' => 'laravel-filemanager', 'middleware' =>['web', 'auth:admin']], function () {
     \UniSharp\LaravelFilemanager\Lfm::routes();
