@@ -50,53 +50,25 @@
 
             <div class="wrapp-gallery">
                 <div id="bdf-15" class="list-gallery">
-                <div class="row">
-                    @foreach($gallery as $r)
-                        @if(file_exists(public_path('images/gallery/'.$r->images))) 
-                        <div class="col-md-3 col-6 py-3">
-                            <div class="card">
-                                <div class="card-gallery">
-                                <a href="{{ asset('images/gallery/'.$r->images) }}" data-fancybox="gallery" data-caption="Caption Images 1">
-                                    <img src="{{ asset('images/gallery/thumb/medium/'.$r->images) }}" alt="{{ $r->title }}">
-                                </a>
+                    <div class="row">
+                        @foreach($gallery as $r)
+                            @if(file_exists(public_path('images/gallery/'.$r->images))) 
+                            <div class="col-md-3 col-6 py-3">
+                                <div class="card">
+                                    <div class="card-gallery">
+                                    <a href="{{ asset('images/gallery/'.$r->images) }}" data-fancybox="gallery" data-caption="Caption Images 1">
+                                        <img src="{{ asset('images/gallery/thumb/medium/'.$r->images) }}" alt="{{ $r->title }}">
+                                    </a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        @endif
-                    @endforeach
-                    <div class="col-md-3 col-6 py-3">
-                    <div class="card">
-                        <div class="card-gallery">
-                        <a href="https://source.unsplash.com/480x300/?food" data-fancybox="gallery" data-caption="Caption Images 1">
-                            <img src="https://source.unsplash.com/480x300/?food" alt="Image Gallery">
-                        </a>
-                        </div>
+                            @endif
+                        @endforeach
                     </div>
-                    </div>
-        
-                    <div class="col-md-3 col-6 py-3">
-                    <div class="card">
-                        <div class="card-gallery">
-                        <a href="https://source.unsplash.com/480x300/?travel" data-fancybox="gallery" data-caption="Caption Images 1">
-                            <img src="https://source.unsplash.com/480x300/?travel" alt="Image Gallery">
-                        </a>
-                        </div>
-                    </div>
-                    </div>
-        
-                    <div class="col-md-3 col-6 py-3">
-                    <div class="card">
-                        <div class="card-gallery">
-                        <a href="https://source.unsplash.com/480x300/?building" data-fancybox="gallery" data-caption="Caption Images 1">
-                            <img src="https://source.unsplash.com/480x300/?building" alt="Image Gallery">
-                        </a>
-                        </div>
-                    </div>
-                    </div>
-                </div>
                 </div>
 
                 <div id="bdf-14" class="list-gallery">
+
                 <div class="row">
                     <div class="col-md-3 col-6 py-3">
                     <div class="card">
@@ -142,68 +114,26 @@
             </div>
             </div>
             <div class="tab-pane fade" id="gallery-video" role="tabpanel" aria-labelledby="gallery-video-tab" tabindex="0">
+
+            
             <div class="wrapp-gallery">
                 <div class="row">
+                @foreach($video as $v)
                 <div class="col-md-3 col-6 py-3">
                     <div class="card">
                     <div class="card-gallery">
                         <a href="#video1" data-fancybox="gallery_video" data-caption="Caption Images 1">
-                        <img src="https://source.unsplash.com/480x300/?nature"/>
+                        <img src="{{ asset('images/cover_video/thumb/medium/'.$v->cover) }}"/>
                         </a>
                         <div id="video1" class="fancybox-video">
                         <video controls width="100%" height="auto" class="video-item">
-                            <source src="./assets/videos/big_buck_bunny.mp4" type="video/mp4">   
+                            <source src="{{ asset('video/'.$v->file) }}" type="video/mp4">   
                         </video>
                         </div>
                     </div>
                     </div>
                 </div>
-
-                <div class="col-md-3 col-6 py-3">
-                    <div class="card">
-                    <div class="card-gallery">
-                        <a href="#video2" data-fancybox="gallery_video" data-caption="Caption Images 1">
-                        <img src="https://source.unsplash.com/480x300/?bali" alt="Image Gallery">
-                        </a>
-                        <div id="video2" class="fancybox-video">
-                        <video controls width="100%" height="auto" class="video-item">
-                            <source src="./assets/videos/big_buck_bunny.mp4" type="video/mp4">   
-                        </video>
-                        </div>
-                    </div>
-                    </div>
-                </div>
-
-                <div class="col-md-3 col-6 py-3">
-                    <div class="card">
-                    <div class="card-gallery">
-                        <a href="#video3" data-fancybox="gallery_video" data-caption="Caption Images 1">
-                        <img src="https://source.unsplash.com/480x300/?space" alt="Image Gallery">
-                        </a>
-                        <div id="video3" class="fancybox-video">
-                        <video controls width="100%" height="auto" class="video-item">
-                            <source src="./assets/videos/big_buck_bunny.mp4" type="video/mp4">   
-                        </video>
-                        </div>
-                    </div>
-                    </div>
-                </div>
-
-                <div class="col-md-3 col-6 py-3">
-                    <div class="card">
-                    <div class="card-gallery">
-                        <a href="#video4" data-fancybox="gallery_video" data-caption="Caption Images 1">
-                        <img src="https://source.unsplash.com/480x300/?winter" alt="Image Gallery">
-                        </a>
-                        <div id="video4" class="fancybox-video">
-                        <video controls width="100%" height="auto" class="video-item">
-                            <source src="./assets/videos/big_buck_bunny.mp4" type="video/mp4">   
-                        </video>
-                        </div>
-                    </div>
-                    </div>
-                </div>
-
+                @endforeach
                 </div>
             </div>
             </div>

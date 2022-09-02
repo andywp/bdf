@@ -8,7 +8,24 @@
     .video-js {
         width: 200px;
     }
-
+    .video-js .vjs-big-play-button {
+        font-size: 2em;
+        line-height: 1.5em;
+        height: 1.63332em;
+        width: 2em;
+        display: block;
+        position: absolute;
+        top: 42%;
+        left: 39%;
+        padding: 0;
+        cursor: pointer;
+        opacity: 1;
+        border: 0.06666em solid #fff;
+        background-color: #2B333F;
+        background-color: rgba(43, 51, 63, 0.7);
+        border-radius: 0.3em;
+        transition: all 0.4s;
+    }
 </style>
 @endsection
 
@@ -67,9 +84,9 @@
     </div>
     <!-- Modal -->
     <div class="modal fade" id="createVideo" tabindex="-1"  data-bs-backdrop="static" aria-labelledby="createAlbumLabel" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog  modal-xl">
             <form id="uploadFile" method="POST" action="{{ route('admin.video.storevideo') }}" enctype="multipart/form-data">
-                <div class="modal-content " >
+                <div class="modal-content" >
                     <div class="modal-header">
                         <h5 class="modal-title" id="createAlbumLabel">Add Video</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -87,6 +104,32 @@
                                     <input name="video" type="file" class="form-file-input form-control">
                                     <span class="text-danger" id="inputVideoError"></span>
                                 </div>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label>Thumbnail</label>
+                                <div class="upload-file">
+                                    <div class="preview">
+                                        <div><img  id="preview_add_post_image" src="{{ asset('assets/images/default.jpg') }}"></div>
+                                    </div>
+                                    <div class="upload-file-input">	
+                                        <!-- <a id="btn_remove_add_content_image" href="javascript:void(0)" class="delFile" onclick="return removeFile_add_content_image()"><i class="fa fa-trash"></i></a> -->
+                                        <a id="btn_restore_add_content_image" href="javascript:void(0)" class="restoreFile" onclick="return restoreFile_add_content_image()" style="display:none"><i class="fa fa-reply"></i></a>
+                                        <p class="button">
+                                        <button type="button" id="button_add_post_image" data-input="thumbnail"  data-preview="preview_add_post_image" class="off position-relative">
+                                        <i class="fa fa-upload"></i>
+                                        <input 
+                                                id="fileupload" 
+                                                data-default-src="{{ asset('assets/images/default.jpg') }}" 
+                                                type="file" name="post_image" 
+                                    
+                                                class="upload-input" 
+                                                readonly accept="image/*">    
+                                        </button>
+                                        </p>		
+                                    </div>
+                                    <input id="thumbnail" class="form-control" type="hidden" name="filepath">
+                                </div>
+                                <span class="text-danger" id="inputpost_imageError"></span>
                             </div>
                             <div class="form-group mb-4">
                                 <div class="progress">
@@ -183,7 +226,26 @@
 </script>
 <script type="text/javascript" >
 $(document).ready(function(){
-   
+    $('#fileupload').on('change', event => {
+        $('#del').show();
+        let input =event.currentTarget;
+        if (input.files && input.files[0]) {
+            let reader = new FileReader();
+            reader.onload = event => {
+                $('#preview_add_post_image').attr('src', event.target.result);
+            };
+            reader.readAsDataURL(input.files[0]);
+            //$('#banner_remove').val(0); 
+        }
+    });
+
+    function removeFile_add_content_image(){
+        $("#preview_add_content_image").html('');
+        $("#file_add_content_image").val('');
+        $("#btn_remove_add_content_image").hide();
+        $("#btn_restore_add_content_image").show();
+        return false;
+    }
 
     $.ajaxSetup({
         headers: {
@@ -203,22 +265,27 @@ $(document).ready(function(){
             })
         },
         complete: function (xhr) {
-            //console.log(xhr,'File has uploaded');
-            $('#createVideo').modal('toggle');
-            $('#galleryfoto').dataTable().fnDestroy();
-            loadData();
-            $(":input","#uploadFile")
-                .not(":button, :submit, :reset, :hidden")
-                .val("")
-                .removeAttr("checked")
-                .removeAttr("selected");
-            notif('Video has uploaded');
+            console.log(xhr,'File has uploaded');
+            if(!xhr.responseJSON.errors){
+                $('#createVideo').modal('toggle');
+                $('#galleryfoto').dataTable().fnDestroy();
+                loadData();
+                $(":input","#uploadFile")
+                    .not(":button, :submit, :reset, :hidden")
+                    .val("")
+                    .removeAttr("checked")
+                    .removeAttr("selected");
+                    $('.progress .progress-bar').css("width",'0%');
+                notif('Video has uploaded');
+            }
         },
         error: function(response){
             
             $('#EditalbumError').text(response.responseJSON.errors.title);
             //inputVideoError
             $('#inputVideoError').text(response.responseJSON.errors.video);
+            //inputpost_imageError
+            $('#inputpost_imageError').text(response.responseJSON.errors.post_image);
         }
     });
 
@@ -323,7 +390,7 @@ $(document).ready(function(){
                         className: "text-center",
                         orderable: false, 
                         searchable: false,
-                        width: "20px"    
+                        width: "200px"    
                     },    
                 ],
                 fnDrawCallback : function() {
@@ -371,6 +438,7 @@ $(document).ready(function(){
     $('.done-upload').click(function() {
         $('#createAlbum').modal('toggle');
         $('#galleryfoto').dataTable().fnDestroy();
+        $('.progress .progress-bar').css("width",'0%');
         loadData();
     });
 
@@ -405,7 +473,7 @@ $(document).ready(function(){
             // e.preventDefault();
         Swal.fire({
                 title: "Warning..!",
-                text: "Do you want to delete Album "+$(this).data('title')+" ?",
+                text: "Do you want to delete Video "+$(this).data('title')+" ?",
                 icon: "warning",
                 showCancelButton:true,
                 confirmButtonText: 'Ok',
@@ -423,13 +491,13 @@ $(document).ready(function(){
                         data: $('#fd'+$(this).data('id')).serialize(),
                         dataType: 'json',
                         success: function(data){
-                            console.log(data);
+                            //console.log(data);
                             notif(data.success);
-
+                            //loadData();
                             $('.gall'+data.id).remove();
 
                             //$('#galleryfoto').dataTable().fnDestroy();
-                            //loadData();
+                            loadData();
                         },
                         error:function (response) {
                             $('#EditalbumError').text(response.responseJSON.errors.album);

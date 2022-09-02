@@ -1,5 +1,5 @@
 @extends('layouts.auth-master')
-
+@section('title','Login')
 @section('content')
 <div class="authincation-content">
     <div class="row no-gutters">
@@ -9,8 +9,17 @@
                     <a href="{{ url('/') }}"><img src="https://rasalogi.com/wp-content/uploads/2021/12/logo.png" alt="Rasalogi App"></a>
                 </div>
                 <h4 class="text-center mb-4">Sign in your account</h4>
+                @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
                 <form method="POST" action="{{ route('admin.login') }}" autocomplete="off">
-                @csrf
+                    @csrf
                     <div class="mb-3">
                         <label class="mb-1"><strong>Email</strong></label>
                         <input type="email" name="email" class="form-control" >

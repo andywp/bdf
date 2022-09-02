@@ -138,4 +138,11 @@ class HelperImages{
 
     }
 
+    public static function deleteVideo($oldfile){
+        $oldImages=public_path('/video/'.$oldfile);
+        if(File::exists($oldImages)){
+            File::delete($oldImages);
+        }
+    }
+
 }

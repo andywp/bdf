@@ -25,7 +25,7 @@ class HomeController extends Controller
     {
         Meta::set('title', 'BDF');
         Meta::set('description', 'Directorate General of Information and Public Diplomacy, Ministry of Foreign Affairs of Republic of Indonesia');
-        //Meta::set('image', asset('images/home-logo.png'));
+        Meta::set('image', asset('images/home-logo.png'));
 
         $slider=\App\Models\Slider::where('publish',1)->orderBy('order_slider','ASC')->get();
         $gallery=\App\Models\Gallery::orderBy('id','ASC')->limit(8)->get();

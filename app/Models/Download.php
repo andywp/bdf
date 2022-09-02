@@ -26,4 +26,8 @@ class Download extends Model
 
         return Carbon::parse($this->attributes['created_at'])->translatedFormat('l, d F Y');
      }
+
+     function category(){
+		return $this->belongsTo(Category::class,'id');
+	}
 }

@@ -20,7 +20,9 @@ class Category extends Model
         'title','type'
 
     ];
-
+    public function download(){
+        return $this->hasMany(Download::class, 'category_id');
+    }
 
     public function getCreatedAtAttribute(){
 

@@ -11,6 +11,7 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
 use DataTables;
 use File;
+use PhpParser\Node\Expr\FuncCall;
 
 class VideoController extends Controller
 {
@@ -127,7 +128,9 @@ class VideoController extends Controller
         $this->validate($request, [
             /* 'title' => 'required|string|max:255', */
             'video' => 'required|file|mimetypes:video/mp4',
+            'post_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
+
 
         $file = $request->file('video');
         $name=Carbon::now()->format('YmdHis').Str::random(3).'.'.$file->extension();
@@ -137,10 +140,20 @@ class VideoController extends Controller
         }
         $file->move($video_path , $name);
 
+        /*thumbnail*/
+        $post_image='';
+        $cover = $request->file('post_image');
+        if(!empty($cover)){
+            $post_image=\App\Helpers\HelperImages::upload($cover,'cover_video');
+        }
+
+        $title=!empty($request->title)?$request->title:$name;
+        //dd($request->all());
         $video::create([
             'category_id'   => $request->category_id,
-            'title'         => $request->title,
-            'file'          => $name
+            'title'         => $title,
+            'file'          => $name,
+            'cover'         => $post_image
         ]);
         $response=[
             'error' => false,
@@ -158,10 +171,11 @@ class VideoController extends Controller
                         ->addColumn('action', function($row){  
                             //$enc_id = \Crypt::encrypt($row->id);
                             $btn = '
-                                    <form id="fd'.$row->id.'" action="'.route("admin.gallery.photodestroy",$row->id).'" method="POST">
+                                    <form id="fd'.$row->id.'" action="'.route("admin.video.destroyvideo",$row->id).'" method="POST">
                                         <input type="hidden" name="_token" value="' . csrf_token() . '" />
                                         <input type="hidden" name="_method" value="DELETE">
                                         <div class="d-flex">
+                                        
                                             <button  type="button" data-id="'.$row->id.'" data-title="'.$row->title.'" data-bs-toggle="tooltip" data-bs-placement="bottom"  title="Delete" class="delete btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></button>
                                         <div>
                                     </form>
@@ -177,14 +191,18 @@ class VideoController extends Controller
                         })
                         ->editColumn('file', function($row){  
                             //$enc_id = \Crypt::encrypt($row->id);
+
+                            
+                            $mimi_type='';
                             $path_video=public_path('/video/'.$row->file);
-                            $mimi_type=mime_content_type($path_video);
-                            $url_video='';
+                            if(File::exists($path_video)){
+                                $mimi_type=mime_content_type($path_video);
+                                $url_video='';
 
-                            $cover=empty($row->cover)?asset('assets/images/default-video.png'):asset('video/cover/'.$row->file);
+                                $cover=empty($row->cover)?asset('assets/images/default-video.png'):asset('images/cover_video/thumb/small/'.$row->cover);
 
 
-                            $html='
+                                 $html='
                                     
 
                                     <video
@@ -196,8 +214,9 @@ class VideoController extends Controller
                                         height="200"
                                         poster="'.$cover.'"
                                         data-setup="{}"
+                                        controlsList="nodownload"
                                     >
-                                        <source src="'.asset('video/'.$row->file).'" type="'.$mimi_type.'" />
+                                        <source src="'.asset('video/'.$row->file).'" type="'.$mimi_type.'" controlsList="nodownload" />
                                         
                                         <p class="vjs-no-js">
                                         To view this video please enable JavaScript, and consider upgrading to a
@@ -209,18 +228,44 @@ class VideoController extends Controller
                                     </video>
 
                                 ';
+                            }else{
+
+                                $html='<img src="'.asset('assets/images/broken.png').'">';
+                            }
+                            
+                            
 
                            
                             return $html;
                         })
                         ->rawColumns(['action','file','title'])   //merender content column dalam bentuk html
                         ->escapeColumns()  //mencegah XSS Attack
-                        ->orderColumn('title',function ($query, $order) {
+                        ->orderColumn('file',function ($query, $order) {
                             $query->orderBy('id', $order);
                         })
                         ->toJson();
 
         }
+    }
+
+    public function destroyvideo(Request $request, $id, Video $Video){
+        $id =(int) $id;
+        //dd($id);
+        $data=$Video::find($id);
+        $file=$data->cover;
+        $video=$data->file;
+        if(!empty($data->cover)){
+            \App\Helpers\HelperImages::delete($file,'cover_video');
+        }
+
+        if(!empty($video)){
+            \App\Helpers\HelperImages::deleteVideo($video);
+        }
+       
+
+
+        $data=$data->delete();
+        return response()->json(['success'=>'video Delete successfully','id' => $id]);
     }
 
 }

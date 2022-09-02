@@ -352,7 +352,7 @@ $(document).ready(function(){
                         acceptedFiles: ".pdf",
                         addRemoveLinks: true,
                         timeout: 50000,
-                        maxFilesize: 3,
+                        maxFilesize: 30,
                         removedfile: function(file) 
                         {
                             var name = file.upload.filename;

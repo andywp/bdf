@@ -14,9 +14,9 @@
     </li>
     <li class="nav-item"><a class="nav-link link text-black text-primary display-4" href="{{ route('history') }}">HISTORY</a></li>
     <li class="nav-item"><a class="nav-link link text-black text-primary display-4" href="{{ route('gallery') }}">GALLERY</a></li>
-    <li class="nav-item"><a class="nav-link link text-black text-primary display-4" href="./ipd.html">IPD</a></li>
-    <li class="nav-item"><a class="nav-link link text-black text-primary display-4" href="./publication.html">PUBLICATION</a></li>
-    <li class="nav-item"><a class="nav-link link text-black text-primary display-4" href="./media-advisory.html">MEDIA</a></li>
+    <li class="nav-item"><a class="nav-link link text-black text-primary display-4" href="{{ route('ipd') }}">IPD</a></li>
+    <li class="nav-item"><a class="nav-link link text-black text-primary display-4" href="{{ route('publication') }}">PUBLICATION</a></li>
+    <li class="nav-item"><a class="nav-link link text-black text-primary display-4" href="{{ route('publication') }}">MEDIA</a></li>
     <li class="nav-item"><a class="nav-link link text-black text-primary display-4" href="./contact.html">CONTACT</a></li>
     <li class="nav-item dropdown">
         <a class="nav-link link text-black text-primary display-4 dropdown-toggle" href="#" id="dropdownLayanan" role="button" data-bs-toggle="dropdown" aria-expanded="false">

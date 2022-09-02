@@ -3,21 +3,21 @@
 <head>
     <meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="keywords" content="" />
-	<meta name="author" content="" />
-	<meta name="robots" content="" />
+	<meta name="keywords" content="bdf" />
+	<meta name="author" content="rasalogi.com" />
+	<meta name="robots" content="no-follow" />
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="description" content="Jobick : Job Admin Bootstrap 5 Template" />
-	<meta property="og:title" content="Jobick : Job Admin Bootstrap 5 Template" />
-	<meta property="og:description" content="Jobick : Job Admin Bootstrap 5 Template" />
-	<meta property="og:image" content="https://jobick.dexignlab.com/xhtml/social-image.png" />
+	<meta name="description" content="@yield('title') |  Bali Democracy Forum" />
+	<meta property="og:title" content="@yield('title') |  Bali Democracy Forum" />
+	<meta property="og:description" content="@yield('title') |  Bali Democracy Forum" />
+	<meta property="og:image" content="{{ asset('/bdf/assets/images/logo-bdf.png') }}" />
 	<meta name="format-detection" content="telephone=no">
 	<meta name="csrf-token" content="{{ csrf_token() }}">
 	<!-- PAGE TITLE HERE -->
-	<title> @yield('title')</title>
+	<title> @yield('title') |  Bali Democracy Forum</title>
 	
 	<!-- FAVICONS ICON -->
-	<link rel="shortcut icon" type="image/png" href="{{asset('assets/images/favicon.png')}}" />
+	<link rel="shortcut icon" type="image/png" href="{{asset('bdf/assets/images/logo-bdf.png')}}" />
     <link href="{{asset('assets/css/style.css')}}" rel="stylesheet">
     @yield('styles')
     <style>
@@ -27,6 +27,9 @@
         .btn-primary {
             border-color: #38b6ff;
             background-color: #38b6ff;
+        }
+        .form-control{
+            border: 0.0625rem solid #87d1fc;
         }
     </style>
 </head>

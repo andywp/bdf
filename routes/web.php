@@ -26,7 +26,9 @@ Route::get('/', function () {
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('landing');
 Route::get('/history', [App\Http\Controllers\BdfController::class, 'history'])->name('history');
 Route::get('/gallery', [App\Http\Controllers\BdfController::class, 'gallery'])->name('gallery');
-
+Route::get('/ipd', [App\Http\Controllers\BdfController::class, 'ipd'])->name('ipd');
+Route::get('/publication', [App\Http\Controllers\BdfController::class, 'publication'])->name('publication');
+Route::post('/publication', [App\Http\Controllers\BdfController::class, 'download'])->name('download');
 //
 Auth::routes();
 Route::group(['prefix' => 'laravel-filemanager', 'middleware' =>['web', 'auth:admin']], function () {
@@ -139,6 +141,7 @@ Route::group(['prefix' => 'laravel-filemanager', 'middleware' =>['web', 'auth:ad
                 Route::post('/publish', [App\Http\Controllers\Admin\VideoController::class,'publish'])->name('publish');
                 Route::post('/store-video', [App\Http\Controllers\Admin\VideoController::class,'storevideo'])->name('storevideo');
                 Route::post('data-video/{id}',[App\Http\Controllers\Admin\VideoController::class,'dataTableVideo'])->name('datavideo');
+                Route::delete('/{id}/video-delete', [App\Http\Controllers\Admin\VideoController::class,'destroyvideo'])->name('destroyvideo');
 
             });
 
