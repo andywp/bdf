@@ -44,6 +44,7 @@ Route::get('/gallery', [App\Http\Controllers\BdfController::class, 'gallery'])->
 Route::get('/ipd', [App\Http\Controllers\BdfController::class, 'ipd'])->name('ipd');
 Route::get('/publication', [App\Http\Controllers\BdfController::class, 'publication'])->name('publication');
 Route::post('/publication', [App\Http\Controllers\BdfController::class, 'download'])->name('download');
+Route::get('/contact', [App\Http\Controllers\BdfController::class, 'contact'])->name('contact');
 //
 Auth::routes();
 

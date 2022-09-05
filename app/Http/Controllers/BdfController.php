@@ -97,10 +97,12 @@ class BdfController extends Controller
             
             return response()->download(public_path('download/'.$request->download[0]));
 
-
         }
-
-
     }
+
+    public function contact(){
+        return view('FE.contact');
+    }
+
 
 }

@@ -10,7 +10,9 @@ body {
   color: #232323;
   position: relative;
 }
-
+h5{
+  font-size: 18px;
+}
 button {
   background-color: transparent;
   border-color: transparent;
@@ -2568,6 +2570,9 @@ footer ul, .contact-list {
 .form-check-input:checked {
   background-color: #2A4B75;
     border-color: #2A4B75;
+}
+.text-bold {
+  font-weight: bold;
 }
 
 @media only screen and (max-width: 1148px) {
