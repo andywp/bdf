@@ -27,7 +27,7 @@
             <li><a class="dropdown-item" href="{{ route('virtualattendance') }}">Virtual Attendance</a></li>
             <li><a class="dropdown-item" href="{{ route('media') }}">Media</a></li>
             <li><a class="dropdown-item" href="{{ route('guest') }}">Guest</a></li>
-            <li><a class="dropdown-item" href="./commitee.html">Commitee</a></li>
+            <li><a class="dropdown-item" href="{{ route('commitee_create') }}">Commitee</a></li>
         </ul>
     </li>
 </ul>

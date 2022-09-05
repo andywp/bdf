@@ -257,9 +257,142 @@ class RegisterController extends Controller
 
         $organisasi=\App\Models\Organization::get();
         $negara=\App\Models\Countries::get();
-        
-
         return view('FE.register.guest',compact('organisasi','negara'));
-
     }
+
+    public function guest_create(Request $request, \App\Models\GuestAttendance $guest){
+        $request->validate([
+            'country_organization'=> 'required',
+            'title'=> 'required',
+            'family_name'=> 'required',
+            'first_name'=> 'required',
+            'prefered_name_on_badge'=> 'required|max:25',
+            'nationality'=> 'required',
+            'affiliation'=> 'required',
+            'official_title'=> 'required',
+            'office_address'=> 'required',
+            'gender'=> 'required',
+            'email'=> 'required|email:rfc,dns',
+            'telephone'=> 'required',
+            'fax'=> 'required',
+            'passport_no'=> 'required',
+            'date_of_issuance'=> 'required|date',
+            'date_of_expiry'=> 'required|date',
+            'agree'=> 'required',
+            'photo' => 'required|image|max:1024',
+            'diplomatic_note' => 'required|image|max:1024',
+        ]);
+        //dd($request->all());
+        $Photo='';
+        $file = $request->file('photo');
+        if(!empty($file)){
+            $Photo=\App\Helpers\HelperImages::upload($file,'register');
+        }
+
+        $diplomatic_note='';
+        $file2 = $request->file('diplomatic_note');
+        if(!empty($file2)){
+            $diplomatic_note=\App\Helpers\HelperImages::upload($file2,'register');
+        }
+        
+        $input=[
+            'country_organization' => $request->country_organization,
+            'country_organization_other' => $request->country_organization_other,
+            'title' => $request->title,
+            'family_name' => $request->family_name,
+            'first_name' => $request->first_name,
+            'prefered_name_on_badge' => $request->prefered_name_on_badge,
+            'nationality' => $request->nationality,
+            'country_organization' => $request->country_organization,
+            'nationality_other' => $request->nationality_other,
+            'affiliation' => $request->affiliation,
+            'official_title' => $request->official_title,
+            'passport_no'   => $request->passport_no,
+            'office_address' => $request->office_address,
+            'gender' => $request->gender,
+            'email' => $request->email,
+            'telephone' => $request->telephone,
+            'fax' => $request->fax,
+            'date_of_issuance' => $request->date_of_issuance,
+            'date_of_expiry' => $request->date_of_expiry,
+            'agree' => $request->agree,
+            'photo' => $Photo,
+            'diplomatic_note' => $diplomatic_note,
+        ];
+
+        $guest::create($input);
+        return redirect()->route('guest')->with('success','RegisterGuest Attendance successfully submite');
+    
+    }
+
+    public function commitee(){
+        Meta::set('title', 'Register Commite Attendance| BDF');
+        Meta::set('description', 'Register Commite Attendance');
+        Meta::set('image', asset('images/home-logo.png'));
+
+        $organisasi=\App\Models\Organization::get();
+        $negara=\App\Models\Countries::get();
+        return view('FE.register.commitee',compact('organisasi','negara'));
+    }
+
+    public function commitee_create(Request $request, \App\Models\CommiteAttendance $commiteAttendance){
+        $request->validate([
+            'gelar'=> 'required',
+            'nama_lengkap'=> 'required',
+            'prefered_name_on_badge'=> 'required|max:25',
+            'jabatan'=> 'required',
+            'nik'=> 'nullable|numeric|digits:16',
+            'satuan_kerja'=> 'required',
+            'bidang_kepanitiaan'=> 'required',
+            'nomor_rekening'=> 'required|numeric',
+            'bank'=> 'required',
+            'email'=> 'required|email:rfc,dns',
+            'phone'=> 'required',
+            'nomor_pesawat'=> 'required',
+            //'passport_no'=> 'required',
+            'tanggal'=> 'required|date',
+            'jam'=> 'required',
+            'nomor_pesawat_pulang'=> 'required',
+            'tanggal_pulang'=> 'required|date',
+            'jam_pulang'=> 'required',
+            'agree'=> 'required',
+            'foto' => 'required|image|max:1024',
+            'ktp' => 'required|image|max:1024',
+        ]);
+
+        $foto='';
+        $file = $request->file('foto');
+        if(!empty($file)){
+            $foto=\App\Helpers\HelperImages::upload($file,'register');
+        }
+
+        $ktp='';
+        $file2 = $request->file('ktp');
+        if(!empty($file2)){
+            $ktp=\App\Helpers\HelperImages::upload($file2,'register');
+        }
+
+        $input=[
+                'gelar'         => $request->gelar,
+                'nama_lengkap'  => $request->nama_lengkap,
+                'prefered_name_on_badge'  => $request->prefered_name_on_badge,
+                'jabatan'  => $request->jabatan,
+                'satuan_kerja'  => $request->satuan_kerja,
+                'bidang_kepanitiaan'  => $request->bidang_kepanitiaan,
+                'nomor_rekening'  => $request->nomor_rekening,
+                'nomor_pesawat'  => $request->nomor_pesawat,
+                'tanggal'  => $request->tanggal,
+                'jam'  => $request->jam,
+                'nomor_pesawat_pulang'  => $request->nomor_pesawat_pulang,
+                'tanggal_pulang'  => $request->tanggal_pulang,
+                'jam_pulang'  => $request->jam_pulang,
+                'agree'  => $request->agree,
+                'foto'  => $foto,
+                'ktp'   => $ktp
+        ];
+
+        $commiteAttendance::create($input);
+        return redirect()->route('commitee')->with('success','Register Commite Attendance successfully submite');
+    }
+
 }

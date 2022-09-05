@@ -62,7 +62,9 @@ Route::post('/media', [App\Http\Controllers\RegisterController::class,'media_cre
 /* Guest Attendance */
 Route::get('/guest', [App\Http\Controllers\RegisterController::class,'guest'])->name('guest');
 Route::post('/guest', [App\Http\Controllers\RegisterController::class,'guest_create'])->name('guest_store');
-
+/* commitee */
+Route::get('/commitee', [App\Http\Controllers\RegisterController::class,'commitee'])->name('commitee');
+Route::post('/commitee', [App\Http\Controllers\RegisterController::class,'commitee_create'])->name('commitee_create');
 
 
 

@@ -101,6 +101,9 @@ class BdfController extends Controller
     }
 
     public function contact(){
+        Meta::set('title', 'CONTACT US | BDF');
+        Meta::set('description', 'CONTACT US');
+        Meta::set('image', asset('images/home-logo.png'));
         return view('FE.contact');
     }
 
