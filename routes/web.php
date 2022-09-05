@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\MentorController;
 use App\Http\Controllers\Admin\StudentController;
 use App\Http\Controllers\Admin\PostController;
+use Illuminate\Support\Facades\Http;
 //use App\Models\Mentor;
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +24,20 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+/* Route::get('/negara', function () {
+    //event(new OrderStatusUpdated('Hello Echo'));
+    $response = Http::get('https://countriesnow.space/api/v0.1/countries/');
+   // dd($response->json());
+
+    foreach($response->json()['data'] as $r){
+
+        \App\Models\Countries::create(['name' => $r['country']]);
+
+    }
+
+
+}); */
+
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('landing');
 Route::get('/history', [App\Http\Controllers\BdfController::class, 'history'])->name('history');
 Route::get('/gallery', [App\Http\Controllers\BdfController::class, 'gallery'])->name('gallery');
@@ -31,6 +46,25 @@ Route::get('/publication', [App\Http\Controllers\BdfController::class, 'publicat
 Route::post('/publication', [App\Http\Controllers\BdfController::class, 'download'])->name('download');
 //
 Auth::routes();
+
+/**register */
+
+/* Physical Attendance */
+Route::get('/physical-attendance', [App\Http\Controllers\RegisterController::class,'physical_attendance'])->name('physicalattendance');
+Route::post('/physical-attendance', [App\Http\Controllers\RegisterController::class,'physical_attendance_create'])->name('physicalattendance_store');
+/* Virtual Attendance */
+Route::get('/virtual-attendance', [App\Http\Controllers\RegisterController::class,'virtual_attendance'])->name('virtualattendance');
+Route::post('/virtual-attendance', [App\Http\Controllers\RegisterController::class,'virtual_attendance_create'])->name('virtualattendance_store');
+/*Media */
+Route::get('/media', [App\Http\Controllers\RegisterController::class,'media'])->name('media');
+Route::post('/media', [App\Http\Controllers\RegisterController::class,'media_create'])->name('media_store');
+/* Guest Attendance */
+Route::get('/guest', [App\Http\Controllers\RegisterController::class,'guest'])->name('guest');
+Route::post('/guest', [App\Http\Controllers\RegisterController::class,'guest_create'])->name('guest_store');
+
+
+
+
 Route::group(['prefix' => 'laravel-filemanager', 'middleware' =>['web', 'auth:admin']], function () {
     \UniSharp\LaravelFilemanager\Lfm::routes();
 });

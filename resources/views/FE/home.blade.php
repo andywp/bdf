@@ -9,6 +9,23 @@
         object-fit: cover;
         height: 200px;
     }
+    .banner_slider .carousel-item img {
+      height: 600px;
+      object-fit: cover;
+    }
+
+    @media only screen and (max-width: 768px) {
+      .banner_slider .carousel-item img {
+          height: 370px;
+    }  
+  @media only screen and (max-width: 575px) {
+    .banner_slider .carousel-item img {
+        height: 318px;
+    }
+    .banner_slider{
+        padding-top: 50px;
+    }
+  }
   </style>
 @endsection
 
@@ -16,7 +33,7 @@
 @section('content')
 
     <!-- BANNER -->
-    <section class="slider1 banner_slider mbr-fullscreen" id="slider1-2">
+    <section class="slider1 banner_slider " id="slider1-2">
       <div class="carousel slide carousel-fade" id="t300HvSMfa" data-ride="carousel" data-bs-ride="carousel" data-interval="5000" data-bs-interval="5000">
         <ol class="carousel-indicators">
             @foreach($slider as $sliders)

@@ -23,10 +23,10 @@
             REGISTRATION
         </a>
         <ul class="dropdown-menu bg-white" aria-labelledby="dropdownLayanan">
-            <li><a class="dropdown-item" href="./physical-attendance.html">Physical Attendance</a></li>
-            <li><a class="dropdown-item" href="./virtual-attendance.html">Virtual Attendance</a></li>
-            <li><a class="dropdown-item" href="./media.html">Media</a></li>
-            <li><a class="dropdown-item" href="./guest.html">Guest</a></li>
+            <li><a class="dropdown-item" href="{{ route('physicalattendance') }}">Physical Attendance</a></li>
+            <li><a class="dropdown-item" href="{{ route('virtualattendance') }}">Virtual Attendance</a></li>
+            <li><a class="dropdown-item" href="{{ route('media') }}">Media</a></li>
+            <li><a class="dropdown-item" href="{{ route('guest') }}">Guest</a></li>
             <li><a class="dropdown-item" href="./commitee.html">Commitee</a></li>
         </ul>
     </li>
