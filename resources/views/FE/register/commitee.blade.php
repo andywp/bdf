@@ -141,7 +141,7 @@
 
                     <div class="form-outline mb-4">
                         <label class="form-label" for="tgl-keberangkatan">Tanggal</label>
-                        <input type="text" id="tgl-keberangkatan" name="tanggal" class="form-control  @error('tanggal') is-invalid @enderror"  value="{{ old('tanggal') }}" placeholder="" />
+                        <input type="date" id="tgl-keberangkatan" name="tanggal" class="form-control  @error('tanggal') is-invalid @enderror"  value="{{ old('tanggal') }}" placeholder="" />
                         @error('tanggal')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror

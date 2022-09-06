@@ -178,7 +178,7 @@
                     
                     <div class="form-outline mb-4">
                         <label class="form-label" for="passport-no">Passport Number</label>
-                        <input type="text" id="passport-no" class="form-control  @error('passport_no') is-invalid @enderror" name="passport_no"  value="{{ old('passport_no') }}" placeholder="" />
+                        <input type="text" id="passport-no" class="form-control  @error('passport_no') is-invalid @enderror" name="./"  value="{{ old('passport_no') }}" placeholder="" />
                         @error('passport_no')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror

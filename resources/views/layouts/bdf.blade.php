@@ -49,7 +49,11 @@
                             <input type="submit" id="search-submit" />
                         </form>
                     </li>
-                    <li class="nav-item"><a class="nav-link link text-white text-primary display-4" href="./login.html">LOGIN</a></li>
+                    @if(!@Auth::user()->id)
+                    <li class="nav-item"><a class="nav-link link text-white text-primary display-4" href="{{ route('login') }}">LOGIN</a></li>
+                    @else
+                    <li class="nav-item"><a class="nav-link link text-white text-primary display-4" href="{{ route('logout') }}"  onclick="event.preventDefault();document.getElementById('logout-form').submit();" >LOGOUT</a> <form action="{{ route('logout') }}" id="logout-form" method="post">@csrf</form></li>
+                    @endif
                 </ul>
             </div>
         </div>
@@ -104,10 +108,10 @@
                 <div class="col-md-3 col-12">
                     <div class="widget-nav">
                         <ul>
-                            <li><a class="text-white" href="./history.html">HISTORY</a></li>
-                            <li><a class="text-white" href="./ipd.html">IPD</a></li>
-                            <li><a class="text-white" href="./publication.html">PUBLICATION</a></li>
-                            <li><a class="text-white" href="./media-advisory.html">MEDIA</a></li>
+                            <li><a class="text-white" href="{{ route('history') }}">HISTORY</a></li>
+                            <li><a class="text-white" href="{{ route('ipd') }}">IPD</a></li>
+                            <li><a class="text-white" href="{{ route('publication') }}">PUBLICATION</a></li>
+                            <li><a class="text-white" href="{{ route('publication') }}">MEDIA</a></li>
                         </ul>
                     </div>
                 </div>

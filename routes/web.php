@@ -50,23 +50,33 @@ Auth::routes();
 
 /**register */
 
-/* Physical Attendance */
-Route::get('/physical-attendance', [App\Http\Controllers\RegisterController::class,'physical_attendance'])->name('physicalattendance');
-Route::post('/physical-attendance', [App\Http\Controllers\RegisterController::class,'physical_attendance_create'])->name('physicalattendance_store');
-/* Virtual Attendance */
-Route::get('/virtual-attendance', [App\Http\Controllers\RegisterController::class,'virtual_attendance'])->name('virtualattendance');
-Route::post('/virtual-attendance', [App\Http\Controllers\RegisterController::class,'virtual_attendance_create'])->name('virtualattendance_store');
-/*Media */
-Route::get('/media', [App\Http\Controllers\RegisterController::class,'media'])->name('media');
-Route::post('/media', [App\Http\Controllers\RegisterController::class,'media_create'])->name('media_store');
-/* Guest Attendance */
-Route::get('/guest', [App\Http\Controllers\RegisterController::class,'guest'])->name('guest');
-Route::post('/guest', [App\Http\Controllers\RegisterController::class,'guest_create'])->name('guest_store');
-/* commitee */
-Route::get('/commitee', [App\Http\Controllers\RegisterController::class,'commitee'])->name('commitee');
-Route::post('/commitee', [App\Http\Controllers\RegisterController::class,'commitee_create'])->name('commitee_create');
 
 
+Route::middleware(['guest:web','PreventBackHistory'])->group(function(){
+    Route::view('/login','auth.login')->name('login');
+    Route::post('/login',[App\Http\Controllers\UserController::class,'check'])->name('logincheck');
+});
+Route::middleware(['auth:web','PreventBackHistory'])->group(function(){
+    Route::post('/logout',[App\Http\Controllers\UserController::class,'logout'])->name('logout');
+
+    Route::get('/commitee', [App\Http\Controllers\RegisterController::class,'commitee'])->name('commitee');
+    Route::post('/commitee', [App\Http\Controllers\RegisterController::class,'commitee_create'])->name('commitee_create');
+    /* Physical Attendance */
+    Route::get('/physical-attendance', [App\Http\Controllers\RegisterController::class,'physical_attendance'])->name('physicalattendance');
+    Route::post('/physical-attendance', [App\Http\Controllers\RegisterController::class,'physical_attendance_create'])->name('physicalattendance_store');
+    /* Virtual Attendance */
+    Route::get('/virtual-attendance', [App\Http\Controllers\RegisterController::class,'virtual_attendance'])->name('virtualattendance');
+    Route::post('/virtual-attendance', [App\Http\Controllers\RegisterController::class,'virtual_attendance_create'])->name('virtualattendance_store');
+    /*Media */
+    Route::get('/media', [App\Http\Controllers\RegisterController::class,'media'])->name('media');
+    Route::post('/media', [App\Http\Controllers\RegisterController::class,'media_create'])->name('media_store');
+    /* Guest Attendance */
+    Route::get('/guest', [App\Http\Controllers\RegisterController::class,'guest'])->name('guest');
+    Route::post('/guest', [App\Http\Controllers\RegisterController::class,'guest_create'])->name('guest_store');
+    /* commitee */
+    Route::get('/commitee', [App\Http\Controllers\RegisterController::class,'commitee'])->name('commitee');
+    Route::post('/commitee', [App\Http\Controllers\RegisterController::class,'commitee_create'])->name('commitee_create');
+});
 
 Route::group(['prefix' => 'laravel-filemanager', 'middleware' =>['web', 'auth:admin']], function () {
     \UniSharp\LaravelFilemanager\Lfm::routes();
@@ -240,6 +250,48 @@ Route::group(['prefix' => 'laravel-filemanager', 'middleware' =>['web', 'auth:ad
                 Route::put('/{id}/update-password',  [App\Http\Controllers\Admin\AdminUserController::class,'updatepassword'])->name('password');
                 //Route::delete('/{id}/delete', [App\Http\Controllers\Admin\AdminUserController::class,'destroy'])->name('destroy');
             });
+
+            /*user */
+            Route::prefix('user-register')->name('userreg.')->group(function(){
+                Route::get('/', [App\Http\Controllers\Admin\UserController::class,'index'])->name('index');
+                Route::post('/data',[App\Http\Controllers\Admin\UserController::class,'dataTable'])->name('data');
+                Route::post('/store',[App\Http\Controllers\Admin\UserController::class,'store'])->name('store');
+                Route::post('/update',[App\Http\Controllers\Admin\UserController::class,'update'])->name('update');
+                Route::post('/password',[App\Http\Controllers\Admin\UserController::class,'password'])->name('password');
+                Route::delete('/{id}/delete',[App\Http\Controllers\Admin\UserController::class,'destroy'])->name('destroy');
+            });
+
+            /**register physical */
+            Route::prefix('physical')->name('physical.')->group(function(){
+                Route::get('/', [App\Http\Controllers\Admin\RegisterController::class,'physicalindex'])->name('index');
+                Route::post('/data',[App\Http\Controllers\Admin\RegisterController::class,'physicaldataTable'])->name('physicaldataTable');
+                Route::get('/excel',[App\Http\Controllers\Admin\RegisterController::class,'physicalindexexcel'])->name('excel');
+            });
+
+            Route::prefix('virtual')->name('virtual.')->group(function(){
+                Route::get('/', [App\Http\Controllers\Admin\RegisterController::class,'virtualindex'])->name('index');
+                Route::post('/data',[App\Http\Controllers\Admin\RegisterController::class,'virtualdataTable'])->name('data');
+                Route::get('/excel',[App\Http\Controllers\Admin\RegisterController::class,'virtualexcel'])->name('excel');
+            });
+
+            Route::prefix('media')->name('media.')->group(function(){
+                Route::get('/', [App\Http\Controllers\Admin\RegisterController::class,'mediaindex'])->name('index');
+                Route::post('/data',[App\Http\Controllers\Admin\RegisterController::class,'mediadataTable'])->name('data');
+                Route::get('/excel',[App\Http\Controllers\Admin\RegisterController::class,'Mediaexcel'])->name('excel');
+            });
+
+            Route::prefix('guest')->name('guest.')->group(function(){
+                Route::get('/', [App\Http\Controllers\Admin\RegisterController::class,'guestindex'])->name('index');
+                Route::post('/data',[App\Http\Controllers\Admin\RegisterController::class,'guestataTable'])->name('data');
+                Route::get('/excel',[App\Http\Controllers\Admin\RegisterController::class,'guestexcel'])->name('excel');
+            });
+
+            Route::prefix('commitee')->name('commitee.')->group(function(){
+                Route::get('/', [App\Http\Controllers\Admin\RegisterController::class,'commiteeindex'])->name('index');
+                Route::post('/data',[App\Http\Controllers\Admin\RegisterController::class,'commiteeTable'])->name('data');
+                Route::get('/excel',[App\Http\Controllers\Admin\RegisterController::class,'commiteeexcel'])->name('excel');
+            });
+
 
         });
     });

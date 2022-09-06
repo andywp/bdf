@@ -2,7 +2,7 @@
             Nav header start
         ***********************************-->
  <div class="nav-header">
-     <a href="index.html" class="brand-logo">
+     <a href="{{ url('/') }}" class="brand-logo">
             <img class="logo-abbr" src="{{ asset('assets/logo/bdf.png') }}" alt="logo-abbr" >
             <!--<img class="brand-title" src="{{ asset('assets/logo/konsela_2.png') }}" alt="brand-title" > -->
             <div class="brand-title"><h2 class="font-weight-bold" style="color:#fff;" >BDF</h2></div>
