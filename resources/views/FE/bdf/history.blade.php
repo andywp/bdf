@@ -1,5 +1,12 @@
 @extends('layouts.bdf')
-
+<style>
+    .card-body {
+        min-height: 350px;
+    }
+    .card-text p {
+        line-height: 20px;
+    }
+</style>
 @section('content')
 <section class="first_section" id="history">
     <div class="container">
