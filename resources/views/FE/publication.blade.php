@@ -13,7 +13,7 @@
         @csrf
         <div class="row">
           <div class="col-12">
-            <div class="filter-content">
+            <!-- <div class="filter-content">
                 <div class="counter-download">
                     <button class="reset-btn" type="button" id="reset_download">-</button>
                     <div class="label_counter">
@@ -21,8 +21,8 @@
                     </div>
                 </div>
                 <button type="submit" id="btn_download"><i class="fas fa-arrow-down"></i> Download</button>
-            </div>
-
+            </div> -->
+           
             <div class="accordion" id="accordion_Download">
                 @foreach($data as $r)
                 <div class="accordion-item">
@@ -37,10 +37,10 @@
                     <div class="accordion-body">
                          @foreach($r->download as $d)
                             <div class="form-check">
-                                <input class="form-check-input" name="download[]" type="checkbox" value="{{ $d->file }}" id="flexCheckDefault">
-                                <label class="form-check-label" for="flexCheckDefault">
-                                    {{ $d->title }}
-                                </label>
+                               <!--  <input class="form-check-input" name="download[]" type="checkbox" value="{{ $d->file }}" id="flexCheckDefault" -->
+                                <a href="{{ asset('download/'. $d->file) }}" download>
+                                  <i class="fas fa-file-pdf"></i> {{ $d->title }}
+                                </a>
                             </div>
                         @endforeach
                     </div>
