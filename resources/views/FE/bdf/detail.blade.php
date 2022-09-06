@@ -12,7 +12,7 @@
         
         <div class="row">
           <div class="col-12">
-            @if(file_exists(public_path('images/post/'.$data->post_image))) 
+            @if(file_exists(public_path('images/post/'.$data->post_image)) && !empty($data->post_image) 
             <div class="wrap-img-full mb-6">
               <img src="{{ asset('images/post/'.$data->post_image) }}" alt="{{ $data->post_title }}" >
             </div>
