@@ -8,6 +8,10 @@
         object-fit: cover;
         height: 200px;
     }
+    h6{
+        font-weight: 500;
+        color: #2A4B75;
+    }
   </style>
 @endsection
 @section('content')
@@ -56,10 +60,11 @@
                             <div class="col-md-3 col-6 py-3">
                                 <div class="card">
                                     <div class="card-gallery">
-                                    <a href="{{ asset('images/gallery/'.$r->images) }}" data-fancybox="gallery" data-caption="Caption Images 1">
+                                    <a href="{{ asset('images/gallery/'.$r->images) }}" data-fancybox="gallery" data-caption="{{ $r->title }}">
                                         <img src="{{ asset('images/gallery/thumb/medium/'.$r->images) }}" alt="{{ $r->title }}">
                                     </a>
                                     </div>
+                                    <h6 class="my-2 text-center" >{{ $r->title }}</h6>
                                 </div>
                             </div>
                             @endif
@@ -121,16 +126,17 @@
                 @foreach($video as $v)
                 <div class="col-md-3 col-6 py-3">
                     <div class="card">
-                    <div class="card-gallery">
-                        <a href="#video1" data-fancybox="gallery_video" data-caption="Caption Images 1">
-                        <img src="{{ asset('images/cover_video/thumb/medium/'.$v->cover) }}"/>
-                        </a>
-                        <div id="video1" class="fancybox-video">
-                        <video controls width="100%" height="auto" class="video-item">
-                            <source src="{{ asset('video/'.$v->file) }}" type="video/mp4">   
-                        </video>
+                        <div class="card-gallery">
+                            <a href="#video1" data-fancybox="gallery_video" data-caption="Caption Images 1">
+                            <img src="{{ asset('images/cover_video/thumb/medium/'.$v->cover) }}"/>
+                            </a>
+                            <div id="video1" class="fancybox-video">
+                            <video controls width="100%" height="auto" class="video-item">
+                                <source src="{{ asset('video/'.$v->file) }}" type="video/mp4">   
+                            </video>
+                            </div>
                         </div>
-                    </div>
+                        <h6 class="my-2 text-center" >{{ $v->title }}</h6>
                     </div>
                 </div>
                 @endforeach

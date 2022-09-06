@@ -53,6 +53,7 @@ class BdfController extends Controller
         $gallery=\App\Models\Gallery::where('album_id',$albumID)->get();
         
         $video=\App\Models\Video::where('publish',1)->paginate(12);
+        //dd($video);
 
         return view('FE.gallery.index',compact('album','gallery','albumID','video'));
     }
