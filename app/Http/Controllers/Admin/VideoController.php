@@ -103,16 +103,21 @@ class VideoController extends Controller
         return response()->json($response);
     }
 
-    public function update(Request $request,Category $Category){
-        $request->validate([
-            'title'          => 'required|max:255',
-        ]);
-        $id=(int) $request->id;
-        $name= $request->title;
-        $data=$Category::find($id);
-        $data->title = $name;
-        $data->save();
-        return response()->json(['success'=>'Album successfully Updated']);
+    public function update(Request $request,Video $Category){
+        
+        if($request->ajax()) {
+            //print_r($request->input);
+
+            foreach($request->title as $k=>$v){
+                $Slider=$Category::find($k);
+                $Slider->title =$v;
+                $Slider->save();
+
+            }
+            return response()->json(['success'=> 'Update Video successfully']);
+        }
+
+
     }
     public function destroy(Request $request, $id, Category $Category){
         $id =(int) $id;

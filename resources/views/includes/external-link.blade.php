@@ -14,7 +14,7 @@
           @foreach($slider as $r)
             @if(file_exists(public_path('images/link/thumb/small/'.$r->images))) 
             <div>
-              <a href="{{ !empty($->order_link)?$r->order_link:'#' }}"><img src="{{ asset('images/link/thumb/medium/'.$r->images) }}" alt="{{ $r->title }}" class="img_externallinks"></a>
+              <a href="{{ !empty($r->url)?$r->url:'#' }}"><img src="{{ asset('images/link/thumb/medium/'.$r->images) }}" alt="{{ $r->title }}" class="img_externallinks"></a>
             </div>
             @endif
           @foreach

@@ -39,23 +39,13 @@ class BdfController extends Controller
         Meta::set('title','Gallery | BDF');
         Meta::set('description','Gallery Bali Democracy Forum');
 
-        $album=\App\Models\Album::where('publish',1)->select('id','album')->orderBy('id','ASC')->get();
-        if(!$request->album){
-            $albumID=\App\Models\Album::where('publish',1)->select('id','album')->limit(1)->orderBy('id','ASC')->first()->id;
-        }else{
-            $id=(int) $request->album;
-            if(!\App\Models\Album::where('publish',1)->select('id','album')->where('id',$id)->count()){
-                return abort(404);
-            }else{
-                $albumID= $id;
-            }
-        }
-        $gallery=\App\Models\Gallery::where('album_id',$albumID)->get();
+        $album=\App\Models\Album::with('gallery')->where('publish',1)->select('id','album')->orderBy('id','ASC')->get();
+        
         
         $video=\App\Models\Video::where('publish',1)->paginate(12);
         //dd($video);
 
-        return view('FE.gallery.index',compact('album','gallery','albumID','video'));
+        return view('FE.gallery.index',compact('album','video'));
     }
 
     public function ipd(){

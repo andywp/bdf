@@ -73,6 +73,7 @@
                     <div class="error-msg"></div>
                     <form id="dropzone" action="{{ route('admin.publication.storeFile') }}" class="dropzone" method="POST" novalidate>
                         <input type="hidden" name="category_id" value="{{ $dataAlbum->id }}" >
+                        <input type="hidden" name="category" value="{{ $dataAlbum->title }}" >
                         @csrf
                          
                     </form>
@@ -347,7 +348,7 @@ $(document).ready(function(){
                             var name=file.name.replace(/\s/g, '');
                             var dt = new Date();
                             var time = dt.getTime();
-                        return 'bdf-'+time+name;
+                        return '{{ $dataAlbum->title }} -'+time+name;
                         },
                         acceptedFiles: ".pdf",
                         addRemoveLinks: true,

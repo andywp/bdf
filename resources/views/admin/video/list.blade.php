@@ -57,7 +57,7 @@
                     </div>
                     @endif
                     <div class="table-responsive">
-                        <form id="updatephoto" action="{{ route('admin.gallery.updatephoto') }}" class="form" method="POST" novalidate>
+                        <form id="updatephoto" action="{{ route('admin.video.update') }}" class="form" method="POST" novalidate>
                             <table id="galleryfoto" class="table table-striped table-bordered display w-100">
                                 <thead>
                                     <tr>
@@ -447,7 +447,7 @@ $(document).ready(function(){
         event.preventDefault();
         $.ajax({
             type: 'POST',
-            url: "{{ route('admin.gallery.updatephoto') }}",
+            url: "{{ route('admin.video.update') }}",
             data: $("#updatephoto").serialize(),
             dataType: 'json',
             success: function(data){

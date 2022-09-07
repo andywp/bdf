@@ -26,4 +26,8 @@ class Album extends Model
         return Carbon::parse($this->attributes['created_at'])->translatedFormat('l, d F Y');
      }
 
+    public function gallery(){
+        return $this->hasMany(Gallery::class, 'album_id');
+    }
+
 }

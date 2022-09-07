@@ -92,7 +92,7 @@ class PublicationController extends Controller
 
     public function storeFile(Request $request, Download $Download){
         $file = $request->file('file');
-        $name=Carbon::now()->format('YmdHis').Str::random(3).'.'.$file->extension();
+        $name=Carbon::now()->format('YmdHis').'-'.$request->category.'.'.$file->extension();
         $file_path = public_path('/download/');
         if (!File::exists($file_path)) {
             File::makeDirectory($file_path);

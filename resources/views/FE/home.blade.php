@@ -126,7 +126,7 @@
               @foreach($link as $r)
                 @if(file_exists(public_path('images/link/thumb/mini/'.$r->images))) 
                 <div>
-                  <a href="{{ !empty($r->order_link)?$r->order_link:'#' }}"><img src="{{ asset('images/link/thumb/medium/'.$r->images) }}" alt="{{ $r->title }}" class="img_externallinks"></a>
+                  <a href="{{ !empty($r->url)?'https://'.$r->url:'#' }}" target="_blank"><img src="{{ asset('images/link/thumb/medium/'.$r->images) }}" alt="{{ $r->title }}" class="img_externallinks"></a>
                 </div>
                 @endif
               @endforeach

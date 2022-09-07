@@ -40,83 +40,42 @@
         <!-- Tabs content -->
         <div class="tab-content" id="gallery-tabContent">
             <div class="tab-pane fade show active" id="gallery-images" role="tabpanel" aria-labelledby="gallery-images-tab" tabindex="0">
-            <form action="{{ route('gallery') }}" method="GET">
-            <div class="form-floating mb-4">
-                <select class="form-select" id="selectGallery" name="album" aria-label="Floating label select example" onchange="this.form.submit()">
-                    @foreach($album as $albums)
-                    <option value="{{ $albums->id }}" {{ ($albums->id == $albumID)?'selected':'' }} > {{ $albums->album }}</option>
-                    @endforeach
-                    
-                </select>
-                <label for="selectGallery">Pilih Kategori</label>
-            </div>
-            </form>
-
-            <div class="wrapp-gallery">
-                <div id="bdf-15" class="list-gallery">
-                    <div class="row">
-                        @foreach($gallery as $r)
-                            @if(file_exists(public_path('images/gallery/'.$r->images))) 
-                            <div class="col-md-3 col-6 py-3">
-                                <div class="card">
-                                    <div class="card-gallery">
-                                    <a href="{{ asset('images/gallery/'.$r->images) }}" data-fancybox="gallery" data-caption="{{ $r->title }}">
-                                        <img src="{{ asset('images/gallery/thumb/medium/'.$r->images) }}" alt="{{ $r->title }}">
-                                    </a>
-                                    </div>
-                                    <h6 class="my-2 text-center" >{{ $r->title }}</h6>
-                                </div>
-                            </div>
-                            @endif
+                <!-- <form action="{{ route('gallery') }}" method="GET"> -->
+                <div class="form-floating mb-4">
+                    <select class="form-select" id="selectGallery" name="album" aria-label="Floating label select example" >
+                        @foreach($album as $albums)
+                        <option value="bdf-{{ $albums->id }}"> {{ $albums->album }}</option>
                         @endforeach
-                    </div>
+                        
+                    </select>
+                    <label for="selectGallery">Pilih Kategori</label>
                 </div>
+            <!--  </form> -->
 
-                <div id="bdf-14" class="list-gallery">
+                <div class="wrapp-gallery">
+                    @foreach($album as $albums)
+                    <div id="bdf-{{ $albums->id }}" class="list-gallery">
+                        <div class="row">
+                            @foreach($albums->gallery as $r)
+                                @if(file_exists(public_path('images/gallery/'.$r->images))) 
+                                <div class="col-md-3 col-6 py-3">
+                                    <div class="card">
+                                        <div class="card-gallery">
+                                        <a href="{{ asset('images/gallery/'.$r->images) }}" data-fancybox="gallery" data-caption="{{ $r->title }}">
+                                            <img src="{{ asset('images/gallery/thumb/medium/'.$r->images) }}" alt="{{ $r->title }}">
+                                        </a>
+                                        </div>
+                                        <h6 class="my-2 text-center" >{{ $r->title }}</h6>
+                                    </div>
+                                </div>
+                                @endif
+                            @endforeach
+                        </div>
+                    </div>
+                    @endforeach
 
-                <div class="row">
-                    <div class="col-md-3 col-6 py-3">
-                    <div class="card">
-                        <div class="card-gallery">
-                        <a href="https://source.unsplash.com/480x300/?nature" data-fancybox="gallery" data-caption="Caption Images 1">
-                            <img src="https://source.unsplash.com/480x300/?nature" alt="Image Gallery">
-                        </a>
-                        </div>
-                    </div>
-                    </div>
-        
-                    <div class="col-md-3 col-6 py-3">
-                    <div class="card">
-                        <div class="card-gallery">
-                        <a href="https://source.unsplash.com/480x300/?bali" data-fancybox="gallery" data-caption="Caption Images 1">
-                            <img src="https://source.unsplash.com/480x300/?bali" alt="Image Gallery">
-                        </a>
-                        </div>
-                    </div>
-                    </div>
-        
-                    <div class="col-md-3 col-6 py-3">
-                    <div class="card">
-                        <div class="card-gallery">
-                        <a href="https://source.unsplash.com/480x300/?car" data-fancybox="gallery" data-caption="Caption Images 1">
-                            <img src="https://source.unsplash.com/480x300/?car" alt="Image Gallery">
-                        </a>
-                        </div>
-                    </div>
-                    </div>
-        
-                    <div class="col-md-3 col-6 py-3">
-                    <div class="card">
-                        <div class="card-gallery">
-                        <a href="https://source.unsplash.com/480x300/?rose" data-fancybox="gallery" data-caption="Caption Images 1">
-                            <img src="https://source.unsplash.com/480x300/?rose" alt="Image Gallery">
-                        </a>
-                        </div>
-                    </div>
-                    </div>
+                    
                 </div>
-                </div>
-            </div>
             </div>
             <div class="tab-pane fade" id="gallery-video" role="tabpanel" aria-labelledby="gallery-video-tab" tabindex="0">
 
@@ -150,4 +109,7 @@
     </div>
 </section>
 
+@endsection
+@section('scripts')
+<script src="{{ asset('bdf/assets/js/selected-gallery.js') }}"></script>
 @endsection
