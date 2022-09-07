@@ -124,11 +124,14 @@ class GalleryController extends Controller
     public function storePhoto(Request $request,\App\Models\Gallery $gallery){
         $albumID=(int) $request->album_id;
         $file = $request->file('file');
+        
+        $originName=str_replace('.'.$file->extension(),'',$file->getClientOriginalName());
         $post_image=\App\Helpers\HelperImages::uploadGallery($file);
 
         $gallery::create([
             'images' => $post_image,
-            'album_id' => $albumID
+            'album_id' => $albumID,
+            'title' => $originName
         ]);
         return response()->json(['success'=>$post_image]);
     }
@@ -177,8 +180,8 @@ class GalleryController extends Controller
                         })
                         ->rawColumns(['action','images','title'])   //merender content column dalam bentuk html
                         ->escapeColumns()  //mencegah XSS Attack
-                        ->orderColumn('name',function ($query, $order) {
-                            $query->orderBy('id', $order);
+                        ->order(function ($query) {
+                            $query->orderBy('id', 'DESC');
                         })
                         ->toJson();
 

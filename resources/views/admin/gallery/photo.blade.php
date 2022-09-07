@@ -101,10 +101,10 @@
          {
             maxFilesize: 120,
             renameFile: function(file) {
-                var name=file.name.replace(/\s/g, '');
+                var name=file.name;
                 var dt = new Date();
                 var time = dt.getTime();
-               return 'bdf-'+time+name;
+               return name;
             },
             acceptedFiles: ".jpeg,.jpg,.png,.gif,.pdf",
             addRemoveLinks: true,

@@ -16,7 +16,7 @@
     <li class="nav-item"><a class="nav-link link text-black text-primary display-4" href="{{ route('gallery') }}">GALLERY</a></li>
     <li class="nav-item"><a class="nav-link link text-black text-primary display-4" href="{{ route('ipd') }}">IPD</a></li>
     <li class="nav-item"><a class="nav-link link text-black text-primary display-4" href="{{ route('publication') }}">PUBLICATION</a></li>
-    <li class="nav-item"><a class="nav-link link text-black text-primary display-4" href="{{ route('publication') }}">MEDIA</a></li>
+    <li class="nav-item"><a class="nav-link link text-black text-primary display-4" href="{{ route('mediaadvisory') }}">MEDIA</a></li>
     <li class="nav-item"><a class="nav-link link text-black text-primary display-4" href="{{ route('contact') }}">CONTACT</a></li>
     @if(isset(Auth::user()->id))
     <li class="nav-item dropdown">

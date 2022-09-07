@@ -390,7 +390,7 @@ $(document).ready(function(){
                         className: "text-center",
                         orderable: false, 
                         searchable: false,
-                        width: "200px"    
+                        width: "30px"    
                     },    
                 ],
                 fnDrawCallback : function() {

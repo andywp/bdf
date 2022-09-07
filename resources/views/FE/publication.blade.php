@@ -36,9 +36,9 @@
                      
                     <div class="accordion-body">
                          @foreach($r->download as $d)
-                            <div class="form-check">
+                            <div class="form-check mb-2">
                                <!--  <input class="form-check-input" name="download[]" type="checkbox" value="{{ $d->file }}" id="flexCheckDefault" -->
-                                <a href="{{ asset('download/'. $d->file) }}" download>
+                                <a target="_blank" href="{{ asset('download/'. $d->file) }}" download>
                                   <i class="fas fa-file-pdf"></i> {{ $d->title }}
                                 </a>
                             </div>
@@ -50,6 +50,7 @@
                 @endforeach
                 
               </div>
+              {{ $data->links() }}
           </div>
         </div>
         </form>

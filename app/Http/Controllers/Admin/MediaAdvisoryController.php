@@ -50,8 +50,8 @@ class MediaAdvisoryController extends Controller
                         }) 
                         ->rawColumns(['action','publish','file'])   //merender content column dalam bentuk html
                         ->escapeColumns()  //mencegah XSS Attack
-                        ->orderColumn('id',function ($query, $order) {
-                            $query->orderBy('id', $order);
+                        ->order(function ($query) {
+                            $query->orderBy('id', 'DESC');
                         })
                         ->toJson();
 
@@ -92,6 +92,7 @@ class MediaAdvisoryController extends Controller
 
     public function storeFile(Request $request, Download $Download){
         $file = $request->file('file');
+        $originName=str_replace('.'.$file->extension(),'',$file->getClientOriginalName());
         $name=Carbon::now()->format('YmdHis').Str::random(3).'.'.$file->extension();
         $file_path = public_path('/download/');
         if (!File::exists($file_path)) {
@@ -101,7 +102,7 @@ class MediaAdvisoryController extends Controller
 
         $Download::create([
             'category_id'   => $request->category_id,
-            'title'         => $name,
+            'title'         => $originName,
             'file'          => $name
         ]);
         $response=[
@@ -155,8 +156,8 @@ class MediaAdvisoryController extends Controller
                         })
                         ->rawColumns(['action','file','title'])   //merender content column dalam bentuk html
                         ->escapeColumns()  //mencegah XSS Attack
-                        ->orderColumn('title',function ($query, $order) {
-                            $query->orderBy('id', $order);
+                        ->order(function ($query) {
+                            $query->orderBy('id', 'DESC');
                         })
                         ->toJson();
 

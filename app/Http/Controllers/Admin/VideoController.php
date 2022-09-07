@@ -129,7 +129,7 @@ class VideoController extends Controller
     /**storage video */
 
     public function storevideo(Request $request, Video $video){
-        //dd($request->all());
+       
         $this->validate($request, [
             /* 'title' => 'required|string|max:255', */
             'video' => 'required|file|mimetypes:video/mp4',
@@ -138,13 +138,17 @@ class VideoController extends Controller
 
 
         $file = $request->file('video');
+       
+        $originName=str_replace('.mp4','',$file->getClientOriginalName());
+        
+    
         $name=Carbon::now()->format('YmdHis').Str::random(3).'.'.$file->extension();
         $video_path = public_path('/video/');
         if (!File::exists($video_path)) {
             File::makeDirectory($video_path);
         }
         $file->move($video_path , $name);
-
+        
         /*thumbnail*/
         $post_image='';
         $cover = $request->file('post_image');
@@ -152,7 +156,7 @@ class VideoController extends Controller
             $post_image=\App\Helpers\HelperImages::upload($cover,'cover_video');
         }
 
-        $title=!empty($request->title)?$request->title:$name;
+        $title=!empty($request->title)?$request->title:$originName;
         //dd($request->all());
         $video::create([
             'category_id'   => $request->category_id,
@@ -245,8 +249,8 @@ class VideoController extends Controller
                         })
                         ->rawColumns(['action','file','title'])   //merender content column dalam bentuk html
                         ->escapeColumns()  //mencegah XSS Attack
-                        ->orderColumn('file',function ($query, $order) {
-                            $query->orderBy('id', $order);
+                        ->order(function ($query) {
+                            $query->orderBy('id', 'DESC');
                         })
                         ->toJson();
 

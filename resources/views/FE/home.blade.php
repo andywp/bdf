@@ -2,30 +2,7 @@
 @section('title','Bali Democracy Forum')
 @section('styles')
   <style>
-    .external_links .slick-slide img{
-        max-width: 70px;
-    }
-    .card-gallery img {
-        object-fit: cover;
-        height: 200px;
-    }
-    .banner_slider .carousel-item img {
-      height: 600px;
-      object-fit: cover;
-    }
 
-    @media only screen and (max-width: 768px) {
-      .banner_slider .carousel-item img {
-          height: 370px;
-    }  
-  @media only screen and (max-width: 575px) {
-    .banner_slider .carousel-item img {
-        height: 318px;
-    }
-    .banner_slider{
-        padding-top: 50px;
-    }
-  }
   </style>
 @endsection
 
@@ -37,7 +14,7 @@
       <div class="carousel slide carousel-fade" id="t300HvSMfa" data-ride="carousel" data-bs-ride="carousel" data-interval="5000" data-bs-interval="5000">
         <ol class="carousel-indicators">
             @foreach($slider as $sliders)
-                <li data-slide-to="{{ $loop->index }}" data-bs-slide-to="$loop->index" class="active" data-target="#t300HvSMfa" data-bs-target="#t300HvSMfa"></li>
+                <li data-slide-to="{{ $loop->index }}" data-bs-slide-to="{{$loop->index }}" class="active" data-target="#t300HvSMfa" data-bs-target="#t300HvSMfa"></li>
             @endforeach
           
         </ol>

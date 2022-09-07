@@ -12,7 +12,8 @@ class Gallery extends Model
 
     protected $fillable = [
         'images',
-        'album_id'
+        'album_id',
+        'title'
     ];
 
 

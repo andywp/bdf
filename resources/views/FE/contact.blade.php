@@ -42,18 +42,44 @@
                   </div>
                 </div>
                 <div class="col-lg-8 col-md-7 col-12">
-                  <form class="py-4">
+                @if ($errors->any())
+                <div class="alert alert-danger" role="alert">
+                    <h4 class="alert-heading">Error Input</h4>
+                    @foreach ($errors->all() as $error)
+                    <p>{{ $error }}</p>
+                    @endforeach
+                </div>
+                @endif
+                @if (session('success'))
+                <div class="alert alert-success">
+                    {{ session('success') }}
+                </div>
+                @endif
+
+                @if (session('error'))
+                <div class="alert alert-error">
+                    {{ session('error') }}
+                </div>
+                @endif
+                  <form class="py-4" method="POST" action="{{ route('contactsend') }}" autocomplete="off">
+                  @csrf
                     <div class="row">
                       <div class="col-md-6 col-12">
                         <div class="form-outline mb-4">
                             <label class="form-label" for="first-name">First Name</label>
-                            <input type="email" id="first-name" class="form-control" placeholder="Jhon" />
+                            <input type="text" id="first-name" name="first_name" class="form-control  @error('first_name') is-invalid @enderror"  value="{{ old('first_name') }}" placeholder="Jhon" autocomplete="off"/>
+                              @error('first_name')
+                              <div class="invalid-feedback">{{ $message }}</div>
+                             @enderror
                         </div>
                       </div>
                       <div class="col-md-6 col-12">
                         <div class="form-outline mb-4">
                             <label class="form-label" for="last-name">last Name</label>
-                            <input type="email" id="last-name" class="form-control" placeholder="Due" />
+                            <input type="text" id="last-name" name="last_name" class="form-control  @error('last_name') is-invalid @enderror" value="{{ old('last_name') }}" placeholder="Due" autocomplete="off"/>
+                            @error('las_name')
+                              <div class="invalid-feedback">{{ $message }}</div>
+                             @enderror
                         </div>
                       </div>
                     </div>
@@ -62,25 +88,41 @@
                       <div class="col-md-6 col-12">
                         <div class="form-outline mb-4">
                             <label class="form-label" for="phone">Phone</label>
-                            <input type="email" id="phone" class="form-control" placeholder="081 xxxx xxxx xx" />
+                            <input type="tel" id="phone" name="phone" class="form-control  @error('phone') is-invalid @enderror"  value="{{ old('phone') }}" placeholder="081 xxxx xxxx xx" autocomplete="off"/>
+                            @error('phone')
+                              <div class="invalid-feedback">{{ $message }}</div>
+                             @enderror
                         </div>
                       </div>
                       <div class="col-md-6 col-12">
                         <div class="form-outline mb-4">
                             <label class="form-label" for="email">Email</label>
-                            <input type="email" id="email" class="form-control" placeholder="mail@mail.com" />
+                            <input type="email" id="email" name="email" class="form-control @error('email') is-invalid @enderror"  value="{{ old('email') }}" placeholder="mail@mail.com" autocomplete="off"/>
+                              @error('email')
+                              <div class="invalid-feedback">{{ $message }}</div>
+                             @enderror
                         </div>
                       </div>
                     </div>
 
                     <div class="row mb-5">
+                     <div class="col-12 mb-4">
+                        <label class="form-label " for="message">Subject</label>
+                        <input type="text" id="last-name" name="subject" class="form-control  @error('subject') is-invalid @enderror" value="{{ old('subject') }}" placeholder="subject" autocomplete="off"/>
+                        @error('subject')
+                          <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                      </div>
                       <div class="col-12">
                         <label class="form-label" for="message">Message</label>
-                        <textarea class="form-control" placeholder="Write your message" id="message"></textarea>
+                        <textarea name="message" class="form-control  @error('subject') is-invalid @enderror" placeholder="Write your message" id="message" required="required">{{ old('message') }}</textarea>
+                        @error('message')
+                          <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                       </div>
                     </div>
                                       
-                    <button type="button" class="btn primary-btn mb-4 maxwidth-none">Send Message</button>
+                    <button type="submit" class="btn primary-btn mb-4 maxwidth-none">Send Message</button>
                   </form>
                 </div>
               </div>

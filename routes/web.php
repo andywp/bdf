@@ -44,7 +44,9 @@ Route::get('/gallery', [App\Http\Controllers\BdfController::class, 'gallery'])->
 Route::get('/ipd', [App\Http\Controllers\BdfController::class, 'ipd'])->name('ipd');
 Route::get('/publication', [App\Http\Controllers\BdfController::class, 'publication'])->name('publication');
 Route::post('/publication', [App\Http\Controllers\BdfController::class, 'download'])->name('download');
+Route::get('/media-advisory', [App\Http\Controllers\BdfController::class, 'mediaadvisory'])->name('mediaadvisory');
 Route::get('/contact', [App\Http\Controllers\BdfController::class, 'contact'])->name('contact');
+Route::post('/contact', [App\Http\Controllers\BdfController::class, 'contactsend'])->name('contactsend');
 //
 Auth::routes();
 
