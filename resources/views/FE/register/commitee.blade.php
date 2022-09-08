@@ -36,6 +36,7 @@
                 <form action="{{ route('commitee_create') }}" class="needs-validation" method="POST" novalidate enctype="multipart/form-data">
                 @csrf
                     <h3 class="text-center title-form">Panitia</h3>
+                    <!--
                     <div class="form-outline mb-4">
                         <label class="form-label" for="gelar">Gelar</label>
                         <input type="text" id="gelar" class="form-control @error('gelar') is-invalid @enderror" name="gelar" value="{{ old('gelar') }}" placeholder="- Title -" />
@@ -43,6 +44,7 @@
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
+                    -->
 
                     <div class="form-outline mb-4">
                         <label class="form-label" for="nama-lengkap">Nama Lengkap</label>

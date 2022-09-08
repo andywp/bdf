@@ -293,8 +293,8 @@ class RegisterController extends Controller
             })
             ->rawColumns(['action','name'])   //merender content column dalam bentuk html
             ->escapeColumns()  //mencegah XSS Attack
-            ->orderColumn('name',function ($query, $order) {
-                $query->orderBy('id', $order);
+            ->order(function ($query) {
+                $query->orderBy('id', 'DESC');
             })
             ->toJson(); 
         }
@@ -302,18 +302,27 @@ class RegisterController extends Controller
         }
 
         public function physicalindexexcel(){
-            $data=\App\Models\PhysicalAttendance::all();
+            //$table=(new \App\Models\PhysicalAttendance)->getTableColumns();
+            $table=collect(\App\Models\PhysicalAttendance::first())->keys();
+            //dd($table);
+
+            $thead='';
+            foreach($table as $r ){
+
+                if(($r !='updated_at') && ($r !='bdf_id') && ($r !='id') && ($r !='agree')  ){
+                    $name=$r;
+                    $thead.='<td>'.ucwords(str_replace('_',' ',$name)).'</td>';
+                }
+            }
+
+
+            $data=\App\Models\PhysicalAttendance::orderBy('id','DESC')->get();
             //dd($data);
             $rowHTML='';
             foreach($data as $row){
                 $rowHTML .='
                     <tr>
-                        <td>
-                            <img width: 210px; height: 210px; src="'.asset('images/register/'.$row->Photo).'"  class="img-thumbnail" >
-                        </td>
-                        <td>
-                            <img width: 210px; height: 210px; src="'.asset('images/register/'.$row->diplomatic_note).'"  class="img-thumbnail" >
-                        </td>
+                       
                         <td>
                            '.$row->country_organization.'
                         </td>
@@ -336,15 +345,17 @@ class RegisterController extends Controller
                            '.$row->nationality.'
                         </td>
                         <td>
-                           '.$row->position.'
-                        </td>
-                        <td>
-                           '.$row->position_other.'
+                           '.$row->nationality_other.'
                         </td>
                         <td>
                            '.$row->affiliation.'
                         </td>
-                       
+                        <td>
+                           '.$row->official_title.'
+                        </td>
+                        <td>
+                            '.$row->gender.'
+                        </td>
                         <td>
                            '.$row->official_title.'
                         </td>
@@ -354,32 +365,30 @@ class RegisterController extends Controller
                         </td>
                        
                         <td>
+                           '.$row->gender.'
+                        </td>
+                        <td>
                            '.$row->email.'
                         </td>
+                        <td>
+                            \''.$row->telephone.'\'
+                        </td>
+                        <td>
+                           \''.$row->fax.'\'
+                        </td>
+                       
+                        <td>
+                           '.$row->passport_no.'
+                        </td>
                       
-                        <td>
-                           '.$row->telephone.'
-                        </td>
-                        
-                        <td>
-                           '.$row->fax.'
-                        </td>
-                     
-                        <td>
-                           \''.$row->passport_no.'\'
-                        </td>
-                        <td>
-                           '.$row->fax.'
-                        </td>
-                        
                         <td>
                            '.$row->date_of_issuance.'
                         </td>
-                      
+                        
                         <td>
                            '.$row->date_of_expiry.'
                         </td>
-                        
+                       
                         <td>
                            '.$row->flight_number.'
                         </td>
@@ -387,15 +396,14 @@ class RegisterController extends Controller
                         <td>
                            '.$row->flight_date.'
                         </td>
-                       
+                        
                         <td>
                            '.$row->flight_time.'
                         </td>
-                        
+                       
                         <td>
                            '.$row->departure_flight_number.'
                         </td>
-                       
                         <td>
                            '.$row->departure_flight_date.'
                         </td>
@@ -421,52 +429,24 @@ class RegisterController extends Controller
                            '.$row->body_measurement.'
                         </td>
                         <td>
-                           '.$row->created_at.'
+                            <a href="'.asset('images/register/'.$row->Photo).'" target="_blank"> '.asset('images/register/'.$row->Photo).'</a>
                         </td>
+                        <td>
+                            <a href="'.asset('images/register/'.$row->diplomatic_note).'" target="_blank"> '.asset('images/register/'.$row->diplomatic_note).'</a>
+                        </td>
+                        <td>
+                            '.$row->created_at.'
+                     </td>
                     </tr>
                     ';
             }
             header("Content-type: application/vnd-ms-excel");
-            header("Content-Disposition: attachment; filename=Data Register Physical Attendance_{{ date('Ymdhis') }}.xls");
+            header("Content-Disposition: attachment; filename=Data Register Physical Attendance_".date('Ymdhis').".xls");
 
               echo $html='
                     <table border="1">
                         <thead>
-                            <tr>
-                                <td>'.ucwords(str_replace('_',' ','Photo')).'</td>
-                                <td>'.ucwords(str_replace('_',' ','diplomatic_note')).'</td>
-                                <td>'.ucwords(str_replace('_',' ','country_organization')).'</td>
-                                <td>'.ucwords(str_replace('_',' ','country_organization_other')).'</td>
-                                <td>'.ucwords(str_replace('_',' ','title')).'</td>
-                                <td>'.ucwords(str_replace('_',' ','family_name')).'</td>
-                                <td>'.ucwords(str_replace('_',' ','first_name')).'</td>
-                                <td>'.ucwords(str_replace('_',' ','prefered_name_on_badge')).'</td>
-                                <td>'.ucwords(str_replace('_',' ','nationality')).'</td>
-                                <td>'.ucwords(str_replace('_',' ','nationality_other')).'</td>
-                                <td>'.ucwords(str_replace('_',' ','position_other')).'</td>
-                                <td>'.ucwords(str_replace('_',' ','affiliation')).'</td>
-                                <td>'.ucwords(str_replace('_',' ','official_title')).'</td>
-                                <td>'.ucwords(str_replace('_',' ','gender')).'</td>
-                                <td>'.ucwords(str_replace('_',' ','office_address')).'</td>
-                                <td>'.ucwords(str_replace('_',' ','email')).'</td>
-                                <td>'.ucwords(str_replace('_',' ','fax')).'</td>
-                                <td>'.ucwords(str_replace('_',' ','passport_no')).'</td>
-                                <td>'.ucwords(str_replace('_',' ','date_of_issuance')).'</td>
-                                <td>'.ucwords(str_replace('_',' ','date_of_expiry')).'</td>
-                                <td>'.ucwords(str_replace('_',' ','flight_number')).'</td>
-                                <td>'.ucwords(str_replace('_',' ','flight_date')).'</td>
-                                <td>'.ucwords(str_replace('_',' ','flight_time')).'</td>
-                                <td>'.ucwords(str_replace('_',' ','departure_flight_number')).'</td>
-                                <td>'.ucwords(str_replace('_',' ','departure_flight_date')).'</td>
-                                <td>'.ucwords(str_replace('_',' ','departure_flight_time')).'</td>
-                                <td>'.ucwords(str_replace('_',' ','special_dietary_requirement')).'</td>
-                                <td>'.ucwords(str_replace('_',' ','special_dietary_requirement_Other')).'</td>
-                                <td>'.ucwords(str_replace('_',' ','other_dietary_restriction')).'</td>
-                                <td>'.ucwords(str_replace('_',' ','other_food_allergy')).'</td>
-                                <td>'.ucwords(str_replace('_',' ','body_measurement')).'</td>
-                                
-                                <td>'.ucwords(str_replace('_',' ','created_at')).'</td>
-                            </tr>
+                            '.$thead.'
                         <thead>
                         <tbody>
                             '.$rowHTML.'
@@ -625,8 +605,8 @@ class RegisterController extends Controller
                 })
                 ->rawColumns(['action','name'])   //merender content column dalam bentuk html
                 ->escapeColumns()  //mencegah XSS Attack
-                ->orderColumn('name',function ($query, $order) {
-                    $query->orderBy('id', $order);
+                ->order(function ($query) {
+                    $query->orderBy('id', 'DESC');
                 })
                 ->toJson(); 
             }
@@ -635,7 +615,7 @@ class RegisterController extends Controller
 
 
         public function virtualexcel(){
-            $data=\App\Models\VirtualAttendance::all();
+            $data=\App\Models\VirtualAttendance::orderBy('id','DESC')->get();
             //dd($data);
             $rowHTML='';
             foreach($data as $row){
@@ -662,7 +642,7 @@ class RegisterController extends Controller
 
             }
             header("Content-type: application/vnd-ms-excel");
-            header("Content-Disposition: attachment; filename=Data Register Virtual Attendance_{{ date('Ymdhis') }}.xls");
+            header("Content-Disposition: attachment; filename=Data Register Virtual Attendance_".date('Ymdhis').".xls");
             echo $html='
             <table border="1">
                 <thead>
@@ -777,8 +757,8 @@ class RegisterController extends Controller
                 })
                 ->rawColumns(['action','name'])   //merender content column dalam bentuk html
                 ->escapeColumns()  //mencegah XSS Attack
-                ->orderColumn('name',function ($query, $order) {
-                    $query->orderBy('id', $order);
+                ->order(function ($query) {
+                    $query->orderBy('id', 'DESC');
                 })
                 ->toJson(); 
 
@@ -788,7 +768,7 @@ class RegisterController extends Controller
     }
 
     public function Mediaexcel(){
-        $data=\App\Models\MediaAttendance::all();
+        $data=\App\Models\MediaAttendance::orderBy('id','DESC')->get();
 
         $table='';
        foreach($data as  $r){
@@ -799,11 +779,11 @@ class RegisterController extends Controller
                     <td>'.$r->nationality.'</td>
                     <td>'.$r->nationality_other.'</td>
                     <td>'.$r->date_of_birth.'</td>
-                    <td>'.$r->gender.'</td>
+                    <td>\''.$r->gender.'</td>
                     <td>'.$r->email.'</td>
-                    <td>'.$r->phone.'</td>
-                    <td>'.$r->id_nummber.'</td>
-                    <td>'.$r->date_of_issuance.'</td>
+                    <td>'.$r->phone.'\'</td>
+                    <td>\''.$r->id_nummber.'\'</td>
+                    <td>\''.$r->date_of_issuance.'</td>
                     <td>'.$r->date_of_expiry.'</td>
                     <td>'.$r->name_of_media.'</td>
                     <td>'.$r->media_other.'</td>
@@ -811,15 +791,15 @@ class RegisterController extends Controller
                     <td>'.$r->your_position_in_agency_other.'</td>
                     <td>'.$r->how_do_we_contact_you.'</td>
                     <td>'.$r->contact_person_name.'</td>
-                    <td>'.$r->contact_person_phone.'</td>
+                    <td>\''.$r->contact_person_phone.'\'</td>
                     <td>'.$r->contact_person_email.'</td>
                     <td>'.$r->country_of_head_office_address.'</td>
                     <td>'.$r->your_office_address.'</td>
                     <td>'.$r->origin_of_media.'</td>
                     <td>'.$r->type_of_media.'</td>
                     <td>'.$r->type_of_media_other.' </td>
-                    <td><img src="'.asset('images/register/'.$r->Letter_of_assignment).'"  class="img-thumbnail" ></td>
-                    <td><img src="'.asset('images/register/'.$r->passport_ktp).'"  class="img-thumbnail" ></td>
+                    <td><a href="'.asset('images/register/'.$r->Letter_of_assignment).'" taget="_blank">'.asset('images/register/'.$r->Letter_of_assignment).'</a></td>
+                    <td><a href="'.asset('images/register/'.$r->passport_ktp).'" taget="_blank">'.asset('images/register/'.$r->passport_ktp).'</a></td>
                     <td>'.$r->created_at.'</td>
 
                 </tr?
@@ -830,7 +810,7 @@ class RegisterController extends Controller
        }
 
        header("Content-type: application/vnd-ms-excel");
-       header("Content-Disposition: attachment; filename=Data Register Media Attendance_{{ date('Ymdhis') }}.xls");
+       header("Content-Disposition: attachment; filename=Data Register Media Attendance_".date('Ymdhis').".xls");
         echo $html='
         <table border="1">
             <thead>
@@ -957,8 +937,8 @@ class RegisterController extends Controller
             })
             ->rawColumns(['action','name'])   //merender content column dalam bentuk html
             ->escapeColumns()  //mencegah XSS Attack
-            ->orderColumn('name',function ($query, $order) {
-                $query->orderBy('id', $order);
+            ->order(function ($query) {
+                $query->orderBy('id', 'DESC');
             })
             ->toJson(); 
 
@@ -972,7 +952,7 @@ class RegisterController extends Controller
 
     //guestexcel
     public function guestexcel(){
-        $data=\App\Models\GuestAttendance::all();
+        $data=\App\Models\GuestAttendance::orderBy('id','DESC')->get();
         //dd($data);
         $table='';
        foreach($data as  $r){
@@ -993,11 +973,11 @@ class RegisterController extends Controller
                     <td>'.$r->email.'</td>
                     <td>'.$r->telephone.'</td>
                     <td>'.$r->fax.'</td>
-                    <td>'.$r->passport_no.'</td>
+                    <td>\''.$r->passport_no.'\'</td>
                     <td>'.$r->date_of_issuance.'</td>
                     <td>'.$r->date_of_expiry.'</td>
-                    <td><img src="'.asset('images/register/'.$r->photo).'"  class="img-thumbnail" ></td>
-                    <td><img src="'.asset('images/register/'.$r->diplomatic_note).'"  class="img-thumbnail" ></td>
+                    <td><a href="'.asset('images/register/'.$r->photo).'" target="_blank">'.asset('images/register/'.$r->photo).'</a></td>
+                    <td><a href="'.asset('images/register/'.$r->photo).'" target="_blank">'.asset('images/register/'.$r->diplomatic_note).'</a></td>
                     <td>'.$r->created_at.'</td>
 
                 </tr>
@@ -1008,7 +988,7 @@ class RegisterController extends Controller
        }
 
        header("Content-type: application/vnd-ms-excel");
-       header("Content-Disposition: attachment; filename=Data Register Media Attendance_{{ date('Ymdhis') }}.xls");
+       header("Content-Disposition: attachment; filename=Data Register Media Attendance_".date('Ymdhis').".xls");
         echo $html='
         <table border="1">
             <thead>
@@ -1053,7 +1033,7 @@ class RegisterController extends Controller
             $datas = \App\Models\CommiteAttendance::select('*');
             return DataTables::of($datas)
             ->addColumn('action', function($row){  
-                
+                //print_r($row->toArray());
                 $html='';
                 foreach($row->toArray() as $k=>$v){
                     if($k != 'id' && $k != 'bdf_id' && $k != 'agree' && $k != 'created_at' && $k != 'updated_at'){
@@ -1128,8 +1108,8 @@ class RegisterController extends Controller
             })
             ->rawColumns(['action','name'])   //merender content column dalam bentuk html
             ->escapeColumns()  //mencegah XSS Attack
-            ->orderColumn('name',function ($query, $order) {
-                $query->orderBy('id', $order);
+            ->order(function ($query) {
+                $query->orderBy('id', 'DESC');
             })
             ->toJson(); 
 
@@ -1138,31 +1118,31 @@ class RegisterController extends Controller
 
 
     public function commiteeexcel(){
-        $data=\App\Models\CommiteAttendance::all();
+        $data=\App\Models\CommiteAttendance::orderBy('id','DESC')->get();
         //dd($data);
         $table='';
        foreach($data as  $r){
         $table.='
                 <tr>
-                    <td>'.$r->gelar.'</td>
+                   
                     <td>'.$r->nama_lengkap.'</td>
                     <td>'.$r->prefered_name_on_badge.'</td>
                     <td>'.$r->jabatan.'</td>
                     <td>\''.$r->nik.'\'</td>
                     <td>'.$r->satuan_kerja.'</td>
                     <td>'.$r->bidang_kepanitiaan.'</td>
-                    <td>'.$r->nomor_rekening.'</td>
+                    <td>\''.$r->nomor_rekening.'\'</td>
                     <td>'.$r->bank.'</td>
                     <td>'.$r->email.'</td>
                     <td>'.$r->phone.'</td>
-                    <td>'.$r->office_address.'</td>
+                   
                     <td>'.$r->nomor_pesawat.'</td>
-                    <td>'.$r->jam.'</td>
-                    <td>'.$r->nomor_pesawat_pulang.'</td>
+                    <td>\''.$r->jam.'\'</td>
+                    <td>\''.$r->nomor_pesawat_pulang.'\'</td>
                     <td>'.$r->tanggal_pulang.'</td>
                     <td>'.$r->jam_pulang.'</td>
-                    <td><img src="'.asset('images/register/'.$r->foto).'"  class="img-thumbnail" ></td>
-                    <td><img src="'.asset('images/register/'.$r->ktp).'"  class="img-thumbnail" ></td>
+                    <td><a href="'.asset('images/register/'.$r->foto).'" target="_blank">'.asset('images/register/'.$r->foto).'</a></td>
+                    <td><a href="'.asset('images/register/'.$r->ktp).'" target="_blank">'.asset('images/register/'.$r->ktp).'</a></td>
                     <td>'.$r->created_at.'</td>
 
                 </tr>
@@ -1173,12 +1153,12 @@ class RegisterController extends Controller
        }
 
        header("Content-type: application/vnd-ms-excel");
-       header("Content-Disposition: attachment; filename=Data Register Commite Attendance_{{ date('Ymdhis') }}.xls");
+       header("Content-Disposition: attachment; filename=Data Register Commite Attendance_".date('Ymdhis').".xls");
         echo $html='
         <table border="1">
             <thead>
                 <tr>
-                    <td>'.ucwords(str_replace('_',' ','gelar')).'</td>
+                   
                     <td>'.ucwords(str_replace('_',' ','nama_lengkap')).'</td>
                     <td>'.ucwords(str_replace('_',' ','prefered_name_on_badge')).'</td>
                     <td>'.ucwords(str_replace('_',' ','jabatan')).'</td>
@@ -1190,7 +1170,7 @@ class RegisterController extends Controller
                     <td>'.ucwords(str_replace('_',' ','email')).'</td>
                     <td>'.ucwords(str_replace('_',' ','phone')).'</td>
                     <td>'.ucwords(str_replace('_',' ','nomor_pesawat')).'</td>
-                    <td>'.ucwords(str_replace('_',' ','email')).'</td>
+                    
                     <td>'.ucwords(str_replace('_',' ','jam')).'</td>
                     <td>'.ucwords(str_replace('_',' ','nomor_pesawat_pulang')).'</td>
                     <td>'.ucwords(str_replace('_',' ','tanggal_pulang')).'</td>

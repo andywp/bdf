@@ -24,19 +24,19 @@
             REGISTRATION
         </a>
         <ul class="dropdown-menu bg-white" aria-labelledby="dropdownLayanan">
-            @if((Auth::user()->type_user == 'Physical Attendance') || (Auth::user()->type_user == 'Physical Commitee'))
+            @if((Auth::user()->type_user == 'Physical Attendance') || (Auth::user()->type_user == 'Commitee'))
             <li><a class="dropdown-item" href="{{ route('physicalattendance') }}">Physical Attendance</a></li>
             @endif
-            @if((Auth::user()->type_user == 'Virtual Attendance') || (Auth::user()->type_user == 'Physical Commitee'))
+            @if((Auth::user()->type_user == 'Virtual Attendance') || (Auth::user()->type_user == 'Commitee'))
             <li><a class="dropdown-item" href="{{ route('virtualattendance') }}">Virtual Attendance</a></li>
             @endif
-            @if((Auth::user()->type_user == 'Media') || (Auth::user()->type_user == 'Physical Commitee'))
+            @if((Auth::user()->type_user == 'Media') || (Auth::user()->type_user == 'Commitee'))
             <li><a class="dropdown-item" href="{{ route('media') }}">Media</a></li>
             @endif
-            @if((Auth::user()->type_user == 'Guest') || (Auth::user()->type_user == 'Guest'))
+            @if((Auth::user()->type_user == 'Guest') || (Auth::user()->type_user == 'Commitee'))
             <li><a class="dropdown-item" href="{{ route('guest') }}">Guest</a></li>
             @endif
-            @if((Auth::user()->type_user == 'Commitee') || (Auth::user()->type_user == 'Guest'))
+            @if((Auth::user()->type_user == 'Commitee'))
             <li><a class="dropdown-item" href="{{ route('commitee') }}">Commitee</a></li>
             @endif
         </ul>

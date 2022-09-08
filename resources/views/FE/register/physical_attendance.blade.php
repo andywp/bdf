@@ -62,7 +62,14 @@
 
                     <div class="form-outline mb-4">
                         <label class="form-label" for="titleform">Title</label>
-                        <input type="text" id="titleform" class="form-control @error('title') is-invalid @enderror" name="title" value="{{ old('title') }}" placeholder="- Title -" />
+                        <select class="optionselect form-select  form-control w-100 @error('title') is-invalid @enderror" name="title">
+                            <option value="">-Title-</option>
+                            <option value="H.E." {{(old('title') == 'H.E.')?'selected':'' }}>H.E.</option>
+                            <option value="Mr" {{(old('title') == 'Mr')?'selected':'' }}>Mr</option>
+                            <option value="Ms" {{(old('title') == 'Ms')?'selected':'' }}>Ms</option>
+                            <option value="Dr" {{(old('title') == 'Dr')?'selected':'' }}>Dr</option>
+                            <option value="Prof" {{(old('title') == 'Prof')?'selected':'' }}>Prof.</option>
+                        </select>
                         @error('title')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
@@ -113,7 +120,15 @@
 
                     <div class="form-outline mb-4">
                         <label class="form-label" for="position">Position</label>
-                        <input type="text" id="position" class="form-control @error('position') is-invalid @enderror" name="position"  value="{{ old('position') }}" placeholder="- Position Delegation -" />
+                        <select class="form-select optionselect form-control  @error('position') is-invalid @enderror" name="position" aria-label="Default select example">
+                            <option value="">-Position Delegation-</option>
+                            <option value="Foreign Minister" {{(old('position') == 'Foreign Minister')?'selected':'' }}>Foreign Minister</option>
+                            <option value="Head of Delegation" {{(old('position') == 'Head of Delegation')?'selected':'' }}>Head of Delegation</option>
+                            <option value="Spouse" {{(old('position') == 'Spouse')?'selected':'' }}>Spouse</option>
+                            <option value="Member of Delegation" {{(old('position') == 'Member of Delegation')?'selected':'' }}>Member of Delegation</option>
+                            <option value="Security Officer"  {{(old('position') == 'Security Officer')?'selected':'' }}>Security Officer</option>
+                            <option value="Other"  {{(old('position') == 'Other')?'selected':'' }}>Other</option>
+                        </select>
                         @error('position')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
@@ -136,7 +151,7 @@
                     </div>
 
                     <div class="form-outline mb-4">
-                        <label class="form-label" for="office-address">Office Address</label>
+                        <label class="form-label" for="office-address">Office Title</label>
                         <input type="text" id="office-address" class="form-control  @error('official_title') is-invalid @enderror" name="official_title" value="{{ old('official_title') }}"  placeholder="" />
                         @error('official_title')
                             <div class="invalid-feedback">{{ $message }}</div>
@@ -144,9 +159,17 @@
                     </div>
 
                     <div class="form-outline mb-4">
+                        <label class="form-label" for="office-address">Office Address</label>
+                        <input type="text" id="office-address" class="form-control  @error('office_address') is-invalid @enderror" name="office_address" value="{{ old('office_address') }}"  placeholder="" />
+                        @error('office_address')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="form-outline mb-4">
                         <label class="form-label" for="position">Gender</label>
                         <select class="form-select form-control  @error('gender') is-invalid @enderror" name="gender" aria-label="Default select example">
-                        <option>- Gender -</option>
+                        <option  value="" >- Gender -</option>
                         <option value="male" {{ (old('gender') == 'male')?'selected':'' }}>Male</option>
                         <option value="female" {{ (old('gender') == 'female')?'selected':'' }}>Female</option>
                         </select>
@@ -456,7 +479,7 @@
                     <div class="form-outline mb-5">
                         <label class="form-label" for="diplomatic-note">
                         Diplomatic Note
-                        <p><small>(Max 1MB: pdf)</small></p>
+                        <p><small>(Max 1MB: jpg)</small></p>
                         </label>
                         <input type="file" id="diplomatic-note" name="diplomatic_note"  value="{{ old('diplomatic_note') }}" class="form-control @error('diplomatic_note') is-invalid @enderror" />
                         @error('diplomatic_note')

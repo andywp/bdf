@@ -28,6 +28,6 @@ class ContactMail extends Mailable
      */
     public function build()
     {
-        return $this->subject('Contact US - '. $this->data->subject)->view('emails.contact',['data' => $this->data]);
+        return $this->from('noreply@bdf.com','BDF')->subject('[noreply] Contact US - '. $this->data->subject)->view('emails.contact',['data' => $this->data]);
     }
 }

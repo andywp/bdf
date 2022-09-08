@@ -8,5 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class CommiteAttendance extends Model
 {
     use HasFactory;
+
+    protected $casts = [
+        'tanggal' => 'datetime:Y-m-d'
+     ];
+
     protected $guarded = ['id'];
 }

@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Mail;
 use App\Mail\ContactMail;
+use App\Mail\MailAdmin;
 
 class Contact extends Model
 {
@@ -24,8 +25,9 @@ class Contact extends Model
   
         static::created(function ($item) {
                 
-            $adminEmail = "andy.wijang@gmail.com";
+            $adminEmail = $item->email;
             Mail::to($adminEmail)->send(new ContactMail($item));
+            Mail::to('info@bdf.com')->send(new MailAdmin($item));
         });
     }
 }

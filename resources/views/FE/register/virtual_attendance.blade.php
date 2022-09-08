@@ -59,12 +59,19 @@
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
-
+                        
                         <div class="form-outline mb-4">
                             <label class="form-label" for="titleform">Title</label>
-                            <input type="text" id="titleform" class="form-control @error('title') is-invalid @enderror" name="title" value="{{ old('title') }}" placeholder="- Title -" />
+                            <select class="optionselect form-select  form-control w-100 @error('title') is-invalid @enderror" name="title">
+                                <option value="">-Title-</option>
+                                <option value="H.E." {{(old('title') == 'H.E.')?'selected':'' }}>H.E.</option>
+                                <option value="Mr" {{(old('title') == 'Mr')?'selected':'' }}>Mr</option>
+                                <option value="Ms" {{(old('title') == 'Ms')?'selected':'' }}>Ms</option>
+                                <option value="Dr" {{(old('title') == 'Dr')?'selected':'' }}>Dr</option>
+                                <option value="Prof" {{(old('title') == 'Prof')?'selected':'' }}>Prof.</option>
+                            </select>
                             @error('title')
-                            <div class="invalid-feedback">{{ $message }}</div>
+                                <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
 
@@ -112,11 +119,20 @@
 
                         <div class="form-outline mb-4">
                             <label class="form-label" for="position">Position</label>
-                            <input type="text" id="position" class="form-control @error('position') is-invalid @enderror" name="position"  value="{{ old('position') }}" placeholder="- Position Delegation -" />
+                            <select class="form-select optionselect form-control  @error('position') is-invalid @enderror" name="position" aria-label="Default select example">
+                                <option value="">-Position Delegation-</option>
+                                <option value="Foreign Minister" {{(old('position') == 'Foreign Minister')?'selected':'' }}>Foreign Minister</option>
+                                <option value="Head of Delegation" {{(old('position') == 'Head of Delegation')?'selected':'' }}>Head of Delegation</option>
+                                <option value="Spouse" {{(old('position') == 'Spouse')?'selected':'' }}>Spouse</option>
+                                <option value="Member of Delegation" {{(old('position') == 'Member of Delegation')?'selected':'' }}>Member of Delegation</option>
+                                <option value="Security Officer"  {{(old('position') == 'Security Officer')?'selected':'' }}>Security Officer</option>
+                                <option value="Other"  {{(old('position') == 'Other')?'selected':'' }}>Other</option>
+                            </select>
                             @error('position')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
+
 
                         <div class="form-outline mb-4">
                             <label class="form-label" for="other3">Other (specify)</label>

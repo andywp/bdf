@@ -62,7 +62,14 @@
 
                     <div class="form-outline mb-4">
                         <label class="form-label" for="titleform">Title</label>
-                        <input type="text" id="titleform" class="form-control @error('title') is-invalid @enderror" name="title" value="{{ old('title') }}" placeholder="- Title -" />
+                        <select class="optionselect form-select  form-control w-100 @error('title') is-invalid @enderror" name="title">
+                            <option value="">-Title-</option>
+                            <option value="H.E." {{(old('title') == 'H.E.')?'selected':'' }}>H.E.</option>
+                            <option value="Mr" {{(old('title') == 'Mr')?'selected':'' }}>Mr</option>
+                            <option value="Ms" {{(old('title') == 'Ms')?'selected':'' }}>Ms</option>
+                            <option value="Dr" {{(old('title') == 'Dr')?'selected':'' }}>Dr</option>
+                            <option value="Prof" {{(old('title') == 'Prof')?'selected':'' }}>Prof.</option>
+                        </select>
                         @error('title')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
@@ -137,7 +144,7 @@
                     <div class="form-outline mb-4">
                         <label class="form-label" for="position">Gender</label>
                         <select class="form-select form-control  @error('gender') is-invalid @enderror" name="gender" aria-label="Default select example">
-                        <option>- Gender -</option>
+                        <option value="">- Gender -</option>
                         <option value="male" {{ (old('gender') == 'male')?'selected':'' }}>Male</option>
                         <option value="female" {{ (old('gender') == 'female')?'selected':'' }}>Female</option>
                         </select>
@@ -178,7 +185,7 @@
                     
                     <div class="form-outline mb-4">
                         <label class="form-label" for="passport-no">Passport Number</label>
-                        <input type="text" id="passport-no" class="form-control  @error('passport_no') is-invalid @enderror" name="./"  value="{{ old('passport_no') }}" placeholder="" />
+                        <input type="text" id="passport-no" class="form-control  @error('passport_no') is-invalid @enderror" name="passport_no"  value="{{ old('passport_no') }}" placeholder="" />
                         @error('passport_no')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
@@ -207,6 +214,9 @@
                         <p><small>(Preferebly white background Max 1MB: jpg)</small></p>
                       </label>
                       <input type="file" id="photo" name="photo" value="{{ old('photo') }}" class="form-control  @error('photo') is-invalid @enderror"  />
+                        @error('photo')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
 
                     <div class="form-outline mb-5">
@@ -215,6 +225,9 @@
                         <p><small>(Max 1MB: pdf)</small></p>
                       </label>
                       <input type="file" id="diplomatic-note" class="form-control  @error('diplomatic_note') is-invalid @enderror"  value="{{ old('diplomatic_note') }}" name="diplomatic_note" />
+                        @error('diplomatic_note')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
 
                     <div class="form-check mb-4">

@@ -81,7 +81,7 @@
                         <div class="form-outline mb-4">
                             <label class="form-label" for="position">Gender</label>
                             <select class="form-select form-control  @error('gender') is-invalid @enderror" name="gender" aria-label="Default select example">
-                            <option>- Gender -</option>
+                            <option value="">- Gender -</option>
                             <option value="male" {{ (old('gender') == 'male')?'selected':'' }}>Male</option>
                             <option value="female" {{ (old('gender') == 'female')?'selected':'' }}>Female</option>
                             </select>
@@ -111,7 +111,7 @@
 
                         <div class="form-outline mb-4">
                             <label class="form-label" for="id-number">Passport Number / KTP</label>
-                            <input type="text" id="id-number" class="form-control @error('id_nummber') is-invalid @enderror"  value="{{ old('id_nummber') }}" placeholder="" />
+                            <input type="text" id="id-number" name="id_nummber" class="form-control @error('id_nummber') is-invalid @enderror"  value="{{ old('id_nummber') }}" placeholder="" />
                             @error('id_nummber')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror

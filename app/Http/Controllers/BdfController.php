@@ -123,10 +123,22 @@ class BdfController extends Controller
             'subject'=> 'required',
             'message'=> 'required|min:5',
         ]);
+        //$request->ip = $request->ip();
 
-        $contact::create($request->all());
+        $input=[
+            'first_name'=>  $request->first_name,
+            'last_name'=>  $request->last_name,
+            'phone'=>  $request->phone,
+            'email'=>  $request->email,
+            'subject'=>  $request->subject,
+            'message'=>  $request->message,
+            'ip'    =>  $request->ip()
+        ];
 
-        return redirect()->route('media')->with('success','Thank you for contacting us');
+
+        $contact::create($input);
+
+        return redirect()->route('contact')->with('success','Thank you for contacting us. We have entered your data into the database.');
     }
 
 }
