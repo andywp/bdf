@@ -16,6 +16,10 @@
     <link rel="stylesheet" href="{{asset('bdf/assets/3rdparty/bootstrap/css/bootstrap-reboot.min.css')}}" />
     <link rel="stylesheet" href="{{asset('bdf/assets/3rdparty/dropdown/css/style.css')}}" />
     <link rel="stylesheet" href="{{asset('bdf/assets/3rdparty/socicon/css/styles.css')}}" />
+    <link rel="stylesheet" href="{{asset('bdf/datetimepicker/css/classic.css')}}" />
+    <link rel="stylesheet" href="{{asset('bdf/datetimepicker/css/classic.date.css')}}" />
+    <link rel="stylesheet" href="{{asset('bdf/datetimepicker/css/classic.time.css')}}" />
+    <link rel="stylesheet" href="{{asset('bdf/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.min.css')}}" />
 
     <!-- slick slider -->
     <link rel="stylesheet" type="text/css" href="{{asset('bdf/assets/3rdparty/slick/slick.css')}}" />
@@ -159,6 +163,13 @@
     <script src="{{ asset('bdf/assets/3rdparty/dropdown/js/navbar-dropdown.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
     <script type="text/javascript" src="{{ asset('bdf/assets/3rdparty/slick/slick.min.js') }}"></script>
+    <script src="{{ asset('bdf/datetimepicker/js/legacy.js') }}"></script>
+    <script src="{{ asset('bdf/datetimepicker/js/picker.js') }}"></script>
+    <script src="{{ asset('bdf/datetimepicker/js/picker.time.js') }}"></script>
+    <script src="{{ asset('bdf/datetimepicker/js/picker.date.js') }}"></script>
+    <script src="{{ asset('bdf/bootstrap-material-datetimepicker/js/moment.min.js') }}"></script>
+    <script src="{{ asset('bdf/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.min.js') }}"></script>
+
     <script src="{{ asset('bdf/assets/js/script.js')}}"></script>
     @yield('scripts')
 </body>
