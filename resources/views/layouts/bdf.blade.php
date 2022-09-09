@@ -170,7 +170,7 @@
     <script src="{{ asset('bdf/bootstrap-material-datetimepicker/js/moment.min.js') }}"></script>
     <script src="{{ asset('bdf/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.min.js') }}"></script>
 
-    <script src="{{ asset('bdf/assets/js/script.js')}}"></script>
+    <script src="{{ asset('bdf/assets/js/script.js?v123')}}"></script>
     @yield('scripts')
 </body>
 
