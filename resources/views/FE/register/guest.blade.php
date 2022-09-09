@@ -193,7 +193,7 @@
 
                     <div class="form-outline mb-4">
                         <label class="form-label" for="date-issuance">Date of Issuance</label>
-                        <input type="date" id="date-issuance" class="form-control  @error('date_of_issuance') is-invalid @enderror" name="date_of_issuance"  value="{{ old('date_of_issuance') }}" laceholder="" />
+                        <input type="text" id="date-issuance" class="form-control datepicker  @error('date_of_issuance') is-invalid @enderror" name="date_of_issuance"  value="{{ old('date_of_issuance') }}" laceholder="" />
                         @error('date_of_issuance')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
@@ -201,7 +201,7 @@
 
                     <div class="form-outline mb-4">
                         <label class="form-label" for="date-expiry">Date of Expiry</label>
-                        <input type="date" id="date-expiry" class="form-control  @error('date_of_expiry') is-invalid @enderror" name="date_of_expiry" value="{{ old('date_of_expiry') }}" placeholder="" />
+                        <input type="text" id="date-expiry" class="form-control datepicker  @error('date_of_expiry') is-invalid @enderror" name="date_of_expiry" value="{{ old('date_of_expiry') }}" placeholder="" />
                         @error('date_of_expiry')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror

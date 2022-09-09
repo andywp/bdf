@@ -143,7 +143,7 @@
 
                     <div class="form-outline mb-4">
                         <label class="form-label" for="tgl-keberangkatan">Tanggal</label>
-                        <input type="date" id="tgl-keberangkatan" name="tanggal" class="form-control  @error('tanggal') is-invalid @enderror"  value="{{ old('tanggal') }}" placeholder="" />
+                        <input type="text" id="tgl-keberangkatan" name="tanggal" class="form-control datepicker  @error('tanggal') is-invalid @enderror"  value="{{ old('tanggal') }}" placeholder="" />
                         @error('tanggal')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
@@ -151,7 +151,7 @@
 
                     <div class="form-outline mb-4">
                         <label class="form-label" for="jam-keberangkatan">Jam</label>
-                        <input type="time" id="jam-keberangkatan" name="jam" class="form-control @error('jam') is-invalid @enderror" value="{{ old('jam') }}" />
+                        <input type="text" id="jam-keberangkatan" name="jam" class="form-control timepicker @error('jam') is-invalid @enderror" value="{{ old('jam') }}" />
                         @error('jam')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
@@ -168,7 +168,7 @@
 
                     <div class="form-outline mb-4">
                         <label class="form-label" for="tanggal-kepulangan">Tanggal</label>
-                        <input type="date" id="tanggal-kepulangan" name="tanggal_pulang" class="form-control @error('tanggal_pulang') is-invalid @enderror" value="{{ old('tanggal_pulang') }}" placeholder="" />
+                        <input type="text" id="tanggal-kepulangan" name="tanggal_pulang" class="form-control datepicker @error('tanggal_pulang') is-invalid @enderror" value="{{ old('tanggal_pulang') }}" placeholder="" />
                         @error('tanggal_pulang')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
@@ -176,7 +176,7 @@
 
                     <div class="form-outline mb-4">
                          <label class="form-label" for="jam-kepulangan">Jam</label>
-                        <input type="time" id="jam-kepulangan" name="jam_pulang" class="form-control  @error('jam_pulang') is-invalid @enderror" value="{{ old('jam_pulang') }}" />
+                        <input type="text" id="jam-kepulangan" name="jam_pulang" class="form-control timepicker  @error('jam_pulang') is-invalid @enderror" value="{{ old('jam_pulang') }}" />
                         @error('jam_pulang')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror

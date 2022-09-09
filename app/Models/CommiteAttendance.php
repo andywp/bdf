@@ -15,3 +15,4 @@ class CommiteAttendance extends Model
 
     protected $guarded = ['id'];
 }
+ 

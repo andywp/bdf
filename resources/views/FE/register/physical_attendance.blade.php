@@ -218,7 +218,7 @@
 
                     <div class="form-outline mb-4">
                         <label class="form-label" for="date-issuance">Date of Issuance</label>
-                        <input type="date" id="date-issuance" class="form-control  @error('date_of_issuance') is-invalid @enderror" name="date_of_issuance"  value="{{ old('date_of_issuance') }}" laceholder="" />
+                        <input type="text" id="date-issuance" class="form-control datepicker @error('date_of_issuance') is-invalid @enderror" name="date_of_issuance"  value="{{ old('date_of_issuance') }}" laceholder="" />
                         @error('date_of_issuance')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
@@ -226,7 +226,7 @@
 
                     <div class="form-outline mb-4">
                         <label class="form-label" for="date-expiry">Date of Expiry</label>
-                        <input type="date" id="date-expiry" class="form-control  @error('date_of_expiry') is-invalid @enderror" name="date_of_expiry" value="{{ old('date_of_expiry') }}" placeholder="" />
+                        <input type="text" id="date-expiry" class="form-control datepicker  @error('date_of_expiry') is-invalid @enderror" name="date_of_expiry" value="{{ old('date_of_expiry') }}" placeholder="" />
                         @error('date_of_expiry')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
@@ -246,7 +246,7 @@
 
                     <div class="form-outline mb-4">
                         <label class="form-label" for="date-arrival">Date</label>
-                        <input type="date" id="date-arrival" class="form-control @error('flight_date') is-invalid @enderror" name="flight_date" value="{{ old('flight_date') }}" placeholder="" />
+                        <input type="text" id="date-arrival" class="form-control datepicker @error('flight_date') is-invalid @enderror" name="flight_date" value="{{ old('flight_date') }}" placeholder="" />
                         @error('flight_date')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
@@ -254,7 +254,7 @@
 
                     <div class="form-outline mb-4">
                         <label class="form-label" for="time-arrival">Time</label>
-                        <input type="time" id="time-arrival" class="form-control @error('flight_time') is-invalid @enderror" name="flight_time" value="{{ old('flight_time') }}" value="23:59" />
+                        <input type="text" id="time-arrival" class="form-control timepicker @error('flight_time') is-invalid @enderror" name="flight_time" value="{{ old('flight_time') }}" value="23:59" />
                         @error('flight_time')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
@@ -271,7 +271,7 @@
 
                     <div class="form-outline mb-4">
                         <label class="form-label" for="date-departure">Date</label>
-                        <input type="date" id="date-departure" class="form-control  @error('departure_flight_date') is-invalid @enderror" name="departure_flight_date"  value="{{ old('departure_flight_date') }}" placeholder="" />
+                        <input type="text" id="date-departure" class="form-control datepicker  @error('departure_flight_date') is-invalid @enderror" name="departure_flight_date"  value="{{ old('departure_flight_date') }}" placeholder="" />
                         @error('departure_flight_date')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
@@ -279,7 +279,7 @@
 
                     <div class="form-outline mb-4">
                         <label class="form-label" for="time-departure">Time</label>
-                        <input type="time" id="time-departure" class="form-control  @error('departure_flight_time') is-invalid @enderror" name="departure_flight_time" value="{{ old('departure_flight_time') }}" value="23:59" />
+                        <input type="text" id="time-departure" class="form-control timepicker @error('departure_flight_time') is-invalid @enderror" name="departure_flight_time" value="{{ old('departure_flight_time') }}" value="23:59" />
                         @error('departure_flight_time')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror

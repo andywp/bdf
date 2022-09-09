@@ -56,18 +56,18 @@ $(document).ready(function(){
         ]
     });
     
-    $('.datepicker').pickadate({
+   /*  $('.datepicker').pickadate({
         selectMonths: true,
         selectYears: true
-    }),
-    $('.timepicker').pickatime()
+    }), */
+    $('.datetimepicker').pickatime()
     $('#date-time').bootstrapMaterialDatePicker({
         format: 'YYYY-MM-DD HH:mm'
     });
-    $('input[type=date]').bootstrapMaterialDatePicker({
+    $('.datepicker').bootstrapMaterialDatePicker({
         time: false
     });
-    $('input[type=time]').bootstrapMaterialDatePicker({
+    $('.timepicker').bootstrapMaterialDatePicker({
         date: false,
         format: 'HH:mm'
     });

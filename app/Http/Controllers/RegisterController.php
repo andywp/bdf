@@ -106,8 +106,8 @@ class RegisterController extends Controller
             'Photo' => $Photo,
             'diplomatic_note' => $diplomatic_note,
         ];
-
-        $physicalAttendance::create( $input);
+        //dd($input);
+        $physicalAttendance::create($input);
         return redirect()->route('physicalattendance')->with('success','Register Physical Attendance successfully submite');
         
     }

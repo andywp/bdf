@@ -12,7 +12,10 @@ class MediaAttendance extends Model
     protected $casts = [
         'date_of_birth' => 'datetime:Y-m-d',
         'date_of_issuance' => 'datetime:Y-m-d',
-        'date_of_expiry' => 'datetime:Y-m-d'
+        'date_of_expiry' => 'datetime:Y-m-d',
+        'your_position_in_agency' => 'array',  
+        'how_do_we_contact_you' => 'array',  
+        'type_of_media' => 'array',  
      ];
 
 

@@ -11,3 +11,4 @@ class VirtualAttendance extends Model
 
     protected $guarded = ['id'];
 }
+ 
