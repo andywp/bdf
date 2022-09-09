@@ -198,7 +198,7 @@
 
                         <div class="form-outline mb-4">
                             <label class="form-label" for="other2">Other</label>
-                            <input type="text" id="other2" class="form-control  @error('your_position_in_agency_other') is-invalid @enderror"  value="{{ old('your_position_in_agency_other') }}" name="your_position_in_agency_other" />
+                            <input type="text" id="other2" class="form-control  @error('your_position_in_agency_other') is-invalid @enderror"  value="{{ old('your_position_in_agency_other') }}"  name="your_position_in_agency_other" />
                         </div>
 
                         <label class="form-label">How do we contact you?</label>

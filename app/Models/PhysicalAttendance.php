@@ -17,7 +17,7 @@ class PhysicalAttendance extends Model
         'departure_flight_date' => 'datetime:Y-m-d',
         'special_dietary_requirement' => 'array',
         'food_allergy' => 'array',
-        'food_allergy' => 'array',
+        // /'food_allergy' => 'array',
      ];
 
     public function setSpecialDietaryRequirementAttribute( $data ) {

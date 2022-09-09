@@ -682,7 +682,7 @@ class RegisterController extends Controller
                 $datas = \App\Models\MediaAttendance::select('*');
                 return DataTables::of($datas)
                 ->addColumn('action', function($row){  
-                    
+                   // dd($row->toArray());
                     $html='';
                     foreach($row->toArray() as $k=>$v){
                         if($k != 'id' && $k != 'bdf_id' && $k != 'agree' && $k != 'created_at' && $k != 'updated_at'){
@@ -702,15 +702,17 @@ class RegisterController extends Controller
 
 
                             }else{
-                                $html.='
-                                        <tr>
-                                            <td>'.ucwords(str_replace('_',' ',$k)).'</td>
-                                            <td>:</td>
-                                            <td>
-                                                '.$v.'
-                                            </td>
-                                        </tr>
-                                ';
+                                if($k !='media_other'){
+                                    $html.='
+                                            <tr>
+                                                <td>'.ucwords(str_replace('_',' ',$k)).'</td>
+                                                <td>:</td>
+                                                <td>
+                                                    '.$v.'
+                                                </td>
+                                            </tr>
+                                    ';
+                                }
 
                             }
 
