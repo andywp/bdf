@@ -120,7 +120,7 @@ class RegisterController extends Controller
                                                 <td>Official title</td>
                                                 <td>:</td>
                                                 <td>
-                                                    '.$row->affiliation.'
+                                                    '.$row->office_address.'
                                                 </td>
                                             </tr>
                                             <tr>
