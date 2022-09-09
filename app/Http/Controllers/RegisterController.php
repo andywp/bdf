@@ -100,7 +100,7 @@ class RegisterController extends Controller
             'special_dietary_requirement_Other' => $request->special_dietary_requirement_Other,
             'other_dietary_restriction' => $request->other_dietary_restriction,
             'food_allergy' => ($request->food_allergy)?$request->food_allergy:array(),
-            'other_food_allergy' => ($request->other_food_allergy)?$request->other_food_allergy:array(),
+            'other_food_allergy' => $request->other_food_allergy,
             'body_measurement' => $request->body_measurement,
             'agree' => $request->agree,
             'Photo' => $Photo,

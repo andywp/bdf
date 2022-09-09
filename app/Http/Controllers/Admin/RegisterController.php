@@ -317,7 +317,7 @@ class RegisterController extends Controller
 
 
             $data=\App\Models\PhysicalAttendance::orderBy('id','DESC')->get();
-            //dd($data);
+            
             $rowHTML='';
             foreach($data as $row){
                 $rowHTML .='

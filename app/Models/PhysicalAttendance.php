@@ -17,7 +17,7 @@ class PhysicalAttendance extends Model
         'departure_flight_date' => 'datetime:Y-m-d',
         'special_dietary_requirement' => 'array',
         'food_allergy' => 'array',
-        'other_food_allergy' => 'array',
+        'food_allergy' => 'array',
      ];
 
     public function setSpecialDietaryRequirementAttribute( $data ) {
@@ -32,9 +32,15 @@ class PhysicalAttendance extends Model
     
     }
 
-    public function setFoodOtherFoodAllergyAttribute( $data ) {
+    public function setFoodFoodAllergyAttribute( $data ) {
     
-        $this->attributes['other_food_allergy'] = implode(',',$data);
+        $this->attributes['food_allergy'] = implode(',',$data);
+    
+    }
+
+    public function getFoodOtherFoodAllergyAttribute( $data ) {
+    
+        return  implode(',',$this->other_food_allergy);
     
     }
 
