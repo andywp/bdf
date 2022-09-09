@@ -34,7 +34,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" />
 
     <!-- page css -->
-    <link rel="stylesheet" href="{{asset('bdf/assets/css/style.css')}}" />
+    <link rel="stylesheet" href="{{asset('bdf/assets/css/style.css?v=1')}}" />
     <link rel="stylesheet" href="{{asset('bdf/assets/css/style-2.css')}}" type="text/css">
     <link rel="stylesheet" href="{{asset('bdf/assets/css/index.css')}}" type="text/css" />
     @yield('styles')
