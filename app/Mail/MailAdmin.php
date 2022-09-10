@@ -28,6 +28,6 @@ class MailAdmin extends Mailable
      */
     public function build()
     {
-        return $this->from('noreply@bdf.com','BDF')->subject($this->data->subject)->view('emails.contactadmin',['data' => $this->data]);
+        return $this->from(env('MAIL_FROM_ADDRESS','info@bdf.com'),'BDF')->subject($this->data->subject)->view('emails.contactadmin',['data' => $this->data]);
     }
 }
