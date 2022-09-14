@@ -3,21 +3,20 @@
 <head>
     <meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="keywords" content="" />
-	<meta name="author" content="" />
+	<meta name="author" content="Rsalaogi.com" />
 	<meta name="robots" content="" />
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="description" content="Jobick : Job Admin Bootstrap 5 Template" />
-	<meta property="og:title" content="Jobick : Job Admin Bootstrap 5 Template" />
-	<meta property="og:description" content="Jobick : Job Admin Bootstrap 5 Template" />
-	<meta property="og:image" content="https://jobick.dexignlab.com/xhtml/social-image.png" />
+	<meta name="description" content="Admin BDF" />
+	<meta property="og:title" content="Admin BDF" />
+	<meta property="og:description" content="Admin BDF" />
+	<meta property="og:image" content="{{  asset('bdf/assets/images/logo-bdf.png') }}" />
 	<meta name="format-detection" content="telephone=no">
 	<meta name="csrf-token" content="{{ csrf_token() }}">
 	<!-- PAGE TITLE HERE -->
 	<title> @yield('title')</title>
 	
 	<!-- FAVICONS ICON -->
-	<link rel="shortcut icon" type="image/png" href="{{asset('assets/images/favicon.png')}}" />
+	<link rel="shortcut icon" type="image/png" href="{{  asset('bdf/assets/images/logo-bdf.png') }}" />
 
     <link href="{{asset('assets/vendor/sweetalert2/dist/sweetalert2.min.css')}}" rel="stylesheet">
 

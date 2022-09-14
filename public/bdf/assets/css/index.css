@@ -13,12 +13,17 @@
 @media only screen and (max-width: 768px) {
   .banner_slider .carousel-item img {
       height: 370px;
+  }
 }  
 @media only screen and (max-width: 575px) {
-.banner_slider .carousel-item img {
-    height: 318px;
-}
-.banner_slider{
-    padding-top: 50px;
-}
+    .banner_slider .carousel-item img {
+        height: 240px;
+    }
+    .banner_slider{
+        padding-top: 50px;
+    }
+    .card-gallery img {
+        object-fit: cover;
+        height: 100px;
+    }
 }

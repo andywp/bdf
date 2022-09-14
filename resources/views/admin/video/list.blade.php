@@ -99,7 +99,7 @@
                                 <span class="text-danger" id="EditalbumError"></span>
                             </div> 
                             <div class="form-group mb-3">
-                                <label>Video</label>
+                                <label>Video max {{ ini_get('upload_max_filesize') }}</label>
                                 <div class="form-file">
                                     <input name="video" type="file" class="form-file-input form-control">
                                     <span class="text-danger" id="inputVideoError"></span>
@@ -119,7 +119,7 @@
                                         <i class="fa fa-upload"></i>
                                         <input 
                                                 id="fileupload" 
-                                                data-default-src="{{ asset('assets/images/default.jpg') }}" 
+                                                data-default="{{ asset('assets/images/default.jpg') }}" 
                                                 type="file" name="post_image" 
                                     
                                                 class="upload-input" 
@@ -265,7 +265,7 @@ $(document).ready(function(){
             })
         },
         complete: function (xhr) {
-            console.log(xhr,'File has uploaded');
+            //console.log(xhr,'File has uploaded');
             if(!xhr.responseJSON.errors){
                 $('#createVideo').modal('toggle');
                 $('#galleryfoto').dataTable().fnDestroy();
@@ -276,11 +276,14 @@ $(document).ready(function(){
                     .removeAttr("checked")
                     .removeAttr("selected");
                     $('.progress .progress-bar').css("width",'0%');
+
+                let defaultIMG=$('#fileupload').data('default');
+                $('#preview_add_post_image').attr('src',defaultIMG)
                 notif('Video has uploaded');
             }
         },
         error: function(response){
-            
+            $('.progress .progress-bar').css("width",'0%');
             $('#EditalbumError').text(response.responseJSON.errors.title);
             //inputVideoError
             $('#inputVideoError').text(response.responseJSON.errors.video);

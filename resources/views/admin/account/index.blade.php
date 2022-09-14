@@ -410,7 +410,7 @@ $('#datamentor').on('change', '.togglepublish', function() {
     let id = $(this).data('id');
     $.ajax({
         type: 'POST',
-        url: "{{ route('admin.bdf.publish') }}",
+        url: "{{ route('admin.userreg.publish') }}",
         data: {id:id,publish:publish},
         dataType: 'json',
         success: function(data){

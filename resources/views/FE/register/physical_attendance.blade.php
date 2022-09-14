@@ -457,10 +457,19 @@
                     </div>
 
                     <div class="form-outline mb-4">
-                        <label class="form-label" for="body-measurement">Body Measurement</label>
-                        <input type="text" id="body-measurement" class="form-control  @error('body_measurement') is-invalid @enderror" name="body_measurement"  value="{{ old('body_measurement') }}"  placeholder="- Body Size -" />
+                        <label class="form-label" for="position">Body Measurement</label>
+                        <select id="body-measurement" class="form-select form-control  @error('body_measurement') is-invalid @enderror" name="body_measurement" aria-label="Default select example">
+                        <option  value="" >- Body Size -</option>
+                            <option value="XS" {{ (old('body_measurement') == 'XS')?'selected':'' }}>XS</option>
+                            <option value="S" {{ (old('body_measurement') == 'S')?'selected':'' }}>S</option>
+                            <option value="M" {{ (old('body_measurement') == 'M')?'selected':'' }}>M</option>
+                            <option value="L" {{ (old('body_measurement') == 'L')?'selected':'' }}>L</option>
+                            <option value="XL" {{ (old('body_measurement') == 'XL')?'selected':'' }}>XL</option>
+                            <option value="XXL" {{ (old('body_measurement') == 'XXL')?'selected':'' }}>XXL</option>
+                            <option value="XXXL" {{ (old('body_measurement') == 'XXXL')?'selected':'' }}>XXXL</option>
+                        </select>
                         @error('body_measurement')
-                        <div class="invalid-feedback">{{ $message }}</div>
+                            <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
 
@@ -479,9 +488,9 @@
                     <div class="form-outline mb-5">
                         <label class="form-label" for="diplomatic-note">
                         Diplomatic Note
-                        <p><small>(Max 1MB: jpg)</small></p>
+                        <p><small>(Max 2MB: PDF)</small></p>
                         </label>
-                        <input type="file" id="diplomatic-note" name="diplomatic_note"  value="{{ old('diplomatic_note') }}" class="form-control @error('diplomatic_note') is-invalid @enderror" />
+                        <input type="file" id="diplomatic-note" name="diplomatic_note"  value="{{ old('diplomatic_note') }}" class="form-control @error('diplomatic_note') is-invalid @enderror" accept="application/pdf"/>
                         @error('diplomatic_note')
                         <div class="invalid-feedback">{{ $message }}</div>
                         @enderror

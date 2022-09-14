@@ -348,7 +348,7 @@ $(document).ready(function(){
                             var name=file.name.replace(/\s/g, '');
                             var dt = new Date();
                             var time = dt.getTime();
-                        return '{{ $dataAlbum->title }} -'+time+name;
+                        return file.name;
                         },
                         acceptedFiles: ".pdf",
                         addRemoveLinks: true,

@@ -4,10 +4,18 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Meta;
+use Illuminate\Auth\Access\Response;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Carbon;
+use File;
+use Illuminate\Support\Str;
 
 class RegisterController extends Controller
 {
-    //
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
 
     public function physical_attendance(){
         Meta::set('title', 'Register Physical Attendance | BDF');
@@ -16,8 +24,10 @@ class RegisterController extends Controller
 
         $organisasi=\App\Models\Organization::get();
         $negara=\App\Models\Countries::get();
+        if((Auth::user()->type_user !='Physical Attendance') && (Auth::user()->type_user !='Commitee')){
+            return abort(403, "You are not allowed to access this page");
+        }
         
-
         return view('FE.register.physical_attendance',compact('organisasi','negara'));
     }
 
@@ -53,7 +63,7 @@ class RegisterController extends Controller
             'body_measurement'=> 'required',
             'agree'=> 'required',
             'Photo' => 'required|image|max:1024',
-            'diplomatic_note' => 'required|image|max:1024',
+            'diplomatic_note' => 'required|mimes:pdf|max:2024',
         ]);
 
 
@@ -66,8 +76,17 @@ class RegisterController extends Controller
         $diplomatic_note='';
         $file2 = $request->file('diplomatic_note');
         if(!empty($file2)){
-            $diplomatic_note=\App\Helpers\HelperImages::upload($file2,'register');
+            //$diplomatic_note=\App\Helpers\HelperImages::upload($file2,'register');
+            $uploadPath = public_path('register/pdf/');
+            if(!File::isDirectory($uploadPath)) {
+                File::makeDirectory($uploadPath, 0755, true, true);
+            }
+
+            $diplomatic_note=Carbon::now()->format('YmdHis').Str::random(3).'.'.$file2->extension();
+            $file2->move($uploadPath, $diplomatic_note);
         }
+
+        //dd($request->all());
 
         $input=[
             'country_organization' => $request->country_organization,
@@ -96,10 +115,10 @@ class RegisterController extends Controller
             'departure_flight_number' => $request->departure_flight_number,
             'departure_flight_date' => $request->departure_flight_date,
             'departure_flight_time' => $request->departure_flight_time,
-            'special_dietary_requirement' => $request->special_dietary_requirement,
+            'special_dietary_requirement' => !empty($request->special_dietary_requirement)?implode(',',$request->special_dietary_requirement):'',
             'special_dietary_requirement_Other' => $request->special_dietary_requirement_Other,
             'other_dietary_restriction' => $request->other_dietary_restriction,
-            'food_allergy' => ($request->food_allergy)?$request->food_allergy:array(),
+            'food_allergy' => !empty($request->food_allergy)?implode(',',$request->food_allergy):'',
             'other_food_allergy' => $request->other_food_allergy,
             'body_measurement' => $request->body_measurement,
             'agree' => $request->agree,
@@ -119,7 +138,11 @@ class RegisterController extends Controller
 
         $organisasi=\App\Models\Organization::get();
         $negara=\App\Models\Countries::get();
-        
+
+
+        if((Auth::user()->type_user !='Virtual Attendance') && (Auth::user()->type_user !='Commitee')){
+            return abort(403, "You are not allowed to access this page");
+        }
 
         return view('FE.register.virtual_attendance',compact('organisasi','negara'));
 
@@ -173,6 +196,10 @@ class RegisterController extends Controller
 
         $organisasi=\App\Models\Organization::get();
         $negara=\App\Models\Countries::get();
+        if((Auth::user()->type_user !='Media') && (Auth::user()->type_user !='Commitee')){
+            return abort(403, "You are not allowed to access this page");
+        }
+
         return view('FE.register.media',compact('organisasi','negara'));
 
     }
@@ -204,15 +231,29 @@ class RegisterController extends Controller
             'agree'=> 'required',
             'gender'=> 'required',
             'id_nummber'=> 'required',
-            'Letter_of_assignment' => 'required|image|max:1024',
+            'Letter_of_assignment' => 'required|mimes:pdf|max:2024',
             'passport_ktp' => 'required|image|max:1024',
         ]);
 
-        $Letter_of_assignment='';
+        /* $Letter_of_assignment='';
         $file = $request->file('Letter_of_assignment');
         if(!empty($file)){
             $Letter_of_assignment=\App\Helpers\HelperImages::upload($file,'register');
         }
+        */
+        $Letter_of_assignment='';
+        $file2 = $request->file('Letter_of_assignment');
+        if(!empty($file2)){
+            //$diplomatic_note=\App\Helpers\HelperImages::upload($file2,'register');
+            $uploadPath = public_path('register/pdf/');
+            if(!File::isDirectory($uploadPath)) {
+                File::makeDirectory($uploadPath, 0755, true, true);
+            }
+
+            $Letter_of_assignment=Carbon::now()->format('YmdHis').Str::random(3).'.'.$file2->extension();
+            $file2->move($uploadPath, $Letter_of_assignment);
+        }
+
 
         $passport_ktp='';
         $file2 = $request->file('passport_ktp');
@@ -264,6 +305,10 @@ class RegisterController extends Controller
 
         $organisasi=\App\Models\Organization::get();
         $negara=\App\Models\Countries::get();
+
+        if((Auth::user()->type_user !='Guest') && (Auth::user()->type_user !='Commitee')){
+            return abort(403, "You are not allowed to access this page");
+        }
         return view('FE.register.guest',compact('organisasi','negara'));
     }
 
@@ -287,7 +332,7 @@ class RegisterController extends Controller
             'date_of_expiry'=> 'required|date',
             'agree'=> 'required',
             'photo' => 'required|image|max:1024',
-            'diplomatic_note' => 'required|image|max:1024',
+            'diplomatic_note' => 'required|mimes:pdf|max:2024',
         ]);
         //dd($request->all());
         $Photo='';
@@ -296,10 +341,23 @@ class RegisterController extends Controller
             $Photo=\App\Helpers\HelperImages::upload($file,'register');
         }
 
-        $diplomatic_note='';
+        /* $diplomatic_note='';
         $file2 = $request->file('diplomatic_note');
         if(!empty($file2)){
             $diplomatic_note=\App\Helpers\HelperImages::upload($file2,'register');
+        } */
+
+        $diplomatic_note='';
+        $file2 = $request->file('diplomatic_note');
+        if(!empty($file2)){
+            //$diplomatic_note=\App\Helpers\HelperImages::upload($file2,'register');
+            $uploadPath = public_path('register/pdf/');
+            if(!File::isDirectory($uploadPath)) {
+                File::makeDirectory($uploadPath, 0755, true, true);
+            }
+
+            $diplomatic_note=Carbon::now()->format('YmdHis').Str::random(3).'.'.$file2->extension();
+            $file2->move($uploadPath, $diplomatic_note);
         }
         
         $input=[
@@ -328,7 +386,7 @@ class RegisterController extends Controller
         ];
 
         $guest::create($input);
-        return redirect()->route('guest')->with('success','RegisterGuest Attendance successfully submite');
+        return redirect()->route('guest')->with('success','Register Guest Attendance successfully submite');
     
     }
 
@@ -339,6 +397,9 @@ class RegisterController extends Controller
 
         $organisasi=\App\Models\Organization::get();
         $negara=\App\Models\Countries::get();
+        if(Auth::user()->type_user !='Commitee'){
+            return abort(403, "You are not allowed to access this page");
+        }
         return view('FE.register.commitee',compact('organisasi','negara'));
     }
 

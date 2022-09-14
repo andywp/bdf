@@ -18,7 +18,29 @@ class UserController extends Controller
          $creds = $request->only('email','password');
          $remember=isset($request->remember)?true:false;
          if(Auth::guard('web')->attempt($creds, $remember)){
-             return redirect()->route('landing');
+            //dd(Auth::user());
+            if(Auth::user()->active == 1){
+                switch (Auth::user()->type_user) {
+                    case  'Physical Attendance':
+                        return redirect()->route('physicalattendance');
+                    break;
+                    case  'Virtual Attendance':
+                        return redirect()->route('virtualattendance');
+                    break;
+                    case  'Media':
+                        return redirect()->route('media');
+                    break;
+                    case  'Guest':
+                        return redirect()->route('guest');
+                    break;
+                    default:
+                    return redirect()->route('commitee');
+                }
+            }else{
+                Auth::guard('web')->logout();
+                return redirect()->route('login')->withErrors('Account disabled by admin. please contact admin');
+            }
+            return redirect()->route('landing');
          }else{
              return redirect()->route('login')->withErrors('Incorrect credentials');
          }

@@ -102,7 +102,9 @@
             <div class="row justify-content-center">
                 <div class="col-md-6 col-12">
                     <div class="widget-about">
-                        <img src="{{ asset('bdf/assets/images/logo-footer.png') }}" class="logo-footer">
+                        <a href="{{ route('landing') }}" title="Bali Democracy Forum">
+                            <img src="{{ asset('bdf/assets/images/logo-footer.png') }}"  alt="Bali Democracy Forum | BDF" class="logo-footer">
+                        </a>
                         <div class="about-content text-white">
                             Directorate General of Information and Public Diplomacy, Ministry of Foreign Affairs of Republic of Indonesia
                         </div>

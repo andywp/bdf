@@ -27,11 +27,11 @@
                 @foreach($data as $r)
                 <div class="accordion-item">
                   <h2 class="accordion-header" id="heading-{{ $r->id }}">
-                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-{{ $r->id }}" aria-expanded="true" aria-controls="collapse-{{ $r->id }}">
+                    <button class="accordion-button {{ ($loop->iteration == 1)?'':'collapsed' }}" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-{{ $r->id }}" aria-expanded=" {{ ($loop->iteration == 1)?'true':'false' }}" aria-controls="collapse-{{ $r->id }}">
                         {{ $r->title }}
                     </button>
                   </h2>
-                  <div id="collapse-{{ $r->id }}" class="accordion-collapse collapse show" aria-labelledby="heading-{{ $r->id }}" data-bs-parent="#accordion_Download">
+                  <div id="collapse-{{ $r->id }}" class="accordion-collapse collapse {{ ($loop->iteration == 1)?'show':'' }} " aria-labelledby="heading-{{ $r->id }}" data-bs-parent="#accordion_Download">
 
                      
                     <div class="accordion-body">

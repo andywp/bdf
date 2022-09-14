@@ -9,6 +9,8 @@ use Meta;
 use ZipArchive;
 class BdfController extends Controller
 {
+    
+    
     public function index($slug_url){
         
         $data=\App\Models\Post::where('publish',1)->where('slug_url',$slug_url)->first();

@@ -222,9 +222,9 @@
                     <div class="form-outline mb-5">
                       <label class="form-label" for="diplomatic-note">
                         Diplomatic Note
-                        <p><small>(Max 1MB: pdf)</small></p>
+                        <p><small>(Max 2MB: pdf)</small></p>
                       </label>
-                      <input type="file" id="diplomatic-note" class="form-control  @error('diplomatic_note') is-invalid @enderror"  value="{{ old('diplomatic_note') }}" name="diplomatic_note" />
+                      <input type="file" id="diplomatic-note" class="form-control  @error('diplomatic_note') is-invalid @enderror"  value="{{ old('diplomatic_note') }}" name="diplomatic_note" accept="application/pdf"/>
                         @error('diplomatic_note')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror

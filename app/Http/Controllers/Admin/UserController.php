@@ -120,4 +120,26 @@ class UserController extends Controller
         return response()->json(['success'=> 'success Update users']);
     }
 
+
+
+    public function publish(Request $request,User $User){
+        //dd($request->all());
+        $id      = (int) $request->id;
+        $publish = (int) $request->publish;
+        $data=$User::find($id);
+        $data->active =$publish;
+        $data->save();
+        $pesan='Successfully active access login user ';
+        if($publish == 0){
+            $pesan='Successfully inactive access login user';
+        }
+        $response=[
+            'error' => false,
+            'pesan' => $pesan
+        ];
+        return response()->json($response);
+
+
+    }
+
 }

@@ -17,9 +17,10 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex align-items-center w-100">
-                        <h4 class="card-title" >Register Media Attendance</h4>
+                        <h4 class="card-title" >Register Guest Attendance</h4>
                         <div class="ms-auto">
-                            <a href="{{route('admin.guest.excel')}}" class="btn btn-outline-primary btn-sm" >
+                            <button class="btn btn-outline-info btn-sm reportrange"> <i class="fa fa-calendar"></i> <span></span></button>
+                            <a  id="downloadexcel" data-url="{{route('admin.guest.index')}}/excel" href="{{route('admin.guest.excel', [ 'start' => date('Y-m-d'), 'end' => date('Y-m-d')] )}}" class="btn btn-outline-primary btn-sm" >
                                 <i class="fas fa-file-excel"></i> Download Excel
                             </a>
                         </div>
@@ -68,13 +69,16 @@
 @section('scripts')
 <script type="text/javascript" >
 $(document).ready(function(){
+    var start = moment().subtract(29, 'days');
+    var end = moment();
+
     $.ajaxSetup({
         headers: {
           'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
 
-    let loadData=()=>{
+    let loadData=(start,end)=>{
         if (! $.fn.dataTable.isDataTable('#datamentor') ) {
             var tbl = $('#datamentor').DataTable({
                 pageLength: 10,
@@ -98,7 +102,8 @@ $(document).ready(function(){
                 ajax: {
                     url:"{{route('admin.guest.data')}}",
                     type: "POST" ,
-                    dataType: 'json'        
+                    dataType: 'json',
+                    data:{startdate:start,enddate:end}        
                 },
                 columns: [
                     {
@@ -133,8 +138,36 @@ $(document).ready(function(){
         }
     }
 
+    function cb(start, end) {
+        
+        $('.reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+        let startDate=start.format('YYYY-MM-DD');
+        let endDate=end.format('YYYY-MM-DD');
 
-    loadData();
+        let download=$('#downloadexcel');
+        let url=download.data('url')+'/'+startDate+'/'+endDate;
+        download.attr('href',url);
+
+        $('#datamentor').dataTable().fnDestroy();
+        loadData(startDate,endDate);
+    }
+
+    $('.reportrange').daterangepicker({
+        startDate: start,
+        endDate: end,
+        ranges: {
+           'Today': [moment(), moment()],
+           'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+           'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+           'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+           'This Month': [moment().startOf('month'), moment().endOf('month')],
+           'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+        }
+    }, cb);
+
+    cb(start, end);
+
+    //loadData();
 });
 
 @if (session('success'))

@@ -106,10 +106,10 @@
                 var time = dt.getTime();
                return name;
             },
-            acceptedFiles: ".jpeg,.jpg,.png,.gif,.pdf",
+            acceptedFiles: ".jpeg,.jpg,.png,.gif",
             addRemoveLinks: true,
             timeout: 50000,
-            maxFilesize: 3,
+            maxFilesize: 4,
             removedfile: function(file) 
             {
                 var name = file.upload.filename;

@@ -57,3 +57,5 @@ function get_gravatar($email, $s = 200, $d = 'mp', $r = 'g', $img = false, $atts
 
     return $url;
 }
+
+

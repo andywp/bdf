@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use DataTables;
+use Illuminate\Support\Facades\DB;
 
 class RegisterController extends Controller
 {
@@ -15,6 +16,8 @@ class RegisterController extends Controller
     public function physicaldataTable(Request $request){
         if($request->ajax()) {
             $datas = \App\Models\PhysicalAttendance::select('*');
+            $datas->whereBetween(DB::raw('DATE(created_at)'),[$request->startdate,$request->enddate]);
+           // dd($datas->toSql());
             return DataTables::of($datas)
             ->addColumn('action', function($row){  
                 $btn = '
@@ -267,9 +270,9 @@ class RegisterController extends Controller
                                                 <td>Diplomatic Note</td>
                                                 <td>:</td>
                                                 <td>
-                                                    <div class="register-img">
-                                                        <img src="'.asset('images/register/'.$row->diplomatic_note).'"  class="img-thumbnail" >
-                                                    </div>
+                                                    <a href="'.asset('register/pdf/'.$row->diplomatic_note).'" target="_blank">
+                                                        <i class="fas fa-file-pdf fa-4x"></i>
+                                                    </a>
                                                 </td>
                                             </tr>
 
@@ -301,7 +304,8 @@ class RegisterController extends Controller
 
         }
 
-        public function physicalindexexcel(){
+        public function physicalindexexcel($star='',$end=''){
+            //dd($star,$end);
             //$table=(new \App\Models\PhysicalAttendance)->getTableColumns();
             $table=collect(\App\Models\PhysicalAttendance::first())->keys();
             //dd($table);
@@ -316,8 +320,8 @@ class RegisterController extends Controller
             }
 
 
-            $data=\App\Models\PhysicalAttendance::orderBy('id','DESC')->get();
-            
+            $data=\App\Models\PhysicalAttendance::orderBy('id','DESC')->whereBetween(DB::raw('DATE(created_at)'),[$star,$end])->get();
+            //dd( $data);
             $rowHTML='';
             foreach($data as $row){
                 $rowHTML .='
@@ -432,7 +436,7 @@ class RegisterController extends Controller
                             <a href="'.asset('images/register/'.$row->Photo).'" target="_blank"> '.asset('images/register/'.$row->Photo).'</a>
                         </td>
                         <td>
-                            <a href="'.asset('images/register/'.$row->diplomatic_note).'" target="_blank"> '.asset('images/register/'.$row->diplomatic_note).'</a>
+                            <a href="'.asset('register/pdf/'.$row->diplomatic_note).'" target="_blank">'.asset('register/pdf/'.$row->diplomatic_note).'</a>
                         </td>
                         <td>
                             '.$row->created_at.'
@@ -441,7 +445,7 @@ class RegisterController extends Controller
                     ';
             }
             header("Content-type: application/vnd-ms-excel");
-            header("Content-Disposition: attachment; filename=Data Register Physical Attendance_".date('Ymdhis').".xls");
+            header("Content-Disposition: attachment; filename=Data Register Physical Attendance ".$star."_sd_".$end." ____".date('Ymdhis').".xls");
 
               echo $html='
                     <table border="1">
@@ -466,6 +470,7 @@ class RegisterController extends Controller
         public function virtualdataTable(Request $request){
             if($request->ajax()) {
                 $datas = \App\Models\VirtualAttendance::select('*');
+                $datas->whereBetween(DB::raw('DATE(created_at)'),[$request->startdate,$request->enddate]);
                 return DataTables::of($datas)
                 ->addColumn('action', function($row){  
                     $btn = '
@@ -614,8 +619,8 @@ class RegisterController extends Controller
         }
 
 
-        public function virtualexcel(){
-            $data=\App\Models\VirtualAttendance::orderBy('id','DESC')->get();
+        public function virtualexcel($star='',$end=''){
+            $data=\App\Models\VirtualAttendance::orderBy('id','DESC')->whereBetween(DB::raw('DATE(created_at)'),[$star,$end])->get();
             //dd($data);
             $rowHTML='';
             foreach($data as $row){
@@ -642,7 +647,7 @@ class RegisterController extends Controller
 
             }
             header("Content-type: application/vnd-ms-excel");
-            header("Content-Disposition: attachment; filename=Data Register Virtual Attendance_".date('Ymdhis').".xls");
+            header("Content-Disposition: attachment; filename=Data Register Virtual Attendance ".$star."_sd_".$end." ____".date('Ymdhis').".xls");
             echo $html='
             <table border="1">
                 <thead>
@@ -680,14 +685,16 @@ class RegisterController extends Controller
         public function mediadataTable(Request $request){
             if($request->ajax()) {
                 $datas = \App\Models\MediaAttendance::select('*');
+                $datas->whereBetween(DB::raw('DATE(created_at)'),[$request->startdate,$request->enddate]);
                 return DataTables::of($datas)
                 ->addColumn('action', function($row){  
                    // dd($row->toArray());
                     $html='';
                     foreach($row->toArray() as $k=>$v){
                         if($k != 'id' && $k != 'bdf_id' && $k != 'agree' && $k != 'created_at' && $k != 'updated_at'){
+                                                
 
-                            if($k == 'Letter_of_assignment' || $k == 'passport_ktp' ){
+                            if($k == 'passport_ktp' ){
                                 $html.='
                                 <tr>
                                     <td>'.ucwords(str_replace('_',' ',$k)).'</td>
@@ -700,6 +707,21 @@ class RegisterController extends Controller
                                 </tr>
                                 ';
 
+
+                            }elseif($k == 'Letter_of_assignment'){
+                                $html.='
+                                <tr>
+                                    <td>'.ucwords(str_replace('_',' ',$k)).'</td>
+                                    <td>:</td>
+                                    <td>
+                                        
+                                        <a href="'.asset('register/pdf/'.$v).'" target="_blank">
+                                            <i class="fas fa-file-pdf fa-4x"></i>
+                                        </a>
+                                         
+                                    </td>
+                                </tr>
+                                ';
 
                             }else{
                                 if($k !='media_other'){
@@ -769,8 +791,8 @@ class RegisterController extends Controller
 
     }
 
-    public function Mediaexcel(){
-        $data=\App\Models\MediaAttendance::orderBy('id','DESC')->get();
+    public function Mediaexcel($star,$end){
+        $data=\App\Models\MediaAttendance::orderBy('id','DESC')->whereBetween(DB::raw('DATE(created_at)'),[$star,$end])->get();
 
         $table='';
        foreach($data as  $r){
@@ -800,7 +822,7 @@ class RegisterController extends Controller
                     <td>'.$r->origin_of_media.'</td>
                     <td>'.$r->type_of_media.'</td>
                     <td>'.$r->type_of_media_other.' </td>
-                    <td><a href="'.asset('images/register/'.$r->Letter_of_assignment).'" taget="_blank">'.asset('images/register/'.$r->Letter_of_assignment).'</a></td>
+                    <td><a href="'.asset('register/pdf/'.$r->Letter_of_assignment).'" taget="_blank">'.asset('register/pdf/'.$r->Letter_of_assignment).'</a></td>
                     <td><a href="'.asset('images/register/'.$r->passport_ktp).'" taget="_blank">'.asset('images/register/'.$r->passport_ktp).'</a></td>
                     <td>'.$r->created_at.'</td>
 
@@ -812,7 +834,7 @@ class RegisterController extends Controller
        }
 
        header("Content-type: application/vnd-ms-excel");
-       header("Content-Disposition: attachment; filename=Data Register Media Attendance_".date('Ymdhis').".xls");
+       header("Content-Disposition: attachment; filename=Data Register Media Attendance ".$star."_sd_".$end." ____".date('Ymdhis').".xls");
         echo $html='
         <table border="1">
             <thead>
@@ -862,6 +884,8 @@ class RegisterController extends Controller
     public function guestataTable(Request $request){
         if($request->ajax()) {
             $datas = \App\Models\GuestAttendance::select('*');
+            $datas->whereBetween(DB::raw('DATE(created_at)'),[$request->startdate,$request->enddate]);
+
             return DataTables::of($datas)
             ->addColumn('action', function($row){  
                 
@@ -869,7 +893,7 @@ class RegisterController extends Controller
                 foreach($row->toArray() as $k=>$v){
                     if($k != 'id' && $k != 'bdf_id' && $k != 'agree' && $k != 'created_at' && $k != 'updated_at'){
 
-                        if($k == 'photo' || $k == 'diplomatic_note' ){
+                        if($k == 'photo'){
                             $html.='
                             <tr>
                                 <td>'.ucwords(str_replace('_',' ',$k)).'</td>
@@ -883,6 +907,18 @@ class RegisterController extends Controller
                             ';
 
 
+                        }elseif($k == 'diplomatic_note'){
+                            $html.='
+                            <tr>
+                                <td>'.ucwords(str_replace('_',' ',$k)).'</td>
+                                <td>:</td>
+                                <td>
+                                    <a href="'.asset('register/pdf/'.$row->diplomatic_note).'" target="_blank">
+                                        <i class="fas fa-file-pdf fa-4x"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            ';
                         }else{
                             $html.='
                                     <tr>
@@ -953,8 +989,8 @@ class RegisterController extends Controller
 
 
     //guestexcel
-    public function guestexcel(){
-        $data=\App\Models\GuestAttendance::orderBy('id','DESC')->get();
+    public function guestexcel($star,$end){
+        $data=\App\Models\GuestAttendance::orderBy('id','DESC')->whereBetween(DB::raw('DATE(created_at)'),[$star,$end])->get();
         //dd($data);
         $table='';
        foreach($data as  $r){
@@ -978,8 +1014,8 @@ class RegisterController extends Controller
                     <td>\''.$r->passport_no.'\'</td>
                     <td>'.$r->date_of_issuance.'</td>
                     <td>'.$r->date_of_expiry.'</td>
+                    <td><a href="'.asset('register/pdf/'.$r->diplomatic_note).'" target="_blank">'.asset('register/pdf/'.$r->diplomatic_note).'</a></td>
                     <td><a href="'.asset('images/register/'.$r->photo).'" target="_blank">'.asset('images/register/'.$r->photo).'</a></td>
-                    <td><a href="'.asset('images/register/'.$r->photo).'" target="_blank">'.asset('images/register/'.$r->diplomatic_note).'</a></td>
                     <td>'.$r->created_at.'</td>
 
                 </tr>
@@ -990,7 +1026,7 @@ class RegisterController extends Controller
        }
 
        header("Content-type: application/vnd-ms-excel");
-       header("Content-Disposition: attachment; filename=Data Register Media Attendance_".date('Ymdhis').".xls");
+       header("Content-Disposition: attachment; filename=Data Register Guest Attendance  ".$star."_sd_".$end." ___".date('Ymdhis').".xls");
         echo $html='
         <table border="1">
             <thead>
@@ -1033,6 +1069,7 @@ class RegisterController extends Controller
     public function commiteeTable(Request $request){
         if($request->ajax()) {
             $datas = \App\Models\CommiteAttendance::select('*');
+            $datas->whereBetween(DB::raw('DATE(created_at)'),[$request->startdate,$request->enddate]);
             return DataTables::of($datas)
             ->addColumn('action', function($row){  
                 //print_r($row->toArray());
@@ -1119,8 +1156,8 @@ class RegisterController extends Controller
     }
 
 
-    public function commiteeexcel(){
-        $data=\App\Models\CommiteAttendance::orderBy('id','DESC')->get();
+    public function commiteeexcel($star,$end){
+        $data=\App\Models\CommiteAttendance::orderBy('id','DESC')->whereBetween(DB::raw('DATE(created_at)'),[$star,$end])->get();
         //dd($data);
         $table='';
        foreach($data as  $r){
@@ -1155,7 +1192,7 @@ class RegisterController extends Controller
        }
 
        header("Content-type: application/vnd-ms-excel");
-       header("Content-Disposition: attachment; filename=Data Register Commite Attendance_".date('Ymdhis').".xls");
+       header("Content-Disposition: attachment; filename=Data Register Commite Attendance_  ".$star."_sd_".$end."___".date('Ymdhis').".xls");
         echo $html='
         <table border="1">
             <thead>

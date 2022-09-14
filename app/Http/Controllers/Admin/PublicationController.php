@@ -92,7 +92,10 @@ class PublicationController extends Controller
 
     public function storeFile(Request $request, Download $Download){
         $file = $request->file('file');
+        $originName=str_replace('.'.$file->extension(),'',$file->getClientOriginalName());
+        //dd( $originName);
         $name=Carbon::now()->format('YmdHis').'-'.$request->category.'.'.$file->extension();
+        
         $file_path = public_path('/download/');
         if (!File::exists($file_path)) {
             File::makeDirectory($file_path);
@@ -101,7 +104,7 @@ class PublicationController extends Controller
 
         $Download::create([
             'category_id'   => $request->category_id,
-            'title'         => $name,
+            'title'         => $originName,
             'file'          => $name
         ]);
         $response=[
@@ -155,8 +158,8 @@ class PublicationController extends Controller
                         })
                         ->rawColumns(['action','file','title'])   //merender content column dalam bentuk html
                         ->escapeColumns()  //mencegah XSS Attack
-                        ->orderColumn('title',function ($query, $order) {
-                            $query->orderBy('id', $order);
+                        ->order(function ($query) {
+                            $query->orderBy('id', 'DESC');
                         })
                         ->toJson();
 

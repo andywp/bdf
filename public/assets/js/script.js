@@ -1,6 +1,9 @@
 (function($) {
     "use strict"
 
+    
+
+
     // MAterial Date picker
     $('.datepicker').bootstrapMaterialDatePicker({
         weekStart: 0,

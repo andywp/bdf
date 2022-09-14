@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\MentorController;
 use App\Http\Controllers\Admin\StudentController;
 use App\Http\Controllers\Admin\PostController;
 use Illuminate\Support\Facades\Http;
+//use Meta;
 //use App\Models\Mentor;
 /*
 |--------------------------------------------------------------------------
@@ -19,10 +20,10 @@ use Illuminate\Support\Facades\Http;
 |
 */
 
-Route::get('/', function () {
+/* Route::get('/', function () {
     //event(new OrderStatusUpdated('Hello Echo'));
     return view('welcome');
-});
+}); */
 
 /* Route::get('/negara', function () {
     //event(new OrderStatusUpdated('Hello Echo'));
@@ -55,7 +56,14 @@ Auth::routes();
 
 
 Route::middleware(['guest:web','PreventBackHistory'])->group(function(){
-    Route::view('/login','auth.login')->name('login');
+    //Route::view('/login','auth.login')->name('login');
+    Route::get('/login', function () {
+        \Meta::set('title', 'Login | BDF');
+        \Meta::set('description', 'Directorate General of Information and Public Diplomacy, Ministry of Foreign Affairs of Republic of Indonesia');
+        \Meta::set('image', asset('images/home-logo.png'));
+        return view('auth.login');
+    })->name('login');
+    
     Route::post('/login',[App\Http\Controllers\UserController::class,'check'])->name('logincheck');
 });
 Route::middleware(['auth:web','PreventBackHistory'])->group(function(){
@@ -260,6 +268,7 @@ Route::group(['prefix' => 'laravel-filemanager', 'middleware' =>['web', 'auth:ad
                 Route::post('/store',[App\Http\Controllers\Admin\UserController::class,'store'])->name('store');
                 Route::post('/update',[App\Http\Controllers\Admin\UserController::class,'update'])->name('update');
                 Route::post('/password',[App\Http\Controllers\Admin\UserController::class,'password'])->name('password');
+                Route::post('/publish',[App\Http\Controllers\Admin\UserController::class,'publish'])->name('publish');
                 Route::delete('/{id}/delete',[App\Http\Controllers\Admin\UserController::class,'destroy'])->name('destroy');
             });
 
@@ -267,31 +276,31 @@ Route::group(['prefix' => 'laravel-filemanager', 'middleware' =>['web', 'auth:ad
             Route::prefix('physical')->name('physical.')->group(function(){
                 Route::get('/', [App\Http\Controllers\Admin\RegisterController::class,'physicalindex'])->name('index');
                 Route::post('/data',[App\Http\Controllers\Admin\RegisterController::class,'physicaldataTable'])->name('physicaldataTable');
-                Route::get('/excel',[App\Http\Controllers\Admin\RegisterController::class,'physicalindexexcel'])->name('excel');
+                Route::get('/excel/{start}/{end}',[App\Http\Controllers\Admin\RegisterController::class,'physicalindexexcel'])->name('excel');
             });
 
             Route::prefix('virtual')->name('virtual.')->group(function(){
                 Route::get('/', [App\Http\Controllers\Admin\RegisterController::class,'virtualindex'])->name('index');
                 Route::post('/data',[App\Http\Controllers\Admin\RegisterController::class,'virtualdataTable'])->name('data');
-                Route::get('/excel',[App\Http\Controllers\Admin\RegisterController::class,'virtualexcel'])->name('excel');
+                Route::get('/excel/{start}/{end}',[App\Http\Controllers\Admin\RegisterController::class,'virtualexcel'])->name('excel');
             });
 
             Route::prefix('media')->name('media.')->group(function(){
                 Route::get('/', [App\Http\Controllers\Admin\RegisterController::class,'mediaindex'])->name('index');
                 Route::post('/data',[App\Http\Controllers\Admin\RegisterController::class,'mediadataTable'])->name('data');
-                Route::get('/excel',[App\Http\Controllers\Admin\RegisterController::class,'Mediaexcel'])->name('excel');
+                Route::get('/excel/{start}/{end}',[App\Http\Controllers\Admin\RegisterController::class,'Mediaexcel'])->name('excel');
             });
 
             Route::prefix('guest')->name('guest.')->group(function(){
                 Route::get('/', [App\Http\Controllers\Admin\RegisterController::class,'guestindex'])->name('index');
                 Route::post('/data',[App\Http\Controllers\Admin\RegisterController::class,'guestataTable'])->name('data');
-                Route::get('/excel',[App\Http\Controllers\Admin\RegisterController::class,'guestexcel'])->name('excel');
+                Route::get('/excel/{start}/{end}',[App\Http\Controllers\Admin\RegisterController::class,'guestexcel'])->name('excel');
             });
 
             Route::prefix('commitee')->name('commitee.')->group(function(){
                 Route::get('/', [App\Http\Controllers\Admin\RegisterController::class,'commiteeindex'])->name('index');
                 Route::post('/data',[App\Http\Controllers\Admin\RegisterController::class,'commiteeTable'])->name('data');
-                Route::get('/excel',[App\Http\Controllers\Admin\RegisterController::class,'commiteeexcel'])->name('excel');
+                Route::get('/excel/{start}/{end}',[App\Http\Controllers\Admin\RegisterController::class,'commiteeexcel'])->name('excel');
             });
 
 

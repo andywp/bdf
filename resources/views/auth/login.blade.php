@@ -14,6 +14,20 @@
         <div class="row mt-md-5 mt-3">
           <div class="col-12">
             <div class="login-form">
+               @if (session('error'))
+                    <div class="alert alert-error">
+                        {{ session('error') }}
+                    </div>
+                @endif
+                @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
                 <form method="POST" action="{{ route('logincheck') }}">
                 @csrf
                     <!-- Email input -->
@@ -29,7 +43,7 @@
                   
                     <!-- Password input -->
                     <div class="form-outline mb-4">
-                        <label class="form-label label-flex" for="form2Example2">Password <a href="{{ route('password.request') }}">Forgot password?</a></label>
+                        <label class="form-label label-flex" for="form2Example2">Password <!--<a href="{{ route('password.request') }}">Forgot password?</a> --></label>
                         <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
                         @error('password')
                             <span class="invalid-feedback" role="alert">

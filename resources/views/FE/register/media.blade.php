@@ -386,8 +386,9 @@
                             <label class="form-label" for="photo">
                                 Letter of Assignment
                                 <p><small>(From the editor/executive of the media or Letter from your government /Diplomatic Note from your embassy in Jakarta if you are Official Media/travelling with the delegation. Max 2MB: pdf)</small></p>
+                                
                             </label>
-                            <input type="file" id="photo" class="form-control @error('media_status') is-invalid @enderror" name="Letter_of_assignment" value="{{old('media_status') }}" />
+                            <input type="file" id="photo" class="form-control @error('media_status') is-invalid @enderror" name="Letter_of_assignment" value="{{old('media_status') }}" accept="application/pdf"//>
                             @error('Letter_of_assignment')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
