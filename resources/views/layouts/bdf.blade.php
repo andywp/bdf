@@ -34,9 +34,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" />
 
     <!-- page css -->
-    <link rel="stylesheet" href="{{asset('bdf/assets/css/style.css?v=1')}}" />
-    <link rel="stylesheet" href="{{asset('bdf/assets/css/style-2.css')}}" type="text/css">
-    <link rel="stylesheet" href="{{asset('bdf/assets/css/index.css')}}" type="text/css" />
+    <link rel="stylesheet" href="{{asset('bdf/assets/css/style.css?v=4')}}" />
+    <link rel="stylesheet" href="{{asset('bdf/assets/css/style-2.css?v=4')}}" type="text/css">
+    <link rel="stylesheet" href="{{asset('bdf/assets/css/index.css?v=4')}}" type="text/css" />
     @yield('styles')
 </head>
 
@@ -172,7 +172,7 @@
     <script src="{{ asset('bdf/bootstrap-material-datetimepicker/js/moment.min.js') }}"></script>
     <script src="{{ asset('bdf/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.min.js') }}"></script>
 
-    <script src="{{ asset('bdf/assets/js/script.js?v123')}}"></script>
+    <script src="{{ asset('bdf/assets/js/script.js?v=4')}}"></script>
     @yield('scripts')
 </body>
 
