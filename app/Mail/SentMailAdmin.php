@@ -28,7 +28,7 @@ class SentMailAdmin extends Mailable
      */
     public function build()
     {
-        return $this->from(env('MAIL_FROM_ADDRESS','info@bdf.com'),'BDF')
+        return $this->from(env('MAIL_FROM_ADDRESS','info@rasalogi.com'),'BDF')
                 ->subject('New Participant Registration ['.$this->name.'] ')
                 ->view('emails.admin_notif',['name' => $this->name]);
     }

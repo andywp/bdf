@@ -133,7 +133,7 @@ class RegisterController extends Controller
         try{
             $fullName=$request->first_name.' '.$request->family_name;
             Mail::to($input['email'])->send(new \App\Mail\SentMail($fullName));
-            Mail::to(env('SENT_EMAIL_NOTIF','info@bdf.com'))->send(new \App\Mail\SentMailAdmin($fullName));
+            Mail::to(env('SENT_EMAIL_NOTIF','info@rasalogi.com'))->send(new \App\Mail\SentMailAdmin($fullName));
 
 
         }catch(Exception $e){
@@ -201,7 +201,7 @@ class RegisterController extends Controller
         try{
             $fullName=$request->first_name.' '.$request->family_name;
             Mail::to($input['email'])->send(new \App\Mail\SentMail($fullName));
-            Mail::to(env('SENT_EMAIL_NOTIF','info@bdf.com'))->send(new \App\Mail\SentMailAdmin($fullName));
+            Mail::to(env('SENT_EMAIL_NOTIF','info@rasalogi.com'))->send(new \App\Mail\SentMailAdmin($fullName));
 
 
         }catch(Exception $e){
@@ -320,7 +320,7 @@ class RegisterController extends Controller
         try{
             $fullName=$request->first_name.' '.$request->family_name;
             Mail::to($input['email'])->send(new \App\Mail\SentMail($fullName));
-            Mail::to(env('SENT_EMAIL_NOTIF','info@bdf.com'))->send(new \App\Mail\SentMailAdmin($fullName));
+            Mail::to(env('SENT_EMAIL_NOTIF','info@rasalogi.com'))->send(new \App\Mail\SentMailAdmin($fullName));
 
 
         }catch(Exception $e){
@@ -421,7 +421,7 @@ class RegisterController extends Controller
         try{
             $fullName=$request->first_name.' '.$request->family_name;
             Mail::to($input['email'])->send(new \App\Mail\SentMail($fullName));
-            Mail::to(env('SENT_EMAIL_NOTIF','info@bdf.com'))->send(new \App\Mail\SentMailAdmin($fullName));
+            Mail::to(env('SENT_EMAIL_NOTIF','info@rasalogi.com'))->send(new \App\Mail\SentMailAdmin($fullName));
 
 
         }catch(Exception $e){
@@ -508,7 +508,7 @@ class RegisterController extends Controller
         try{
             $fullName=$request->nama_lengkap;
             Mail::to($input['email'])->send(new \App\Mail\SentMail($fullName));
-            Mail::to(env('SENT_EMAIL_NOTIF','info@bdf.com'))->send(new \App\Mail\SentMailAdmin($fullName));
+            Mail::to(env('SENT_EMAIL_NOTIF','info@rasalogi.com'))->send(new \App\Mail\SentMailAdmin($fullName));
 
 
         }catch(Exception $e){
