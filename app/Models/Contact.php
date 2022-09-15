@@ -27,7 +27,7 @@ class Contact extends Model
                 
             $adminEmail = $item->email;
             Mail::to($adminEmail)->send(new ContactMail($item));
-            Mail::to('info@bdf.com')->send(new MailAdmin($item));
+            Mail::to(env('MAIL_FROM_ADDRESS','info@bdf.com'))->send(new MailAdmin($item));
         });
     }
 }

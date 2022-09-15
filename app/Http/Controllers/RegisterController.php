@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Carbon;
 use File;
 use Illuminate\Support\Str;
+use Mail;
 
 class RegisterController extends Controller
 {
@@ -128,6 +129,18 @@ class RegisterController extends Controller
         ];
         //dd($input);
         $physicalAttendance::create($input);
+
+        try{
+            $fullName=$request->first_name.' '.$request->family_name;
+            Mail::to($input['email'])->send(new \App\Mail\SentMail($fullName));
+            Mail::to(env('SENT_EMAIL_NOTIF','info@bdf.com'))->send(new \App\Mail\SentMailAdmin($fullName));
+
+
+        }catch(Exception $e){
+
+        }
+
+
         return redirect()->route('physicalattendance')->with('success','Register Physical Attendance successfully submite');
         
     }
@@ -185,6 +198,15 @@ class RegisterController extends Controller
         ];
 
         $virtualAttendance::create($input);
+        try{
+            $fullName=$request->first_name.' '.$request->family_name;
+            Mail::to($input['email'])->send(new \App\Mail\SentMail($fullName));
+            Mail::to(env('SENT_EMAIL_NOTIF','info@bdf.com'))->send(new \App\Mail\SentMailAdmin($fullName));
+
+
+        }catch(Exception $e){
+
+        }
         return redirect()->route('virtualattendance')->with('success','Register Virtual Attendance successfully submite');
 
     }
@@ -295,6 +317,15 @@ class RegisterController extends Controller
         ];
 
         $mediaAttendance::create($input);
+        try{
+            $fullName=$request->first_name.' '.$request->family_name;
+            Mail::to($input['email'])->send(new \App\Mail\SentMail($fullName));
+            Mail::to(env('SENT_EMAIL_NOTIF','info@bdf.com'))->send(new \App\Mail\SentMailAdmin($fullName));
+
+
+        }catch(Exception $e){
+
+        }
         return redirect()->route('media')->with('success','Register Media Attendance successfully submite');
     }
 
@@ -387,6 +418,15 @@ class RegisterController extends Controller
         ];
 
         $guest::create($input);
+        try{
+            $fullName=$request->first_name.' '.$request->family_name;
+            Mail::to($input['email'])->send(new \App\Mail\SentMail($fullName));
+            Mail::to(env('SENT_EMAIL_NOTIF','info@bdf.com'))->send(new \App\Mail\SentMailAdmin($fullName));
+
+
+        }catch(Exception $e){
+
+        }
         return redirect()->route('guest')->with('success','Register Guest Attendance successfully submite');
     
     }
@@ -465,6 +505,15 @@ class RegisterController extends Controller
         ];
 
         $commiteAttendance::create($input);
+        try{
+            $fullName=$request->nama_lengkap;
+            Mail::to($input['email'])->send(new \App\Mail\SentMail($fullName));
+            Mail::to(env('SENT_EMAIL_NOTIF','info@bdf.com'))->send(new \App\Mail\SentMailAdmin($fullName));
+
+
+        }catch(Exception $e){
+
+        }
         return redirect()->route('commitee')->with('success','Register Commite Attendance successfully submite');
     }
 
