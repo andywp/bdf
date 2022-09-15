@@ -14,17 +14,18 @@ class RegisterController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+        //$this->middleware('auth');
     }
 
     public function physical_attendance(){
+        //dd(Auth::guard('admin')->check());
         Meta::set('title', 'Register Physical Attendance | BDF');
         Meta::set('description', 'Register Physical Attendance');
         Meta::set('image', asset('images/home-logo.png'));
 
         $organisasi=\App\Models\Organization::get();
         $negara=\App\Models\Countries::get();
-        if((Auth::user()->type_user !='Physical Attendance') && (Auth::user()->type_user !='Commitee')){
+        if((Auth::user()->type_user !='Physical Attendance') && !Auth::guard('admin')->check() ){
             return abort(403, "You are not allowed to access this page");
         }
         
@@ -140,7 +141,7 @@ class RegisterController extends Controller
         $negara=\App\Models\Countries::get();
 
 
-        if((Auth::user()->type_user !='Virtual Attendance') && (Auth::user()->type_user !='Commitee')){
+        if((Auth::user()->type_user !='Virtual Attendance') && !Auth::guard('admin')->check()){
             return abort(403, "You are not allowed to access this page");
         }
 
@@ -196,7 +197,7 @@ class RegisterController extends Controller
 
         $organisasi=\App\Models\Organization::get();
         $negara=\App\Models\Countries::get();
-        if((Auth::user()->type_user !='Media') && (Auth::user()->type_user !='Commitee')){
+        if((Auth::user()->type_user !='Media') && !Auth::guard('admin')->check()){
             return abort(403, "You are not allowed to access this page");
         }
 
@@ -306,7 +307,7 @@ class RegisterController extends Controller
         $organisasi=\App\Models\Organization::get();
         $negara=\App\Models\Countries::get();
 
-        if((Auth::user()->type_user !='Guest') && (Auth::user()->type_user !='Commitee')){
+        if((Auth::user()->type_user !='Guest') && !Auth::guard('admin')->check()){
             return abort(403, "You are not allowed to access this page");
         }
         return view('FE.register.guest',compact('organisasi','negara'));
@@ -397,7 +398,7 @@ class RegisterController extends Controller
 
         $organisasi=\App\Models\Organization::get();
         $negara=\App\Models\Countries::get();
-        if(Auth::user()->type_user !='Commitee'){
+        if(Auth::user()->type_user !='Commitee' && !Auth::guard('admin')->check()){
             return abort(403, "You are not allowed to access this page");
         }
         return view('FE.register.commitee',compact('organisasi','negara'));

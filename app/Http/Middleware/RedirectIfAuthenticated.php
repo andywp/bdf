@@ -29,7 +29,7 @@ class RedirectIfAuthenticated
                     return redirect()->route('mentor.home');
                 }
 
-                return redirect()->route('user.home');
+                return redirect()->route('landing');
                 //return redirect(RouteServiceProvider::HOME);
             }
         }

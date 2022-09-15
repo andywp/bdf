@@ -53,10 +53,12 @@
                             <input type="submit" id="search-submit" />
                         </form>
                     </li>
-                    @if(!@Auth::user()->id)
-                    <li class="nav-item"><a class="nav-link link text-white text-primary display-4" href="{{ route('login') }}">LOGIN</a></li>
+                    @if(Auth::guard('web')->check())
+                        <li class="nav-item"><a class="nav-link link text-white text-primary display-4" href="{{ route('logout') }}"  onclick="event.preventDefault();document.getElementById('logout-form').submit();" >LOGOUT</a> <form action="{{ route('logout') }}" id="logout-form" method="post">@csrf</form></li>
+                    @elseif(Auth::guard('admin')->check())
+                        <li class="nav-item"><a class="nav-link link text-white text-primary display-4" href="{{ route('admin.logout') }}"  onclick="event.preventDefault();document.getElementById('logout-form').submit();" >LOGOUT</a> <form action="{{ route('admin.logout') }}" id="logout-form" method="post">@csrf</form></li>
                     @else
-                    <li class="nav-item"><a class="nav-link link text-white text-primary display-4" href="{{ route('logout') }}"  onclick="event.preventDefault();document.getElementById('logout-form').submit();" >LOGOUT</a> <form action="{{ route('logout') }}" id="logout-form" method="post">@csrf</form></li>
+                        <li class="nav-item"><a class="nav-link link text-white text-primary display-4" href="{{ route('login') }}">LOGIN</a></li>
                     @endif
                 </ul>
             </div>
