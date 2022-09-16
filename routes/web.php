@@ -66,7 +66,7 @@ Route::middleware(['guest:web','PreventBackHistory'])->group(function(){
     
     Route::post('/login',[App\Http\Controllers\UserController::class,'check'])->name('logincheck');
 });
-Route::middleware(['auth:web','PreventBackHistory'])->middleware('auth:admin')->group(function(){
+Route::middleware(['auth','PreventBackHistory'])->group(function(){
     Route::post('/logout',[App\Http\Controllers\UserController::class,'logout'])->name('logout');
 
     Route::get('/commitee', [App\Http\Controllers\RegisterController::class,'commitee'])->name('commitee');
