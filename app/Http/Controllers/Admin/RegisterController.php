@@ -38,7 +38,9 @@ class RegisterController extends Controller
                                                 <td style="width:5px;">:</td>
                                                 <td>
                                                     <div class="register-img">
+                                                        <a href="'.asset('images/register/'.$row->Photo).'" target="_blank">
                                                         <img src="'.asset('images/register/'.$row->Photo).'"  class="img-thumbnail" >
+                                                        </a>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -701,7 +703,9 @@ class RegisterController extends Controller
                                     <td>:</td>
                                     <td>
                                         <div class="register-img">
+                                            <a href="'.asset('images/register/'.$v).'" target="_blank">
                                             <img src="'.asset('images/register/'.$v).'"  class="img-thumbnail" >
+                                            </a>
                                         </div>
                                     </td>
                                 </tr>
@@ -900,7 +904,9 @@ class RegisterController extends Controller
                                 <td>:</td>
                                 <td>
                                     <div class="register-img">
-                                        <img src="'.asset('images/register/'.$v).'"  class="img-thumbnail" >
+                                        <a href="'.asset('images/register/'.$v).'" target="_blank" >
+                                            <img src="'.asset('images/register/'.$v).'"  class="img-thumbnail" >
+                                        </a>
                                     </div>
                                 </td>
                             </tr>
@@ -1084,7 +1090,9 @@ class RegisterController extends Controller
                                 <td>:</td>
                                 <td>
                                     <div class="register-img">
+                                        <a href="'.asset('images/register/'.$v).'" target="_blank">
                                         <img src="'.asset('images/register/'.$v).'"  class="img-thumbnail" >
+                                        </a>
                                     </div>
                                 </td>
                             </tr>
@@ -1092,6 +1100,10 @@ class RegisterController extends Controller
 
 
                         }else{
+                            if($k == 'nik'){
+                                $k='NIP';
+                            }
+
                             $html.='
                                     <tr>
                                         <td>'.ucwords(str_replace('_',' ',$k)).'</td>
@@ -1201,7 +1213,7 @@ class RegisterController extends Controller
                     <td>'.ucwords(str_replace('_',' ','nama_lengkap')).'</td>
                     <td>'.ucwords(str_replace('_',' ','prefered_name_on_badge')).'</td>
                     <td>'.ucwords(str_replace('_',' ','jabatan')).'</td>
-                    <td>'.ucwords(str_replace('_',' ','nik')).'</td>
+                    <td>'.ucwords(str_replace('_',' ','nip')).'</td>
                     <td>'.ucwords(str_replace('_',' ','satuan_kerja')).'</td>
                     <td>'.ucwords(str_replace('_',' ','bidang_kepanitiaan')).'</td>
                     <td>'.ucwords(str_replace('_',' ','nomor_rekening')).'</td>

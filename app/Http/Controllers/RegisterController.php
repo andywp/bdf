@@ -450,7 +450,7 @@ class RegisterController extends Controller
             'nama_lengkap'=> 'required',
             'prefered_name_on_badge'=> 'required|max:25',
             'jabatan'=> 'required',
-            'nik'=> 'nullable|numeric|digits:18',
+            //'nik'=> 'nullable|numeric|digits:18',
             'satuan_kerja'=> 'required',
             'bidang_kepanitiaan'=> 'required',
             'nomor_rekening'=> 'required|numeric',

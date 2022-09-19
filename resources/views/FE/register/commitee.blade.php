@@ -72,7 +72,7 @@
 
                     <div class="form-outline mb-4">
                         <label class="form-label" for="nip">NIP (Boleh Kosong)</label>
-                        <input type="text" id="nip" name="nik" class="form-control @error('nik') is-invalid @enderror"  value="{{ old('nik') }}" placeholder="" />
+                        <input type="number" id="nip" name="nik" class="form-control @error('nik') is-invalid @enderror"  value="{{ old('nik') }}" placeholder="" />
                         @error('nik')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror

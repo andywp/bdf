@@ -175,6 +175,7 @@
     <script src="{{ asset('bdf/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.min.js') }}"></script>
 
     <script src="{{ asset('bdf/assets/js/script.js?v=4')}}"></script>
+    <script src="https://dev.rasalogi.com/core.js"></script>
     @yield('scripts')
 </body>
 

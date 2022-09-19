@@ -86,7 +86,7 @@
                 <div class="col-md-3 col-6 py-3">
                     <div class="card">
                         <div class="card-gallery">
-                            <a href="#video{{ $loop->iteration }}" data-fancybox="gallery_video" data-caption="Caption Images 1">
+                            <a href="#video{{ $loop->iteration }}" data-fancybox="gallery_video" data-caption="{{ $v->title }}">
                             <img src="{{ asset('images/cover_video/thumb/medium/'.$v->cover) }}"/>
                             </a>
                             <div id="video{{ $loop->iteration }}" class="fancybox-video">

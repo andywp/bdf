@@ -99,7 +99,7 @@
                                 <span class="text-danger" id="EditalbumError"></span>
                             </div> 
                             <div class="form-group mb-3">
-                                <label>Video max {{ ini_get('upload_max_filesize') }}</label>
+                                <label>Video</label>
                                 <div class="form-file">
                                     <input name="video" type="file" class="form-file-input form-control">
                                     <span class="text-danger" id="inputVideoError"></span>
