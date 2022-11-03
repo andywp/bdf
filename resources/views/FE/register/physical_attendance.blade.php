@@ -279,8 +279,16 @@
 
                     <div class="form-outline mb-4">
                         <label class="form-label" for="time-departure">Time</label>
-                        <input type="text" id="time-departure" class="form-control timepicker @error('departure_flight_time') is-invalid @enderror" name="departure_flight_time" value="{{ old('departure_flight_time') }}" value="23:59" />
+                        <input type="text" id="time-departure" class="form-control timepicker @error('departure_flight_time') is-invalid @enderror" name="departure_flight_time" value="{{ old('departure_flight_time') }}"  />
                         @error('departure_flight_time')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <!-- Hotel -->
+                    <div class="form-outline mb-4">
+                        <label class="form-label" for="time-departure">Hotel</label>
+                        <input type="text" id="hotel-departure" class="form-control @error('hotel') is-invalid @enderror" name="hotel" value="{{ old('hotel') }}"/>
+                        @error('hotel')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
@@ -455,7 +463,7 @@
                         <label class="form-label" for="other-foodalergy">Other food allergy</label>
                         <input type="text" id="other-foodalergy" name="other_food_allergy" value="{{ old('other_food_allergy') }}" class="form-control  @error('other_food_allergy') is-invalid @enderror" />
                     </div>
-
+                    <!--
                     <div class="form-outline mb-4">
                         <label class="form-label" for="position">Body Measurement</label>
                         <select id="body-measurement" class="form-select form-control  @error('body_measurement') is-invalid @enderror" name="body_measurement" aria-label="Default select example">
@@ -472,6 +480,7 @@
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
+                    -->
 
                     <h3 class="text-center title-form mt-5">Upload Attachment</h3>
                     <div class="form-outline mb-4">

@@ -9,7 +9,11 @@ use Meta;
 use ZipArchive;
 class BdfController extends Controller
 {
-    
+    public function __construct()
+    {
+        //$this->middleware('auth');
+       // visitor()->visit(); 
+    }
     
     public function index($slug_url){
         

@@ -11,11 +11,12 @@ class UserController extends Controller
     public function check(Request $request){
 
         $request->validate([
-            'email'=>'required|email',
+            'username'=>'required',
             'password'=>'required|string'
          ]);
         //  /dd($request->all());
-         $creds = $request->only('email','password');
+         $creds = $request->only('username','password');
+
          $remember=isset($request->remember)?true:false;
          if(Auth::guard('web')->attempt($creds, $remember)){
             //dd(Auth::user());

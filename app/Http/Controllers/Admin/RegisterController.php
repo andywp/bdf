@@ -227,6 +227,13 @@ class RegisterController extends Controller
                                                 </td>
                                             </tr>
                                             <tr>
+                                                <td>Hotel</td>
+                                                <td>:</td>
+                                                <td>
+                                                    '.$row->hotel.'
+                                                </td>
+                                            </tr>
+                                            <tr>
                                                 <td>Special dietary requirement</td>
                                                 <td>:</td>
                                                 <td>
@@ -261,13 +268,7 @@ class RegisterController extends Controller
                                                     '.$row->food_allergy.'
                                                 </td>
                                             </tr>
-                                            <tr>
-                                                <td>Body measurement</td>
-                                                <td>:</td>
-                                                <td>
-                                                    '.$row->body_measurement.'
-                                                </td>
-                                            </tr>
+                                            
                                             <tr>
                                                 <td>Diplomatic Note</td>
                                                 <td>:</td>
@@ -315,7 +316,7 @@ class RegisterController extends Controller
             $thead='';
             foreach($table as $r ){
 
-                if(($r !='updated_at') && ($r !='bdf_id') && ($r !='id') && ($r !='agree')  ){
+                if(($r !='updated_at') && ($r !='bdf_id') && ($r !='id') && ($r !='agree') && ($r !='body_measurement') ){
                     $name=$r;
                     $thead.='<td>'.ucwords(str_replace('_',' ',$name)).'</td>';
                 }
@@ -417,6 +418,9 @@ class RegisterController extends Controller
                            '.$row->departure_flight_time.'
                         </td>
                         <td>
+                            '.$row->hotel.'
+                         </td>
+                        <td>
                            '.$row->special_dietary_requirement.'
                         </td>
                         <td>
@@ -431,9 +435,7 @@ class RegisterController extends Controller
                         <td>
                            '.$row->other_food_allergy.'
                         </td>
-                        <td>
-                           '.$row->body_measurement.'
-                        </td>
+                        
                         <td>
                             <a href="'.asset('images/register/'.$row->Photo).'" target="_blank"> '.asset('images/register/'.$row->Photo).'</a>
                         </td>
