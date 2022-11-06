@@ -35,6 +35,12 @@ class RegisterController extends Controller
 
 
     public function physical_attendance_create(Request $request, \App\Models\PhysicalAttendance $physicalAttendance){
+
+        $messages = [
+            'official_title.required'  => 'The Official Position Title field is required.',
+          ];
+
+
         $request->validate([
             'country_organization'=> 'required',
             'title'=> 'required',
@@ -42,8 +48,9 @@ class RegisterController extends Controller
             'first_name'=> 'required',
             'prefered_name_on_badge'=> 'required|max:25',
             'nationality'=> 'required',
+            'designated_in_delegation'=> 'required',
             'position'=> 'required',
-            'affiliation'=> 'required',
+            //'affiliation'=> 'required',
             'official_title'=> 'required',
             'office_address'=> 'required',
             'gender'=> 'required',
@@ -67,7 +74,7 @@ class RegisterController extends Controller
             'agree'=> 'required',
             'Photo' => 'required|image|max:1024',
             'diplomatic_note' => 'required|mimes:pdf|max:2024',
-        ]);
+        ],$messages);
 
 
         $Photo='';
@@ -99,10 +106,10 @@ class RegisterController extends Controller
             'first_name' => $request->first_name,
             'prefered_name_on_badge' => $request->prefered_name_on_badge,
             'nationality' => $request->nationality,
+            'designated_in_delegation' => $request->designated_in_delegation,
             'nationality_other' => $request->nationality_other,
             'position' => $request->position,
             'position_other' => $request->position_other,
-            'affiliation' => $request->affiliation,
             'official_title' => $request->official_title,
             'office_address' => $request->office_address,
             'gender' => $request->gender,
@@ -172,8 +179,9 @@ class RegisterController extends Controller
             'first_name'=> 'required',
             'prefered_name_on_badge'=> 'required|max:25',
             'nationality'=> 'required',
+            'designated_in_delegation'=> 'required',
             'position'=> 'required',
-            'affiliation'=> 'required',
+            //'affiliation'=> 'required',
             'email'=> 'required|email:rfc,dns',
             'telephone'=> 'required',
             'fax'=> 'required',
@@ -190,9 +198,10 @@ class RegisterController extends Controller
             'prefered_name_on_badge' => $request->prefered_name_on_badge,
             'nationality' => $request->nationality,
             'nationality_other' => $request->nationality_other,
+            'designated_in_delegation' => $request->designated_in_delegation,
             'position' => $request->position,
             'position_other' => $request->position_other,
-            'affiliation' => $request->affiliation,
+            //'affiliation' => $request->affiliation,
             'email' => $request->email,
             'telephone' => $request->telephone,
             'fax' => $request->fax,

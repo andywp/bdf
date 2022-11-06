@@ -118,6 +118,20 @@
                         <input type="text" id="other2" class="form-control @error('nationality_other') is-invalid @enderror" name="nationality_other"  value="{{ old('nationality_other') }}" placeholder="" />
                     </div>
 
+                    
+                    <div class="form-outline mb-4">
+                        <label class="form-label" for="designated_in_delegation">Designated in Delegation</label>
+                        <select class="optionselect form-select  form-control w-100  @error('designated_in_delegation') is-invalid @enderror" name="designated_in_delegation">
+                            <option value="">--Choose--</option>
+                            <option value="Head of Delegation" {{(old('designated_in_delegation') == 'Head of Delegation')?'selected':'' }}>Head of Delegation</option>
+                            <option value="Member of Delegation" {{(old('designated_in_delegation') == 'Member of Delegation')?'selected':'' }} >Member of Delegation</option>
+                        </select>
+                        @error('designated_in_delegation')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+
                     <div class="form-outline mb-4">
                         <label class="form-label" for="position">Position</label>
                         <select class="form-select optionselect form-control  @error('position') is-invalid @enderror" name="position" aria-label="Default select example">
@@ -143,15 +157,7 @@
                     </div>
 
                     <div class="form-outline mb-4">
-                        <label class="form-label" for="affiliation">Affiliation</label>
-                        <input type="text" id="affiliation" class="form-control  @error('affiliation') is-invalid @enderror" name="affiliation" value="{{ old('affiliation') }}" placeholder="" />
-                        @error('affiliation')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-                    </div>
-
-                    <div class="form-outline mb-4">
-                        <label class="form-label" for="office-address">Office Title</label>
+                        <label class="form-label" for="office-address">Official Position Title</label>
                         <input type="text" id="office-address" class="form-control  @error('official_title') is-invalid @enderror" name="official_title" value="{{ old('official_title') }}"  placeholder="" />
                         @error('official_title')
                             <div class="invalid-feedback">{{ $message }}</div>

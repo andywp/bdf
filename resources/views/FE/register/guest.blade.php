@@ -221,7 +221,7 @@
 
                     <div class="form-outline mb-5">
                       <label class="form-label" for="diplomatic-note">
-                        Diplomatic Note
+                      Diplomatic Note / Invitation Letter
                         <p><small>(Max 2MB: pdf)</small></p>
                       </label>
                       <input type="file" id="diplomatic-note" class="form-control  @error('diplomatic_note') is-invalid @enderror"  value="{{ old('diplomatic_note') }}" name="diplomatic_note" accept="application/pdf"/>

@@ -28,7 +28,7 @@ class SentMail extends Mailable
      */
     public function build()
     {
-        return $this->from(env('MAIL_FROM_ADDRESS','info@rasalogi.com'),'BDF')
+        return $this->from(env('MAIL_FROM_ADDRESS','bdf.reg@kemlu.go.id'),'BDF')
                         ->subject('Thank you for your registration BDF')
                         ->view('emails.user',['name' => $this->name]);
     }

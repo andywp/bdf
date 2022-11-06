@@ -101,6 +101,13 @@ class RegisterController extends Controller
                                                 </td>
                                             </tr>
                                             <tr>
+                                                <td>Designated in delegation</td>
+                                                <td>:</td>
+                                                <td>
+                                                    '.$row->designated_in_delegation.'
+                                                </td>
+                                            </tr>
+                                            <tr>
                                                 <td>Position</td>
                                                 <td>:</td>
                                                 <td>
@@ -114,15 +121,9 @@ class RegisterController extends Controller
                                                     '.$row->position_other.'
                                                 </td>
                                             </tr>
+                                            
                                             <tr>
-                                                <td>Affiliation</td>
-                                                <td>:</td>
-                                                <td>
-                                                    '.$row->affiliation.'
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Official title</td>
+                                                <td>Official Position Title</td>
                                                 <td>:</td>
                                                 <td>
                                                     '.$row->office_address.'
@@ -318,6 +319,10 @@ class RegisterController extends Controller
 
                 if(($r !='updated_at') && ($r !='bdf_id') && ($r !='id') && ($r !='agree') && ($r !='body_measurement') ){
                     $name=$r;
+                    if($name == 'official_title'){
+                        $name='Official_Position_Title';
+                    }
+
                     $thead.='<td>'.ucwords(str_replace('_',' ',$name)).'</td>';
                 }
             }
@@ -352,16 +357,16 @@ class RegisterController extends Controller
                            '.$row->nationality.'
                         </td>
                         <td>
+                            '.$row->designated_in_delegation.'
+                        </td>
+                        <td>
                            '.$row->nationality_other.'
                         </td>
                         <td>
-                           '.$row->affiliation.'
+                           '.$row->position.'
                         </td>
                         <td>
-                           '.$row->official_title.'
-                        </td>
-                        <td>
-                            '.$row->gender.'
+                            '.$row->position_other.'
                         </td>
                         <td>
                            '.$row->official_title.'
@@ -385,11 +390,11 @@ class RegisterController extends Controller
                         </td>
                        
                         <td>
-                           '.$row->passport_no.'
+                            \''.$row->passport_no.'\'
                         </td>
                       
                         <td>
-                           '.$row->date_of_issuance.'
+                        '.$row->date_of_issuance.'
                         </td>
                         
                         <td>
@@ -548,6 +553,13 @@ class RegisterController extends Controller
                                                     </td>
                                                 </tr>
                                                 <tr>
+                                                    <td>Designated in delegation</td>
+                                                    <td>:</td>
+                                                    <td>
+                                                        '.$row->designated_in_delegation.'
+                                                    </td>
+                                                </tr>
+                                                <tr>
                                                     <td>Position</td>
                                                     <td>:</td>
                                                     <td>
@@ -561,13 +573,7 @@ class RegisterController extends Controller
                                                         '.$row->position_other.'
                                                     </td>
                                                 </tr>
-                                                <tr>
-                                                    <td>Affiliation</td>
-                                                    <td>:</td>
-                                                    <td>
-                                                        '.$row->affiliation.'
-                                                    </td>
-                                                </tr>
+                                               
                                                
                                                 
                                                 <tr>
@@ -638,9 +644,9 @@ class RegisterController extends Controller
                                 <td>'.$row->prefered_name_on_badge.'</td>
                                 <td>'.$row->nationality.'</td>
                                 <td>'.$row->nationality_other.'</td>
+                                <td>'.$row->designated_in_delegation.'</td>
                                 <td>'.$row->position.'</td>
                                 <td>'.$row->position_other.'</td>
-                                <td>'.$row->affiliation.'</td>
                                 <td>'.$row->email.'</td>
                                 <td>'.$row->telephone.'</td>
                                 <td>'.$row->fax.'</td>
@@ -664,9 +670,9 @@ class RegisterController extends Controller
                         <td>'.ucwords(str_replace('_',' ','prefered_name_on_badge')).'</td>
                         <td>'.ucwords(str_replace('_',' ','nationality')).'</td>
                         <td>'.ucwords(str_replace('_',' ','nationality_other')).'</td>
+                        <td>'.ucwords(str_replace('_',' ','designated_in_delegation')).'</td>
                         <td>'.ucwords(str_replace('_',' ','position')).'</td>
                         <td>'.ucwords(str_replace('_',' ','position_other')).'</td>
-                        <td>'.ucwords(str_replace('_',' ','affiliation')).'</td>
                         <td>'.ucwords(str_replace('_',' ','email')).'</td>
                         <td>'.ucwords(str_replace('_',' ','telephone')).'</td>
                         <td>'.ucwords(str_replace('_',' ','fax')).'</td>
