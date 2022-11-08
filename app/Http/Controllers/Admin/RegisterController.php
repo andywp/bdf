@@ -924,7 +924,7 @@ class RegisterController extends Controller
                         }elseif($k == 'diplomatic_note'){
                             $html.='
                             <tr>
-                                <td>'.ucwords(str_replace('_',' ',$k)).'</td>
+                                <td>Diplomatic Note / Invitation Letter</td>
                                 <td>:</td>
                                 <td>
                                     <a href="'.asset('register/pdf/'.$row->diplomatic_note).'" target="_blank">
@@ -1018,7 +1018,7 @@ class RegisterController extends Controller
                     <td>'.$r->prefered_name_on_badge.'</td>
                     <td>'.$r->nationality.'</td>
                     <td>'.$r->nationality_other.'</td>
-                    <td>'.$r->affiliation.'</td>
+                    <td>'.$r->designated_in_delegation.'</td>
                     <td>'.$r->official_title.'</td>
                     <td>'.$r->office_address.'</td>
                     <td>'.$r->gender.'</td>
@@ -1053,7 +1053,7 @@ class RegisterController extends Controller
                     <td>'.ucwords(str_replace('_',' ','prefered_name_on_badge')).'</td>
                     <td>'.ucwords(str_replace('_',' ','nationality')).'</td>
                     <td>'.ucwords(str_replace('_',' ','nationality_other')).'</td>
-                    <td>'.ucwords(str_replace('_',' ','affiliation')).'</td>
+                    <td>'.ucwords(str_replace('_',' ','designated_in_delegation')).'</td>
                     <td>'.ucwords(str_replace('_',' ','official_title')).'</td>
                     <td>'.ucwords(str_replace('_',' ','office_address')).'</td>
                     <td>'.ucwords(str_replace('_',' ','gender')).'</td>
@@ -1063,7 +1063,7 @@ class RegisterController extends Controller
                     <td>'.ucwords(str_replace('_',' ','passport_no')).'</td>
                     <td>'.ucwords(str_replace('_',' ','passport date_of_issuance')).'</td>
                     <td>'.ucwords(str_replace('_',' ','passport date_of_expiry')).'</td>
-                    <td>'.ucwords(str_replace('_',' ','diplomatic_note')).'</td>
+                    <td>'.ucwords(str_replace('_',' ','Diplomatic Note / Invitation Letter')).'</td>
                     <td>'.ucwords(str_replace('_',' ','photo')).'</td>
                     <td>'.ucwords(str_replace('_',' ','created_at')).'</td>
                 </tr>

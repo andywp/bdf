@@ -118,15 +118,19 @@
                     </div>
 
                     <div class="form-outline mb-4">
-                        <label class="form-label" for="affiliation">Affiliation</label>
-                        <input type="text" id="affiliation" class="form-control  @error('affiliation') is-invalid @enderror" name="affiliation" value="{{ old('affiliation') }}" placeholder="" />
-                        @error('affiliation')
+                        <label class="form-label" for="designated_in_delegation">Designated in Delegation</label>
+                        <select class="optionselect form-select  form-control w-100  @error('designated_in_delegation') is-invalid @enderror" name="designated_in_delegation">
+                            <option value="">--Choose--</option>
+                            <option value="Head of Delegation" {{(old('designated_in_delegation') == 'Head of Delegation')?'selected':'' }}>Head of Delegation</option>
+                            <option value="Member of Delegation" {{(old('designated_in_delegation') == 'Member of Delegation')?'selected':'' }} >Member of Delegation</option>
+                        </select>
+                        @error('designated_in_delegation')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
 
                     <div class="form-outline mb-4">
-                      <label class="form-label" for="office-title">Office Title</label>
+                      <label class="form-label" for="office-title">Official Position Title</label>
                       <input type="text" id="office-title" class="form-control  @error('official_title') is-invalid @enderror" name="official_title" value="{{ old('official_title') }}" placeholder="" />
                       @error('official_title')
                           <div class="invalid-feedback">{{ $message }}</div>
@@ -165,7 +169,7 @@
                     </div>
 
                     <div class="form-outline mb-4">
-                        <label class="form-label" for="telphone">Telphone</label>
+                        <label class="form-label" for="telphone">Telephone</label>
                         <input type="tel" id="telphone" class="form-control  @error('telephone') is-invalid @enderror" name="telephone"  value="{{ old('telephone') }}" placeholder="+62213441508" />
                         @error('telephone')
                             <div class="invalid-feedback">{{ $message }}</div>
@@ -221,7 +225,7 @@
 
                     <div class="form-outline mb-5">
                       <label class="form-label" for="diplomatic-note">
-                      Diplomatic Note / Invitation Letter
+                        Diplomatic Note / Invitation Letter
                         <p><small>(Max 2MB: pdf)</small></p>
                       </label>
                       <input type="file" id="diplomatic-note" class="form-control  @error('diplomatic_note') is-invalid @enderror"  value="{{ old('diplomatic_note') }}" name="diplomatic_note" accept="application/pdf"/>

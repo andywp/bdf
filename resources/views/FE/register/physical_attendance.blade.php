@@ -136,12 +136,17 @@
                         <label class="form-label" for="position">Position</label>
                         <select class="form-select optionselect form-control  @error('position') is-invalid @enderror" name="position" aria-label="Default select example">
                             <option value="">-Position Delegation-</option>
+                            <!--
                             <option value="Foreign Minister" {{(old('position') == 'Foreign Minister')?'selected':'' }}>Foreign Minister</option>
                             <option value="Head of Delegation" {{(old('position') == 'Head of Delegation')?'selected':'' }}>Head of Delegation</option>
                             <option value="Spouse" {{(old('position') == 'Spouse')?'selected':'' }}>Spouse</option>
                             <option value="Member of Delegation" {{(old('position') == 'Member of Delegation')?'selected':'' }}>Member of Delegation</option>
                             <option value="Security Officer"  {{(old('position') == 'Security Officer')?'selected':'' }}>Security Officer</option>
                             <option value="Other"  {{(old('position') == 'Other')?'selected':'' }}>Other</option>
+                            -->
+                            <option value="Minister"  {{(old('position') == 'Minister')?'selected':'' }}>Minister</option>
+                            <option value="Ambassador"  {{(old('position') == 'Ambassador')?'selected':'' }}>Ambassador</option>
+                            
                         </select>
                         @error('position')
                             <div class="invalid-feedback">{{ $message }}</div>
@@ -196,7 +201,7 @@
                     </div>
 
                     <div class="form-outline mb-4">
-                        <label class="form-label" for="telphone">Telphone</label>
+                        <label class="form-label" for="telphone">Telephone</label>
                         <input type="tel" id="telphone" class="form-control  @error('telephone') is-invalid @enderror" name="telephone"  value="{{ old('telephone') }}" placeholder="+62213441508" />
                         @error('telephone')
                             <div class="invalid-feedback">{{ $message }}</div>

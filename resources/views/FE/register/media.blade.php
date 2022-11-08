@@ -102,7 +102,7 @@
                         </div>
 
                         <div class="form-outline mb-4">
-                            <label class="form-label" for="telphone">Telphone</label>
+                            <label class="form-label" for="telphone">Telephone</label>
                             <input type="tel" id="telphone" class="form-control  @error('telephone') is-invalid @enderror" name="telephone"  value="{{ old('telephone') }}" placeholder="+62213441508" />
                             @error('telephone')
                                 <div class="invalid-feedback">{{ $message }}</div>
