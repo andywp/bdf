@@ -142,7 +142,7 @@ class RegisterController extends Controller
         try{
             $fullName=$request->first_name.' '.$request->family_name;
             Mail::to($input['email'])->send(new \App\Mail\SentMail($fullName));
-            Mail::to(env('SENT_EMAIL_NOTIF','info@rasalogi.com'))->send(new \App\Mail\SentMailAdmin($fullName));
+            Mail::to(env('SENT_EMAIL_NOTIF','bdf.balidemocracyforum@gmail.com'))->send(new \App\Mail\SentMailAdmin($fullName));
 
 
         }catch(Exception $e){
@@ -212,7 +212,7 @@ class RegisterController extends Controller
         try{
             $fullName=$request->first_name.' '.$request->family_name;
             Mail::to($input['email'])->send(new \App\Mail\SentMail($fullName));
-            Mail::to(env('SENT_EMAIL_NOTIF','info@rasalogi.com'))->send(new \App\Mail\SentMailAdmin($fullName));
+            Mail::to(env('SENT_EMAIL_NOTIF','bdf.balidemocracyforum@gmail.com'))->send(new \App\Mail\SentMailAdmin($fullName));
 
 
         }catch(Exception $e){
@@ -331,7 +331,7 @@ class RegisterController extends Controller
         try{
             $fullName=$request->first_name.' '.$request->family_name;
             Mail::to($input['email'])->send(new \App\Mail\SentMail($fullName));
-            Mail::to(env('SENT_EMAIL_NOTIF','info@rasalogi.com'))->send(new \App\Mail\SentMailAdmin($fullName));
+            Mail::to(env('SENT_EMAIL_NOTIF','bdf.balidemocracyforum@gmail.com'))->send(new \App\Mail\SentMailAdmin($fullName));
 
 
         }catch(Exception $e){
@@ -363,7 +363,8 @@ class RegisterController extends Controller
             'first_name'=> 'required',
             'prefered_name_on_badge'=> 'required|max:25',
             'nationality'=> 'required',
-            'affiliation'=> 'required',
+            'designated_in_delegation'=> 'required',
+            //'affiliation'=> 'required',
             'official_title'=> 'required',
             'office_address'=> 'required',
             'gender'=> 'required',
@@ -413,7 +414,8 @@ class RegisterController extends Controller
             'nationality' => $request->nationality,
             'country_organization' => $request->country_organization,
             'nationality_other' => $request->nationality_other,
-            'affiliation' => $request->affiliation,
+            'designated_in_delegation' => $request->designated_in_delegation,
+            //'affiliation' => $request->affiliation,
             'official_title' => $request->official_title,
             'passport_no'   => $request->passport_no,
             'office_address' => $request->office_address,
@@ -432,7 +434,7 @@ class RegisterController extends Controller
         try{
             $fullName=$request->first_name.' '.$request->family_name;
             Mail::to($input['email'])->send(new \App\Mail\SentMail($fullName));
-            Mail::to(env('SENT_EMAIL_NOTIF','info@rasalogi.com'))->send(new \App\Mail\SentMailAdmin($fullName));
+            Mail::to(env('SENT_EMAIL_NOTIF','bdf.balidemocracyforum@gmail.com'))->send(new \App\Mail\SentMailAdmin($fullName));
 
 
         }catch(Exception $e){
@@ -519,7 +521,7 @@ class RegisterController extends Controller
         try{
             $fullName=$request->nama_lengkap;
             Mail::to($input['email'])->send(new \App\Mail\SentMail($fullName));
-            Mail::to(env('SENT_EMAIL_NOTIF','info@rasalogi.com'))->send(new \App\Mail\SentMailAdmin($fullName));
+            Mail::to(env('SENT_EMAIL_NOTIF','bdf.balidemocracyforum@gmail.com'))->send(new \App\Mail\SentMailAdmin($fullName));
 
 
         }catch(Exception $e){
