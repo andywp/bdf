@@ -11,7 +11,7 @@
                     <div class="d-flex align-items-center sidebar-info">
                         <div>
                             <span class="font-w400 d-block">{{ Auth::user()->name }}</span>
-                            <small class="text-end font-w400">Superadmin</small>
+                            <small class="text-end font-w400">{{ (Auth::user()->role == 'admin')?'Superadmin':'Admin' }}</small>
                         </div>
                         <i class="fas fa-chevron-down"></i>
                     </div>
@@ -36,6 +36,7 @@
                 </a>
             </div>
         </div>
+        @if(Auth::user()->role == 'admin')
         <ul class="metismenu" id="menu">
              <li><a href="{{ route('admin.home') }}" class="" aria-expanded="false">
                     <i class="flaticon-025-dashboard"></i>
@@ -106,7 +107,29 @@
                   
                 </ul>
             </li>
-            
+        </ul>
+        @else
+        <ul class="metismenu" id="menu">
+             <li><a href="{{ route('admin.home') }}" class="" aria-expanded="false">
+                    <i class="flaticon-025-dashboard"></i>
+                    <span class="nav-text">Dashboard</span>
+                </a>
+            </li>
+            <li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
+                    <i class="flaticon-381-notepad"></i>
+                    <span class="nav-text">Registration</span>
+                </a>
+                <ul aria-expanded="false">
+                    <li><a href="{{ route('admin.physical.index') }}">Physical</a></li>
+                    <li><a href="{{ route('admin.virtual.index') }}">Virtual</a></li>
+                    <li><a href="{{ route('admin.media.index') }}">Media</a></li>
+                    <li><a href="{{ route('admin.guest.index') }}">Guest</a></li>
+                    <li><a href="{{ route('admin.commitee.index') }}">Committee</a></li>
+                </ul>
+            </li>
+        </ul>
+        @endif
+        
         <div class="copyright">
             <p><strong>Bdf</strong> © {{ date('Y') }} All Rights Reserved</p>
             <p class="fs-12">Made with <span class="heart"></span> by <a href="https://rasalogi.com/" target="_blank">RasalogiWeb</a></p>
